@@ -1,0 +1,94 @@
+{
+    "catalog": [{
+            "id": 1,
+            "img_src": "/img/product.jpg",
+            "price": 123.5,
+            "article_number": "b245",
+            "stock_availability": 5,
+            "title": "Название товара 1"
+        },
+
+        {
+            "id": 2,
+            "img_src": "/img/product.jpg",
+            "price": 86,
+            "article_number": "b6767",
+            "stock_availability": 7,
+            "title": "Название товара 2"
+        },
+
+        {
+            "id": 3,
+            "img_src": "/img/product.jpg",
+            "price": 134,
+            "article_number": "b253534",
+            "stock_availability": 54,
+            "title": "Название товара 3"
+        },
+
+        {
+            "id": 4,
+            "img_src": "/img/product.jpg",
+            "price": 123.5,
+            "article_number": "b25645",
+            "stock_availability": 5,
+            "title": "Название товара 4"
+        },
+
+        {
+            "id": 5,
+            "img_src": "/img/product.jpg",
+            "price": 128.5,
+            "article_number": "b25445",
+            "stock_availability": 44,
+            "title": "Название товара 5"
+        },
+
+        {
+            "id": 6,
+            "img_src": "/img/product.jpg",
+            "price": 123.5,
+            "article_number": "b25645",
+            "stock_availability": 49,
+            "title": "Название товара 6"
+        },
+
+        {
+            "id": 7,
+            "img_src": "/img/product.jpg",
+            "price": 123.5,
+            "article_number": "b25645",
+            "stock_availability": 23,
+            "title": "Название товара 7"
+        },
+
+        {
+            "id": 8,
+            "img_src": "/img/product.jpg",
+            "price": 123.5,
+            "article_number": "b245",
+            "stock_availability": 43535333,
+            "title": "Название товара 8"
+        },
+
+        {
+            "id": 9,
+            "img_src": "/img/product.jpg",
+            "price": 123.5,
+            "article_number": "b276545",
+            "stock_availability": 2,
+            "title": "Название товара 9"
+        },
+
+        {
+            "id": 10,
+            "img_src": "/img/product.jpg",
+            "price": 123.5,
+            "article_number": "b56245",
+            "stock_availability": 49,
+            "title": "Название товара 10"
+        }
+
+
+    ]
+}

@@ -1,0 +1,72 @@
+yarn run v1.9.4
+$ ./node_modules/.bin/flow && react-scripts start
+Error ----------------------------------------------------------------------------------- src/components/catalog.js:23:9
+
+Cannot call `this.props.getCatalog` because property `getCatalog` is missing in `Props` [1].
+
+   src/components/catalog.js:23:9
+   23|         this.props.getCatalog(); 
+               ^^^^^^^^^^^^^^^^^^^^^^^
+
+References:
+   src/components/catalog.js:14:33
+   14| class Catalog extends Component<Props, State> { 
+                                       ^^^^^ [1]
+
+
+Error ---------------------------------------------------------------------------------- src/components/catalog.js:31:14
+
+Property `catalog` is missing in `Props` [1].
+
+   src/components/catalog.js:31:14
+   31| 	  if(typeof this.props.catalog !== "undefined" && Array.isArray(this.props.catalog)) catalog = this.props.catalog;
+                    ^^^^^^^^^^^^^^^^^^
+
+References:
+   src/components/catalog.js:14:33
+   14| class Catalog extends Component<Props, State> { 
+                                       ^^^^^ [1]
+
+
+Error ---------------------------------------------------------------------------------- src/components/catalog.js:46:32
+
+Cannot get `this.props.isLoad` because property `isLoad` is missing in `Props` [1].
+
+   src/components/catalog.js:46:32
+   46|             <Preloader isShow={this.props.isLoad} />
+                                      ^^^^^^^^^^^^^^^^^
+
+References:
+   src/components/catalog.js:14:33
+   14| class Catalog extends Component<Props, State> { 
+                                       ^^^^^ [1]
+
+
+Error ----------------------------------------------------------------------------------- src/components/catalog.js:70:3
+
+Cannot call `bindActionCreators` because undefined property `getCatalog` [1] is incompatible with `ActionCreator` [2].
+
+   src/components/catalog.js:70:3
+          v-------------------
+    70|   bindActionCreators(
+    71|     {
+    72| 
+    73|       getCatalog
+    74| 
+    75|     },
+    76|     dispatch
+    77|   )
+          ^
+
+References:
+   flow-typed/npm/react-redux_v5.x.x.js:141:21
+   141|     CP: $Diff<$Diff<ElementConfig<Com>, RSP>, RDP>,
+                            ^^^^^^^^^^^^^^^^^^ [1]
+   flow-typed/npm/redux_v4.x.x.js:51:58
+    51|   declare export type ActionCreators<K, A> = { [key: K]: ActionCreator<A, any> };
+                                                                 ^^^^^^^^^^^^^^^^^^^^^ [2]
+
+
+
+Found 4 errors
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

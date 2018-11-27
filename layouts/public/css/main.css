@@ -1,0 +1,158 @@
+h1 {
+  font-size: 28px;
+}
+
+.content {
+    padding-top:90px;
+}
+
+.clear {
+	padding: 1px;
+	width:1px;
+	height:1px;
+	clear:both;
+	visibility:hidden;
+}
+
+.hide {
+    display: none;
+}
+
+.products .product {
+    position:relative;
+	padding: 0;
+    border-radius: 5px;
+	border: 1px solid lightgrey;
+	width:300px;
+	height:370px;
+	float:left;
+	margin-right: 15px;
+	margin-bottom: 15px;
+    font-size:18px;
+    
+    text-align: center;
+}
+
+.products .product:hover {
+	box-shadow:  4px 4px 6px rgba(0,0,0,0.15); 
+    border: 1px solid silver;
+}
+
+.products .product .num {
+    color: silver;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.products .product .image {
+    cursor: pointer;  
+}
+
+.products .product .header {
+    margin-top:10px;
+}
+
+.products .product .add-cart {
+    position:absolute;
+	bottom:0;
+	height:55px;
+	width:100%;
+}
+
+.products .product .price {
+    font-size: 1.3em;
+}
+
+.pagination {
+    margin-top:20px;
+}
+
+.page-product {
+    margin-top: 100px;
+}
+
+.page-product .page-image {
+    width:100%;
+}
+
+.page-product .page-image img {
+    width:100%;
+}
+
+.page-product .page-header h1 {
+    font-size: 1.5em;
+}
+
+.page-product .page-num {
+    font-size: 0.9em;
+    color: silver;
+}
+
+.page-product .page-price {
+    font-size: 1.5em;
+}
+
+.page-product .page-add-cart {
+    margin-top:30px;
+    margin-bottom:30px;
+}
+
+.page-product .item {
+    font-size: 0.7em;
+    color: grey;
+}
+
+.page-product .page-text {
+    font-size: 1.1em;
+    margin-top:20px;
+}
+
+button.qty-change{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #e3e3e3;
+}
+
+.qty-input{
+    height: 30px;
+    width: 80px;
+    text-align: center;
+}
+
+.qty-changer {
+    width:150px;
+}
+
+.content .delcol {
+    width:35px;
+}
+
+.content .sumcol {
+    width:135px;
+}
+
+.content .sum1col {
+    width:130px;
+}
+
+.content .numcol {
+    width:40px;
+}
+
+.content .sum-text {
+  text-align:right;  
+  font-size: 1.1em;
+}
+
+.content .sum-num {
+  text-align:left;  
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.content .tbl-button-order {
+  text-align:right;
+  margin-top:20px;  
+}

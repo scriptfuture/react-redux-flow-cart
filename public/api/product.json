@@ -1,0 +1,11 @@
+{
+    "product": {
+        "id": 1,
+        "img_src": "/img/product.jpg",
+        "price": 27300,
+        "article_number": "b245",
+        "stock_availability": 5,
+        "title": "Название товара 1",
+        "description": "Описание товара 1"
+    }
+}

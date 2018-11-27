@@ -1,0 +1,38 @@
+{
+  "name": "react-cart-flow",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "connected-react-router": "4.4.1",
+    "history": "^4.7.2",
+    "react": "16.4.2",
+    "react-dom": "16.4.2",
+    "react-redux": "5.0.7",
+    "react-router": "4.3.1",
+    "react-router-dom": "4.3.1",
+    "redux": "4.0.0",
+    "redux-thunk": "2.3.0",
+    "serve": "9.4.2"
+  },
+  "scripts": {
+    "start": "./node_modules/.bin/flow && react-scripts start",
+    "build": "./node_modules/.bin/flow && react-scripts build",
+    "test": "./node_modules/.bin/flow && react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "flow": "./node_modules/.bin/flow",
+    "postinstall": "./node_modules/.bin/flow-typed install"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.74.0",
+    "flow-typed": "^2.4.0",
+    "jest": "^20.0.4",
+    "jest-cli": "^20.0.4"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
