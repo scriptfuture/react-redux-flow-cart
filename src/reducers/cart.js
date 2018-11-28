@@ -1,4 +1,4 @@
-import { GETCATALOG_REQUESTED, GETCATALOG } from './../actions/cart'
+import { ADDPRODUCT, GETCART_REQUESTED, GETCART } from './../actions/cart'
 
 
 const initialState: Object = {
@@ -9,7 +9,7 @@ const initialState: Object = {
 export default (state: Object = initialState, action: Object) => {
 	
   switch (action.type) {    
-    case GETCATALOG_REQUESTED:
+    case GETCART_REQUESTED:
       return {
         ...state,
         cart: [],
@@ -17,10 +17,18 @@ export default (state: Object = initialState, action: Object) => {
         
       }
 
-    case GETCATALOG:
+    case GETCART:
       return {
         ...state,
-        catalog: action.catalog,
+        cart: action.cart,
+        isLoad: false
+      } 
+      
+      
+    case ADDPRODUCT:
+      return {
+        ...state,
+        cart: action.cart,
         isLoad: false
       } 
  

@@ -4,7 +4,8 @@ import axios from 'axios';
 import { SHOW_ERROR } from './app'
 
 // actions
-export const ADDCART = 'cart/ADDCART'
+export const ADDPRODUCT = 'cart/ADDPRODUCT'
+
 export const GETCART_REQUESTED = 'cart/GETCART_REQUESTED'
 export const GETCART = 'cart/GETCART'
 
@@ -39,5 +40,35 @@ export const getCart = (items: Array <number>) => {
                     }]
                 });
             })
+    };
+}
+
+export const addProduct = (id: number, quantity: number) => {
+    
+    return (dispatch: any) => {
+        
+      let cartStr = localStorage.getItem('cart'), cartArr = [];
+      
+      
+      if(cartStr !== null && cartStr !== "") {
+
+          cartArr =  JSON.parse(cartStr);
+          
+          cartArr = cartArr.filter((obj) => !(obj.id === id && obj.quantity === quantity))
+       
+      }  else {
+
+          cartArr.push({"id": id, "quantity": quantity});
+          
+      } // end if
+      
+      localStorage.setItem('cart', JSON.stringify(cartArr));
+      
+      dispatch({
+            type: ADDPRODUCT,
+            cart: cartArr
+      });
+
+
     };
 }
