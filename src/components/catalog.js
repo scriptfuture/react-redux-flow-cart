@@ -48,9 +48,13 @@ class Catalog extends Component<Props, State> {
                            <Link className="nav-link" to={'/product/'+obj.id}>{obj.title}</Link>
                         </div>
                         <div className="price">{obj.price} руб. 35 коп.</div>
-                        <div className="add-cart"><button type="button" className="btn btn-primary">В корзину</button></div>
+                        <div className="add-cart"><button type="button" className="btn btn-primary" onClick={this.addProductToCart}>В корзину</button></div>
                     </div> 
       );
+  }
+  
+  addProductToCart() {
+      alert("test 2");
   }
 
   

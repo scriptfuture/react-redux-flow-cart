@@ -1,72 +1,88 @@
 yarn run v1.9.4
 $ ./node_modules/.bin/flow && react-scripts start
-Error ----------------------------------------------------------------------------------- src/components/catalog.js:23:9
+Error ----------------------------------------------------------------------------------- src/components/product.js:35:8
 
-Cannot call `this.props.getCatalog` because property `getCatalog` is missing in `Props` [1].
+Cannot assign `this.handleChange.bind(...)` to `this.handleChange` because property `handleChange` is not writable.
 
-   src/components/catalog.js:23:9
-   23|         this.props.getCatalog(); 
-               ^^^^^^^^^^^^^^^^^^^^^^^
-
-References:
-   src/components/catalog.js:14:33
-   14| class Catalog extends Component<Props, State> { 
-                                       ^^^^^ [1]
+   35|        this.handleChange = this.handleChange.bind(this);
+              ^^^^^^^^^^^^^^^^^
 
 
-Error ---------------------------------------------------------------------------------- src/components/catalog.js:31:14
+Error ---------------------------------------------------------------------------------- src/components/product.js:55:24
 
-Property `catalog` is missing in `Props` [1].
+Cannot get `Events.target(...).value` because property `value` is missing in statics of `HTMLInputElement` [1].
 
-   src/components/catalog.js:31:14
-   31| 	  if(typeof this.props.catalog !== "undefined" && Array.isArray(this.props.catalog)) catalog = this.props.catalog;
-                    ^^^^^^^^^^^^^^^^^^
+   src/components/product.js:55:24
+     55|      let val: string = Events.target(e, HTMLInputElement).value;
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 References:
-   src/components/catalog.js:14:33
-   14| class Catalog extends Component<Props, State> { 
-                                       ^^^^^ [1]
+   C:\Users\Quies\AppData\Local\Temp\flow\flowlib_345bf4a3\dom.js:2899:15
+   2899| declare class HTMLInputElement extends HTMLElement {
+                       ^^^^^^^^^^^^^^^^ [1]
 
 
-Error ---------------------------------------------------------------------------------- src/components/catalog.js:46:32
+Error ---------------------------------------------------------------------------------- src/components/product.js:55:38
 
-Cannot get `this.props.isLoad` because property `isLoad` is missing in `Props` [1].
+Cannot resolve name `e`.
 
-   src/components/catalog.js:46:32
-   46|             <Preloader isShow={this.props.isLoad} />
-                                      ^^^^^^^^^^^^^^^^^
-
-References:
-   src/components/catalog.js:14:33
-   14| class Catalog extends Component<Props, State> { 
-                                       ^^^^^ [1]
+   55|      let val: string = Events.target(e, HTMLInputElement).value;
+                                            ^
 
 
-Error ----------------------------------------------------------------------------------- src/components/catalog.js:70:3
+Error ---------------------------------------------------------------------------------- src/components/product.js:60:16
 
-Cannot call `bindActionCreators` because undefined property `getCatalog` [1] is incompatible with `ActionCreator` [2].
+Cannot assign `parseInt(...)` to `val` because number [1] is incompatible with string [2].
 
-   src/components/catalog.js:70:3
-          v-------------------
-    70|   bindActionCreators(
-    71|     {
-    72| 
-    73|       getCatalog
-    74| 
-    75|     },
-    76|     dispatch
-    77|   )
-          ^
+   src/components/product.js:60:16
+   60|          val = parseInt(val);
+                      ^^^^^^^^^^^^^
 
 References:
-   flow-typed/npm/react-redux_v5.x.x.js:141:21
-   141|     CP: $Diff<$Diff<ElementConfig<Com>, RSP>, RDP>,
-                            ^^^^^^^^^^^^^^^^^^ [1]
-   flow-typed/npm/redux_v4.x.x.js:51:58
-    51|   declare export type ActionCreators<K, A> = { [key: K]: ActionCreator<A, any> };
-                                                                 ^^^^^^^^^^^^^^^^^^^^^ [2]
+   C:\Users\Quies\AppData\Local\Temp\flow\flowlib_345bf4a3\core.js:15:59
+   15| declare function parseInt(string: mixed, radix?: number): number;
+                                                                 ^^^^^^ [1]
+   src/components/product.js:55:15
+   55|      let val: string = Events.target(e, HTMLInputElement).value;
+                     ^^^^^^ [2]
+
+
+Error ---------------------------------------------------------------------------------- src/components/product.js:61:16
+
+Cannot assign `val > 0 ? val : this.state.quantity` to `val` because:
+ - number [1] is incompatible with string [2].
+ - number [3] is incompatible with string [2].
+
+   src/components/product.js:61:16
+   61|          val = val > 0?val:this.state.quantity;
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+References:
+   C:\Users\Quies\AppData\Local\Temp\flow\flowlib_345bf4a3\core.js:15:59
+   15| declare function parseInt(string: mixed, radix?: number): number;
+                                                                 ^^^^^^ [1]
+   src/components/product.js:55:15
+   55|      let val: string = Events.target(e, HTMLInputElement).value;
+                     ^^^^^^ [2]
+   src/components/product.js:23:15
+   23|     quantity: number
+                     ^^^^^^ [3]
+
+
+Error ----------------------------------------------------------------------------------------- src/utils/events.js:7:52
+
+Cannot coerce `t` to string because `E` [1] should not be coerced.
+
+   src/utils/events.js:7:52
+   7|     throw new Error(`Expected Event target to be ${t} but found ${typeof e.target}`)
+                                                         ^
+
+References:
+   src/utils/events.js:2:32
+   2| function target<E> (e:Event, t:E):E {
+                                     ^ [1]
 
 
 
-Found 4 errors
+Found 7 errors
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

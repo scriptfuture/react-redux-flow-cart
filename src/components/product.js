@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { Preloader } from './blocks/preloader'
 import { Errors } from './blocks/errors'
 
-
 import { getProduct } from './../actions/product'
 
 type Props = {
@@ -23,53 +22,57 @@ type State = {
 
 class Product extends Component<Props, State> { 
 
-  state = {
+  state: State = {
       quantity: 1
   }
  
   constructor() { 
        super();
        
-       this.handleChange = this.handleChange.bind(this);
-       this.plus = this.plus.bind(this);
-       this.minus = this.minus.bind(this);
+       (this: any).handleChange = this.handleChange.bind(this);
+       (this: any).plus = this.plus.bind(this);
+       (this: any).minus = this.minus.bind(this);
   }
   
-  componentDidMount() {
+  componentDidMount(): void {
       
         // получаем актуальные курсы при старте страницы
         this.props.getProduct(1); 
         
   } 
   
-  handleChange(event) {
+  handleChange(event: SyntheticInputEvent<*>): void {
       
-     let val: string = event.target.value;
+     let val: number  = (event.target.value: any);
+     let name: string = event.target.name;
       
-     // количество, только положительные целые числа
-     if(event.target.name === "quantity")  { 
-         val = parseInt(val);
+     // количество, только положительные целые числа 
+     if(name === "quantity")  { 
          val = val > 0?val:this.state.quantity;
      }
 
-     let obj = {};
-     obj[event.target.name] = val;
+     let obj: Object = {};
+     obj[name] = val;
       
      this.setState(obj);
   }
   
-  plus() {
+  plus(): void {
       
      let val: number = this.state.quantity > 0?this.state.quantity + 1:this.state.quantity;
       
       this.setState({ quantity: val });
   }
   
-  minus() {
+  minus(): void {
       
-     let val: number = this.state.quantity > 1?this.state.quantity - 1:this.state.quantity;
+      let val: number = this.state.quantity > 1?this.state.quantity - 1:this.state.quantity;
       
       this.setState({ quantity: val });
+  }
+  
+  addProductToCart() {
+      alert("test");
   }
   
   render() {
@@ -120,7 +123,7 @@ class Product extends Component<Props, State> {
                         <button className="qty-change" onClick={this.plus}>+</button>
                     </div>
                     
-                    <div className="page-add-cart"><button type="button" className="btn btn-primary btn-lg">В корзину</button></div>
+                    <div className="page-add-cart"><button type="button" className="btn btn-primary btn-lg" onClick={this.addProductToCart}>В корзину</button></div>
                 
                     
                 </div>

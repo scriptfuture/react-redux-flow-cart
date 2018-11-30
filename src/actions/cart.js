@@ -47,10 +47,10 @@ export const addProduct = (id: number, quantity: number) => {
     
     return (dispatch: any) => {
         
-      let cartStr = localStorage.getItem('cart'), cartArr = [];
+      let cartStr: ?string = localStorage.getItem('cart'), cartArr: Array<Object> = [];
       
       
-      if(cartStr !== null && cartStr !== "") {
+      if(cartStr != null && cartStr !== "") {
 
           cartArr =  JSON.parse(cartStr);
           
