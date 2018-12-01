@@ -11,7 +11,7 @@ type State = {
 };
 
 
-export class Errors extends Component<Props, State> { 
+export default class Errors extends Component<Props, State> { 
 
   state: State  = {
     httpErrors: {

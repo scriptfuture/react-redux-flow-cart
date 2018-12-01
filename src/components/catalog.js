@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 import { Link } from 'react-router-dom'
 
-import { Preloader } from './blocks/preloader'
-import { Errors } from './blocks/errors'
+import Preloader from './blocks/preloader'
+import Errors from './blocks/errors'
 
 
 import { getCatalog } from './../actions/catalog'
@@ -13,6 +13,7 @@ import { addProduct } from './../actions/cart'
 
 type Props = {
     getCatalog: any,
+    addProduct: any,
     catalog: Array<Object>,
     isLoad: boolean,
     isError: boolean,

@@ -6,6 +6,7 @@ import { Route, Link } from 'react-router-dom'
 import About from './components/about'
 import Catalog from './components/catalog'
 import Product from './components/product'
+import Cart from './components/cart'
 
 type Props = {};
 
@@ -44,10 +45,10 @@ class App extends Component<Props, State> {
               </li>
               
               <li className="nav-item">
-                <a className="nav-link" href="cart.html">Корзина</a>
+                 <Link className="nav-link" to="/cart">Корзина</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="neworder.html">Оформить заказ</a>
+                 <Link className="nav-link" to="/neworder">Оформить заказ</Link>
               </li>
             </ul>
             
@@ -63,6 +64,7 @@ class App extends Component<Props, State> {
                     <Route exact path="/about-us" component={About} /> 
                     
                     <Route exact path="/product/:id" component={Product} />
+                    <Route exact path="/cart" component={Cart} />
                  
                 </div>
             </div>

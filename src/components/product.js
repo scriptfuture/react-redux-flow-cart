@@ -2,34 +2,43 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { Preloader } from './blocks/preloader'
-import { Errors } from './blocks/errors'
+import ReactTooltip from 'react-tooltip'
+
+import TooltipAddToCart from './blocks/tooltip-add-to-cart'
+
+import Preloader from './blocks/preloader'
+import Errors from './blocks/errors'
 
 import { getProduct } from './../actions/product'
 import { addProduct } from './../actions/cart'
 
 type Props = {
     getProduct: any,
+    addProduct: any,
     product: Object,
     isLoad: boolean,
     isError: boolean,
-    errors: Array<Object>
-    
+    errors: Array<Object>,
+    match: Object 
 };
 
 type State = {
     quantity: number,
-    id: number
+    id: number,
+    showTooltip: boolean
 };
 
 class Product extends Component<Props, State> { 
-
-  state: State = {
-      quantity: 1
-  }
  
   constructor() { 
        super();
+       
+       
+       (this: any).state = {
+              quantity: 1,
+              showTooltip: false 
+        };
+      
        
        (this: any).addProductToCart = this.addProductToCart.bind(this);
 
@@ -76,7 +85,11 @@ class Product extends Component<Props, State> {
   }
   
   addProductToCart() {
+      this.setState({showTooltip: true})
+      
       this.props.addProduct(parseInt(this.props.match.params.id), this.state.quantity);
+      
+      setTimeout(() => this.setState({showTooltip: false}), 5000);
   }
   
   render() {
@@ -127,7 +140,10 @@ class Product extends Component<Props, State> {
                         <button className="qty-change" onClick={this.plus}>+</button>
                     </div>
                     
-                    <div className="page-add-cart"><button type="button" className="btn btn-primary btn-lg" onClick={this.addProductToCart}>В корзину</button></div>
+                    <div className="page-add-cart">
+                        <TooltipAddToCart isShow={this.state.showTooltip}/>
+                        <button type="button" className="btn btn-primary btn-lg" onClick={this.addProductToCart} >В корзину</button>
+                    </div>
                 
                     
                 </div>
@@ -154,7 +170,6 @@ const mapDispatchToProps = (dispatch:any) =>
 
       getProduct,
       addProduct
-
     },
     dispatch
   )

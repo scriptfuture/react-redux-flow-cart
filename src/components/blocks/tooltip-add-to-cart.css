@@ -1,0 +1,20 @@
+/* Tooltip container */
+.add-to-cart-tooltip {
+    display: block;
+    position: relative;
+}
+
+/* Tooltip text */
+.add-to-cart-tooltip .add-to-cart-tooltip-text {
+    width: 245px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-top: -55px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
