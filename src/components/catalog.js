@@ -9,6 +9,7 @@ import { Errors } from './blocks/errors'
 
 
 import { getCatalog } from './../actions/catalog'
+import { addProduct } from './../actions/cart'
 
 type Props = {
     getCatalog: any,
@@ -25,6 +26,8 @@ class Catalog extends Component<Props, State> {
  
   constructor() { 
        super();
+       
+       (this: any).addProductToCart = this.addProductToCart.bind(this);
   }
   
   componentDidMount() {
@@ -48,13 +51,13 @@ class Catalog extends Component<Props, State> {
                            <Link className="nav-link" to={'/product/'+obj.id}>{obj.title}</Link>
                         </div>
                         <div className="price">{obj.price} руб. 35 коп.</div>
-                        <div className="add-cart"><button type="button" className="btn btn-primary" onClick={this.addProductToCart}>В корзину</button></div>
+                        <div className="add-cart"><button type="button" className="btn btn-primary" onClick={() => this.addProductToCart(obj.id)}>В корзину</button></div>
                     </div> 
       );
   }
   
-  addProductToCart() {
-      alert("test 2");
+  addProductToCart(id) {
+      this.props.addProduct(parseInt(id), 1);
   }
 
   
@@ -95,7 +98,8 @@ const mapDispatchToProps = (dispatch:any) =>
   bindActionCreators(
     {
 
-      getCatalog
+      getCatalog,
+      addProduct
 
     },
     dispatch

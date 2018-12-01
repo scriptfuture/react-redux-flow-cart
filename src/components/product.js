@@ -6,6 +6,7 @@ import { Preloader } from './blocks/preloader'
 import { Errors } from './blocks/errors'
 
 import { getProduct } from './../actions/product'
+import { addProduct } from './../actions/cart'
 
 type Props = {
     getProduct: any,
@@ -17,7 +18,8 @@ type Props = {
 };
 
 type State = {
-    quantity: number
+    quantity: number,
+    id: number
 };
 
 class Product extends Component<Props, State> { 
@@ -29,6 +31,8 @@ class Product extends Component<Props, State> {
   constructor() { 
        super();
        
+       (this: any).addProductToCart = this.addProductToCart.bind(this);
+
        (this: any).handleChange = this.handleChange.bind(this);
        (this: any).plus = this.plus.bind(this);
        (this: any).minus = this.minus.bind(this);
@@ -36,8 +40,8 @@ class Product extends Component<Props, State> {
   
   componentDidMount(): void {
       
-        // получаем актуальные курсы при старте страницы
-        this.props.getProduct(1); 
+     // получаем актуальные курсы при старте страницы
+     this.props.getProduct(this.props.match.params.id); 
         
   } 
   
@@ -72,7 +76,7 @@ class Product extends Component<Props, State> {
   }
   
   addProductToCart() {
-      alert("test");
+      this.props.addProduct(parseInt(this.props.match.params.id), this.state.quantity);
   }
   
   render() {
@@ -87,7 +91,7 @@ class Product extends Component<Props, State> {
           <div className="container">
               <div className="row page-product">
                 <div className="col-sm-4">
-                   <div className="page-image"><img src={this.props.product.img_src} /></div>
+                   <div className="page-image"><img src={this.props.product.img_src}  alt={this.props.product.title} /></div>
                 </div>
                 <div className="col-sm-5">
                 
@@ -148,7 +152,8 @@ const mapDispatchToProps = (dispatch:any) =>
   bindActionCreators(
     {
 
-      getProduct
+      getProduct,
+      addProduct
 
     },
     dispatch

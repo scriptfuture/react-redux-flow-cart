@@ -50,17 +50,30 @@ export const addProduct = (id: number, quantity: number) => {
       let cartStr: ?string = localStorage.getItem('cart'), cartArr: Array<Object> = [];
       
       
-      if(cartStr != null && cartStr !== "") {
-
-          cartArr =  JSON.parse(cartStr);
-          
-          cartArr = cartArr.filter((obj) => !(obj.id === id && obj.quantity === quantity))
-       
-      }  else {
-
+      if(cartStr == null || cartStr === "") {
           cartArr.push({"id": id, "quantity": quantity});
+      }  else {
+          
+          cartArr =  JSON.parse(cartStr);
+
+          // есть ли уже этот товар в локальном хранилище
+          if(cartArr.some((obj) => obj.id === id)) {
+              
+              cartArr = cartArr.map(function(obj) {
+                  
+                  if(obj.id === id) {
+                      obj.quantity = obj.quantity + quantity;
+                  }
+                  
+                  return obj;
+              });
+              
+          } else {
+              cartArr.push({"id": id, "quantity": quantity});
+          } // end if
           
       } // end if
+
       
       localStorage.setItem('cart', JSON.stringify(cartArr));
       
