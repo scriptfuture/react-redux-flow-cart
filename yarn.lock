@@ -486,6 +486,10 @@ ci-info@^1.5.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-1.6.0.tgz#2ca20dbb9ceb32d4524a683303313f0304b1e497"
 
+classnames@^2.2.5:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
+
 cli-boxes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/cli-boxes/-/cli-boxes-1.0.0.tgz#4fa917c3e59c94a004cd61f8ee509da651687143"
@@ -667,6 +671,38 @@ diff@^3.2.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
 
+dom-serializer@0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-0.1.0.tgz#073c697546ce0780ce23be4a28e293e40bc30c82"
+  dependencies:
+    domelementtype "~1.1.1"
+    entities "~1.1.1"
+
+domelementtype@1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/domelementtype/-/domelementtype-1.2.1.tgz#578558ef23befac043a1abb0db07635509393479"
+
+domelementtype@^1.3.0:
+  version "1.3.0"
+  resolved "http://registry.npmjs.org/domelementtype/-/domelementtype-1.3.0.tgz#b17aed82e8ab59e52dd9c19b1756e0fc187204c2"
+
+domelementtype@~1.1.1:
+  version "1.1.3"
+  resolved "http://registry.npmjs.org/domelementtype/-/domelementtype-1.1.3.tgz#bd28773e2642881aec51544924299c5cd822185b"
+
+domhandler@^2.3.0:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/domhandler/-/domhandler-2.4.2.tgz#8805097e933d65e85546f726d60f5eb88b44f803"
+  dependencies:
+    domelementtype "1"
+
+domutils@^1.5.1:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a"
+  dependencies:
+    dom-serializer "0"
+    domelementtype "1"
+
 duplexer2@~0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.1.4.tgz#8b12dab878c0d69e3e7891051662a32fc6bddcc1"
@@ -689,6 +725,10 @@ encoding@^0.1.11:
   resolved "https://registry.yarnpkg.com/encoding/-/encoding-0.1.12.tgz#538b66f3ee62cd1ab51ec323829d1f9480c74beb"
   dependencies:
     iconv-lite "~0.4.13"
+
+entities@^1.1.1, entities@~1.1.1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
 
 errno@~0.1.7:
   version "0.1.7"
@@ -1125,6 +1165,17 @@ html-encoding-sniffer@^1.0.1:
   dependencies:
     whatwg-encoding "^1.0.1"
 
+htmlparser2@^3.9.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.10.0.tgz#5f5e422dcf6119c0d983ed36260ce9ded0bee464"
+  dependencies:
+    domelementtype "^1.3.0"
+    domhandler "^2.3.0"
+    domutils "^1.5.1"
+    entities "^1.1.1"
+    inherits "^2.0.1"
+    readable-stream "^3.0.6"
+
 http-proxy-agent@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/http-proxy-agent/-/http-proxy-agent-2.1.0.tgz#e4821beef5b2142a2026bd73926fe537631c5405"
@@ -1164,7 +1215,7 @@ inflight@^1.0.4:
     once "^1.3.0"
     wrappy "1"
 
-inherits@2, inherits@~2.0.0, inherits@~2.0.1, inherits@~2.0.3:
+inherits@2, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.0, inherits@~2.0.1, inherits@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
@@ -2237,6 +2288,14 @@ react-router@4.3.1, react-router@^4.3.1:
     prop-types "^15.6.1"
     warning "^4.0.1"
 
+react-tooltip@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-3.9.0.tgz#d874df922c3b34b2e547ec62ff8b2eef42017b51"
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.0"
+    sanitize-html-react "^1.13.0"
+
 react@16.4.2:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.4.2.tgz#2cd90154e3a9d9dd8da2991149fdca3c260e129f"
@@ -2272,6 +2331,14 @@ readable-stream@^2.0.2:
     safe-buffer "~5.1.1"
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
+
+readable-stream@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.0.6.tgz#351302e4c68b5abd6a2ed55376a7f9a25be3057a"
+  dependencies:
+    inherits "^2.0.3"
+    string_decoder "^1.1.1"
+    util-deprecate "^1.0.1"
 
 readable-stream@~2.1.5:
   version "2.1.5"
@@ -2309,6 +2376,10 @@ regex-cache@^0.4.2:
   resolved "https://registry.yarnpkg.com/regex-cache/-/regex-cache-0.4.4.tgz#75bdc58a2a1496cec48a12835bc54c8d562336dd"
   dependencies:
     is-equal-shallow "^0.1.3"
+
+regexp-quote@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/regexp-quote/-/regexp-quote-0.0.0.tgz#1e0f4650c862dcbfed54fd42b148e9bb1721fcf2"
 
 registry-auth-token@3.3.2:
   version "3.3.2"
@@ -2413,6 +2484,14 @@ sane@~1.6.0:
     minimist "^1.1.1"
     walker "~1.0.5"
     watch "~0.10.0"
+
+sanitize-html-react@^1.13.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/sanitize-html-react/-/sanitize-html-react-1.13.0.tgz#e757b9adbaf2c8a762f3d2dff70138838e05420a"
+  dependencies:
+    htmlparser2 "^3.9.0"
+    regexp-quote "0.0.0"
+    xtend "^4.0.0"
 
 sax@^1.2.1:
   version "1.2.4"
@@ -2558,6 +2637,12 @@ string-width@^2.0.0, string-width@^2.1.1:
   dependencies:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
+
+string_decoder@^1.1.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.2.0.tgz#fe86e738b19544afe70469243b2a1ee9240eae8d"
+  dependencies:
+    safe-buffer "~5.1.0"
 
 string_decoder@~0.10.x:
   version "0.10.31"
@@ -2773,7 +2858,7 @@ url-to-options@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/url-to-options/-/url-to-options-1.0.1.tgz#1505a03a289a48cbd7a434efbaeec5055f5633a9"
 
-util-deprecate@~1.0.1:
+util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
 
@@ -2901,6 +2986,10 @@ wrappy@1:
 xml-name-validator@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-2.0.1.tgz#4d8b8f1eccd3419aa362061becef515e1e559635"
+
+xtend@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
 
 y18n@^3.2.1:
   version "3.2.1"
