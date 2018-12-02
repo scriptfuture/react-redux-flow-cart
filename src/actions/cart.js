@@ -9,23 +9,49 @@ export const ADDPRODUCT = 'cart/ADDPRODUCT'
 export const GETCART_REQUESTED = 'cart/GETCART_REQUESTED'
 export const GETCART = 'cart/GETCART'
 
+export const REMOVEPRODUCT_REQUESTED = 'cart/REMOVEPRODUCT_REQUESTED'
+export const REMOVEPRODUCT = 'cart/REMOVEPRODUCT'
+
 // action creators
-export const getCart = (items: Array <number>) => {
+export const getCart = () => {
     
     return (dispatch: any) => {
         dispatch({
             type: GETCART_REQUESTED
         });
+        
+        let cartStr: ?string = localStorage.getItem('cart'), cartArr: Array<Object> = [], cartParams: Array<number> = [];
+      
+        if(cartStr != null && cartStr !== "") {
+              cartArr =  JSON.parse(cartStr);
+              
+              // какие товары каталога запросить с сервера
+              cartParams = cartArr.map((obj) => obj.id);
+        } // end if
 
 
-        axios.get("/api/catalog.json")
+        axios.get("/api/catalog.json?items=" + cartParams.join(','))
             .then(function(res) {
 
                 if (typeof res.data === "undefined" || typeof res.data.catalog === "undefined") throw {code: 0, message: "Поле 'catalog' не найдено!"};
+                
+                let cart: Array<Object> = res.data.catalog;
+                
+                // филтруем массив с сервера на основе списка из localStorage
+                cart = cart.filter((obj) => cartParams.some((pid) => obj.id === pid));
+                
+                // добавляем количество и общую сумму
+                cart = cart.map((obj) => { 
+
+                    obj["quantity"] = cartArr.filter((o) => obj.id === o.id)[0].quantity;
+                    obj["total_price"] = obj.price * obj.quantity;
+
+                    return obj;
+                });
 
                 dispatch({
                     type: GETCART,
-                    catalog: res.data.catalog
+                    cart: cart
                 });
             })
             .catch(function(e) {
@@ -78,10 +104,72 @@ export const addProduct = (id: number, quantity: number) => {
       localStorage.setItem('cart', JSON.stringify(cartArr));
       
       dispatch({
-            type: ADDPRODUCT,
-            cart: cartArr
+         type: ADDPRODUCT
       });
 
 
+    };
+}
+
+export const removeProduct = (removeId: number) => {
+    
+    return (dispatch: any) => {
+        dispatch({
+            type: REMOVEPRODUCT_REQUESTED
+        });
+        
+        let cartStr: ?string = localStorage.getItem('cart'), cartArr: Array<Object> = [], cartParams: Array<number> = [];
+      
+        if(cartStr != null && cartStr !== "") {
+              cartArr =  JSON.parse(cartStr);
+              
+              // удаляем продукт
+              cartArr = cartArr.filter((obj) => obj.id !== removeId);
+              
+              // какие товары каталога запросить с сервера
+              cartParams = cartArr.map((obj) => obj.id);
+        } // end if
+        
+        localStorage.setItem('cart', JSON.stringify(cartArr));
+
+
+        axios.get("/api/catalog.json?items=" + cartParams.join(','))
+            .then(function(res) {
+
+                if (typeof res.data === "undefined" || typeof res.data.catalog === "undefined") throw {code: 0, message: "Поле 'catalog' не найдено!"};
+                
+                let cart: Array<Object> = res.data.catalog;
+                
+                // филтруем массив с сервера на основе списка из localStorage
+                cart = cart.filter((obj) => cartParams.some((pid) => obj.id === pid));
+                
+                // добавляем количество и общую сумму
+                cart = cart.map((obj) => { 
+
+                    obj["quantity"] = cartArr.filter((o) => obj.id === o.id)[0].quantity;
+                    obj["total_price"] = obj.price * obj.quantity;
+
+                    return obj;
+                });
+                
+                console.log(cart);
+
+                dispatch({
+                    type: REMOVEPRODUCT,
+                    cart: cart
+                });
+            })
+            .catch(function(e) {
+                
+                console.log(e);
+
+                dispatch({
+                    type: SHOW_ERROR,
+                    errors: [{
+                        code: e.code,
+                        text: e.message
+                    }]
+                });
+            })
     };
 }

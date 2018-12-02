@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
+import PriceFormatter from './blocks/price-formatter'
 
 import { getCatalog } from './../actions/catalog'
 import { addProduct } from './../actions/cart'
@@ -51,7 +52,9 @@ class Catalog extends Component<Props, State> {
                         <div className="header">
                            <Link className="nav-link" to={'/product/'+obj.id}>{obj.title}</Link>
                         </div>
-                        <div className="price">{obj.price} руб. 35 коп.</div>
+                        <div className="price">
+                            <PriceFormatter priceInCoins={obj.price} bntСlass="cbn-title"  ctСlass="cbn-title"/>
+                        </div>
                         <div className="add-cart"><button type="button" className="btn btn-primary" onClick={() => this.addProductToCart(obj.id)}>В корзину</button></div>
                     </div> 
       );

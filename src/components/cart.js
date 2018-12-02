@@ -4,17 +4,18 @@ import { connect } from 'react-redux'
 
 import { Link } from 'react-router-dom'
 
+import PriceFormatter from './blocks/price-formatter'
+
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
 
-import { getCatalog } from './../actions/catalog'
-import { addProduct } from './../actions/cart'
+import { getCart, removeProduct } from './../actions/cart'
 
 type Props = {
-    getCatalog: any,
-    addProduct: any,
-    catalog: Array<Object>,
+    getCart: any,
+    removeProduct: any,
+    cart: Array<Object>,
     isLoad: boolean,
     isError: boolean,
     errors: Array<Object>
@@ -27,42 +28,46 @@ class Cart extends Component<Props, State> {
  
   constructor() { 
        super();
-       
-       (this: any).addProductToCart = this.addProductToCart.bind(this);
   }
   
   componentDidMount() {
       
         // получаем актуальные курсы при старте страницы
-        this.props.getCatalog(); 
+        this.props.getCart(); 
         
   } 
   
-  getCatalog() {
+  getCart() {
 	  
-	  let catalog = [];
-	  if(typeof this.props.catalog !== "undefined" && Array.isArray(this.props.catalog)) catalog = this.props.catalog;
+	  let cart = [];
+	  if(typeof this.props.cart !== "undefined" && Array.isArray(this.props.cart)) cart = this.props.cart;
 
 	  
-	  return catalog.map((obj, index) =>
-                    <div className="product" key={index}>
-                        <div className="num">№{obj.id}</div>
-                        <div className="image"><img src={obj.img_src} height="180"/></div>
-                        <div className="header">
-                           <Link className="nav-link" to={'/product/'+obj.id}>{obj.title}</Link>
-                        </div>
-                        <div className="price">{obj.price} руб. 35 коп.</div>
-                        <div className="add-cart"><button type="button" className="btn btn-primary" onClick={() => this.addProductToCart(obj.id)}>В корзину</button></div>
-                    </div> 
+	  return cart.map((obj, index) =>
+                  <tr key={index}>
+                  <td>{obj.id}</td>
+                  <td><img src={obj.img_src} width="100"/></td>
+                  <td>
+                     <Link className="nav-link" to={'/product/'+obj.id}>{obj.title}</Link>
+                  </td>
+                  <td>{obj.article_number}</td>  
+                  <td>
+                      <input className="qty-input form-group" type="number" defaultValue={obj.quantity} disabled="disabled"/>
+                  </td>
+                  <td><PriceFormatter priceInCoins={obj.price} /></td>
+                  <td><PriceFormatter priceInCoins={obj.total_price} /></td>
+                  <td><button className="btn btn-danger btn-sm" title="Удалить" onClick={() => this.props.removeProduct(obj.id)}>X</button></td>
+                </tr>
       );
   }
   
-  addProductToCart(id) {
-      this.props.addProduct(parseInt(id), 1);
+  getTotalPrice(): number {
+      return this.props.cart.reduce((sum, current) => sum + (current.price * current.quantity), 0);
   }
-
   
   render() {
+      
+      let total_price = this.getTotalPrice();
 	  
 	  return (
 		   <div>
@@ -89,53 +94,20 @@ class Cart extends Component<Props, State> {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td><img src="img/product1.jpg" width="100"/></td>
-                  <td><a href="product.html">Деревянный конструктор'Изба' (тестовый товар 1)</a></td>
-                  <td>32432-234</td>  
-                  <td>
-                      <input className="qty-input form-group" type="number" value="1"/>
-                  </td>
-                  <td>570</td>
-                  <td>340 руб.</td>
-                  <td><button className="btn btn-danger btn-sm" title="Удалить">X</button></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td><img src="img/product1.jpg" width="100"/></td>
-                  <td><a href="product.html">Деревянный конструктор'Изба' (тестовый товар 2)</a></td>
-                  <td>32432-234</td>
-                  <td>
-                      <input className="qty-input form-group" type="number" value="1"/>
-                  </td>
-                  <td>570</td>
-                  <td>120 руб.</td>
-                  <td><button className="btn btn-danger btn-sm" title="Удалить">X</button></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td><img src="img/product1.jpg" width="100"/></td>
-                  <td><a href="product.html">Деревянный конструктор'Изба' (тестовый товар 3)</a></td>
-                  <td>32432-234</td>
-                  <td>
-                      <input className="qty-input form-group" type="number" value="1"/>
-                  </td>
-                  <td>570</td>
-                  <td>250 руб.</td>
-                  <td><button className="btn btn-danger btn-sm" title="Удалить">X</button></td>
-                </tr>
+               {this.getCart()}
                 
                 <tr>
-                  <td colspan="6" className="sum-text">Стоимость всех товаров:</td>
-                  <td colspan="2" className="sum-num">830 руб.</td>
+                  <td colSpan="6" className="sum-text">Стоимость всех товаров:</td>
+                  <td colSpan="2" className="sum-num"><PriceFormatter priceInCoins={total_price} /></td>
                 </tr>
   
               </tbody>
             </table>
       
-      
-           <div className="tbl-button-order"><button type="button" className="btn btn-primary">Оформить заказ</button></div>
+           <div className="tbl-button-order">
+               {total_price > 0?(<button type="button" className="btn btn-primary">Оформить заказ</button>):
+                                (<button type="button" className="btn btn-primary" disabled>Оформить заказ</button>)}
+           </div>
 
 
           </div>
@@ -144,9 +116,9 @@ class Cart extends Component<Props, State> {
  
 } 
 
-const mapStateToProps = ({ catalog, app  }) => ({
-    catalog: catalog.catalog,
-    isLoad: catalog.isLoad,
+const mapStateToProps = ({ cart, app  }) => ({
+    cart: cart.cart,
+    isLoad: cart.isLoad,
     isError: app.isError,
     errors: app.errors 
 })
@@ -155,8 +127,8 @@ const mapDispatchToProps = (dispatch:any) =>
   bindActionCreators(
     {
 
-      getCatalog,
-      addProduct
+      getCart,
+      removeProduct
 
     },
     dispatch

@@ -1,9 +1,8 @@
-import { ADDPRODUCT, GETCART_REQUESTED, GETCART } from './../actions/cart'
+import { ADDPRODUCT, REMOVEPRODUCT, REMOVEPRODUCT_REQUESTED, GETCART_REQUESTED, GETCART } from './../actions/cart'
 
 
 const initialState: Object = {
-  cart: [],
-  isLoad: false
+  cart: []
 }
 
 export default (state: Object = initialState, action: Object) => {
@@ -26,6 +25,19 @@ export default (state: Object = initialState, action: Object) => {
       
       
     case ADDPRODUCT:
+      return {
+        ...state
+      } 
+      
+    case REMOVEPRODUCT_REQUESTED:
+      return {
+        ...state,
+        cart: [],
+        isLoad: true
+        
+      }
+      
+    case REMOVEPRODUCT:
       return {
         ...state,
         cart: action.cart,

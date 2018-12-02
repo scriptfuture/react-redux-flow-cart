@@ -3,7 +3,7 @@ import React from 'react'
 import './preloader.css'
 
 
-const Preloader = ({ isShow }: boolean) => {return (
+const Preloader = ({ isShow }: Object) => {return (
     <div className={isShow?"preloader-1":"preloader-1 preloader-hide"}>
         <div>Загрузка</div>
         <span className="line line-1"></span>

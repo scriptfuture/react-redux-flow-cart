@@ -60,7 +60,11 @@ h1 {
 }
 
 .products .product .price {
-    font-size: 1.3em;
+    font-size: 24px;
+}
+
+.products .product .price .cbn-title {
+    font-size: 18px;
 }
 
 .pagination {
@@ -93,7 +97,7 @@ h1 {
     font-size: 26px;
 }
 
-.page-product .page-price span {
+.page-product .page-price .cbn-title {
     font-size: 18px;
 }
 
@@ -145,11 +149,11 @@ button.qty-change{
 }
 
 .content .sumcol {
-    width:135px;
+    width:170px;
 }
 
 .content .sum1col {
-    width:130px;
+    width:170px;
 }
 
 .content .numcol {
@@ -159,11 +163,12 @@ button.qty-change{
 .content .sum-text {
   text-align:right;  
   font-size: 1.1em;
+  padding-top:14px;
 }
 
 .content .sum-num {
   text-align:left;  
-  font-size: 1.1em;
+  font-size: 1.2em;
   font-weight: bold;
 }
 

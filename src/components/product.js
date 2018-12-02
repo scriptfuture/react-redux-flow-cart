@@ -9,6 +9,8 @@ import TooltipAddToCart from './blocks/tooltip-add-to-cart'
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
+import PriceFormatter from './blocks/price-formatter'
+
 import { getProduct } from './../actions/product'
 import { addProduct } from './../actions/cart'
 
@@ -28,7 +30,7 @@ type State = {
     showTooltip: boolean
 };
 
-class Product extends Component<Props, State> { 
+class Product extends Component<Props, State> {
  
   constructor() { 
        super();
@@ -131,7 +133,9 @@ class Product extends Component<Props, State> {
                 <div className="col-sm-3 col-product">
                 
 
-                    <div className="page-price"  title="Цена"><span className="item">Цена:&nbsp; </span>{this.props.product.price} <span>руб.</span> 35 <span>коп.</span></div>
+                    <div className="page-price"  title="Цена">
+                         <PriceFormatter priceInCoins={this.props.product.price} isTitlePrice={true} tpСlass="item" bntСlass="cbn-title" ctСlass="cbn-title"/>
+                    </div>
                     
                     
                     <div className="qty-changer" title="Количество">
