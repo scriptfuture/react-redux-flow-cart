@@ -12,6 +12,8 @@ export const GETCART = 'cart/GETCART'
 export const REMOVEPRODUCT_REQUESTED = 'cart/REMOVEPRODUCT_REQUESTED'
 export const REMOVEPRODUCT = 'cart/REMOVEPRODUCT'
 
+export const CHANGEQUANTITY = 'cart/CHANGEQUANTITY'
+
 // action creators
 export const getCart = () => {
     
@@ -111,65 +113,40 @@ export const addProduct = (id: number, quantity: number) => {
     };
 }
 
-export const removeProduct = (removeId: number) => {
+export const removeProduct = (removeId: number, ct: Array<Object>) => {
     
     return (dispatch: any) => {
+
+        // удаляем продукт
+        let cart: Array<Object> = ct.filter((obj) => obj.id !== removeId);
+    
         dispatch({
-            type: REMOVEPRODUCT_REQUESTED
+            type: REMOVEPRODUCT,
+            cart: cart
+        });
+           
+    };
+}
+
+export const сhangeQuantity = (id: number, quantity: number, ct: Array<Object>) => {
+    
+    return (dispatch: any) => {
+        
+        let cart: Array<Object> = ct.map((obj) => { 
+        
+            if(obj.id === id) {
+                obj.quantity = quantity;
+            } // end if
+
+
+            return obj;
         });
         
-        let cartStr: ?string = localStorage.getItem('cart'), cartArr: Array<Object> = [], cartParams: Array<number> = [];
-      
-        if(cartStr != null && cartStr !== "") {
-              cartArr =  JSON.parse(cartStr);
-              
-              // удаляем продукт
-              cartArr = cartArr.filter((obj) => obj.id !== removeId);
-              
-              // какие товары каталога запросить с сервера
-              cartParams = cartArr.map((obj) => obj.id);
-        } // end if
         
-        localStorage.setItem('cart', JSON.stringify(cartArr));
+        dispatch({
+            type: CHANGEQUANTITY,
+            cart: cart
+        });
 
-
-        axios.get("/api/catalog.json?items=" + cartParams.join(','))
-            .then(function(res) {
-
-                if (typeof res.data === "undefined" || typeof res.data.catalog === "undefined") throw {code: 0, message: "Поле 'catalog' не найдено!"};
-                
-                let cart: Array<Object> = res.data.catalog;
-                
-                // филтруем массив с сервера на основе списка из localStorage
-                cart = cart.filter((obj) => cartParams.some((pid) => obj.id === pid));
-                
-                // добавляем количество и общую сумму
-                cart = cart.map((obj) => { 
-
-                    obj["quantity"] = cartArr.filter((o) => obj.id === o.id)[0].quantity;
-                    obj["total_price"] = obj.price * obj.quantity;
-
-                    return obj;
-                });
-                
-                console.log(cart);
-
-                dispatch({
-                    type: REMOVEPRODUCT,
-                    cart: cart
-                });
-            })
-            .catch(function(e) {
-                
-                console.log(e);
-
-                dispatch({
-                    type: SHOW_ERROR,
-                    errors: [{
-                        code: e.code,
-                        text: e.message
-                    }]
-                });
-            })
     };
 }

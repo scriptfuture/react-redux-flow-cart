@@ -10,11 +10,12 @@ import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
 
-import { getCart, removeProduct } from './../actions/cart'
+import { getCart, removeProduct, сhangeQuantity } from './../actions/cart'
 
 type Props = {
     getCart: any,
     removeProduct: any,
+    сhangeQuantity: any,
     cart: Array<Object>,
     isLoad: boolean,
     isError: boolean,
@@ -28,6 +29,9 @@ class Cart extends Component<Props, State> {
  
   constructor() { 
        super();
+       
+
+       (this: any).сhangeQuantity = this.сhangeQuantity.bind(this);
   }
   
   componentDidMount() {
@@ -36,6 +40,16 @@ class Cart extends Component<Props, State> {
         this.props.getCart(); 
         
   } 
+  
+  сhangeQuantity(event: SyntheticInputEvent<*>, id: number, cart: Array<Object>): void {
+      
+     let val: number  = (event.target.value: any);
+
+     // количество, только положительные целые числа 
+     val = val > 0?val:1;
+
+     this.props.сhangeQuantity(id, val, cart);
+  }
   
   getCart() {
 	  
@@ -52,11 +66,11 @@ class Cart extends Component<Props, State> {
                   </td>
                   <td>{obj.article_number}</td>  
                   <td>
-                      <input className="qty-input form-group" type="number" defaultValue={obj.quantity} disabled="disabled"/>
+                      <input className="qty-input form-group" type="number" value={obj.quantity} onChange={(e) => this.сhangeQuantity(e, obj.id, cart)}/>
                   </td>
                   <td><PriceFormatter priceInCoins={obj.price} /></td>
                   <td><PriceFormatter priceInCoins={obj.total_price} /></td>
-                  <td><button className="btn btn-danger btn-sm" title="Удалить" onClick={() => this.props.removeProduct(obj.id)}>X</button></td>
+                  <td><button className="btn btn-danger btn-sm" title="Удалить" onClick={() => this.props.removeProduct(obj.id, cart)}>X</button></td>
                 </tr>
       );
   }
@@ -128,7 +142,8 @@ const mapDispatchToProps = (dispatch:any) =>
     {
 
       getCart,
-      removeProduct
+      removeProduct,
+      сhangeQuantity
 
     },
     dispatch
