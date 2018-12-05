@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import ReactTooltip from 'react-tooltip'
-
 import TooltipAddToCart from './blocks/tooltip-add-to-cart'
 
 import Preloader from './blocks/preloader'

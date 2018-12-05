@@ -172,6 +172,12 @@ button.qty-change{
   font-weight: bold;
 }
 
+.content .sum-info {
+  text-align:left;  
+  font-size: 1em;
+  color: grey;
+}
+
 .content .tbl-button-order {
   text-align:right;
   margin-top:20px;  

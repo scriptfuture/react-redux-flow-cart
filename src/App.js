@@ -7,6 +7,7 @@ import About from './components/about'
 import Catalog from './components/catalog'
 import Product from './components/product'
 import Cart from './components/cart'
+import NewOrder from './components/neworder'
 
 type Props = {};
 
@@ -65,6 +66,7 @@ class App extends Component<Props, State> {
                     
                     <Route exact path="/product/:id" component={Product} />
                     <Route exact path="/cart" component={Cart} />
+                    <Route exact path="/neworder" component={NewOrder} />
                  
                 </div>
             </div>

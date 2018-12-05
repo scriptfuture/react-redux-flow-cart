@@ -3,13 +3,15 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { Link } from 'react-router-dom'
+import { push } from 'connected-react-router'
+
 
 import PriceFormatter from './blocks/price-formatter'
 
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
-
+import { declOfNum } from './../utils'
 import { getCart, removeProduct, сhangeQuantity } from './../actions/cart'
 
 type Props = {
@@ -36,7 +38,7 @@ class Cart extends Component<Props, State> {
   
   componentDidMount() {
       
-        // получаем актуальные курсы при старте страницы
+        // получаем список товаров с сервера
         this.props.getCart(); 
         
   } 
@@ -76,18 +78,35 @@ class Cart extends Component<Props, State> {
   }
   
   getTotalPrice(): number {
-      return this.props.cart.reduce((sum, current) => sum + (current.price * current.quantity), 0);
+      return this.props.cart.reduce((sum: number, current: Object) => sum + (parseInt(current.price) * parseInt(current.quantity)), 0);
+  }
+  
+  getTotalProductNames(): number {
+      return this.props.cart.length;
+  }
+  
+  getTotalQuantity(): number {
+      return this.props.cart.reduce((sum: number, current: Object) => sum + parseInt(current.quantity), 0);
+  }
+  
+  getCartInfo() {
+      let totalQuantity: number = this.getTotalQuantity();
+      let totalProductNames: number = this.getTotalProductNames();
+      
+      return (<div>
+                 В корзине {totalQuantity} {declOfNum(totalQuantity,["товар","товара","товаров"])}&nbsp; 
+                 
+                 ( {totalProductNames} {declOfNum(totalProductNames,["наименование товара","наименования товаров","наименований товаров"])} )
+              </div>);
   }
   
   render() {
       
-      let total_price = this.getTotalPrice();
-	  
+      let total_price: number = this.getTotalPrice();
+  
 	  return (
 		   <div>
             <Preloader isShow={this.props.isLoad} />
-            
-           
             <Errors isError={this.props.isError} errors={this.props.errors}/>
 
            
@@ -111,7 +130,8 @@ class Cart extends Component<Props, State> {
                {this.getCart()}
                 
                 <tr>
-                  <td colSpan="6" className="sum-text">Стоимость всех товаров:</td>
+                  <td colSpan="3" className="sum-info">{this.getCartInfo()}</td>
+                  <td colSpan="3" className="sum-text">Стоимость всех товаров:</td>
                   <td colSpan="2" className="sum-num"><PriceFormatter priceInCoins={total_price} /></td>
                 </tr>
   
@@ -119,7 +139,7 @@ class Cart extends Component<Props, State> {
             </table>
       
            <div className="tbl-button-order">
-               {total_price > 0?(<button type="button" className="btn btn-primary">Оформить заказ</button>):
+               {total_price > 0?(<button type="button" className="btn btn-primary" onClick={this.props.openNewOrder}>Оформить заказ</button>):
                                 (<button type="button" className="btn btn-primary" disabled>Оформить заказ</button>)}
            </div>
 
@@ -143,7 +163,8 @@ const mapDispatchToProps = (dispatch:any) =>
 
       getCart,
       removeProduct,
-      сhangeQuantity
+      сhangeQuantity,
+      openNewOrder:  () => push('/neworder')
 
     },
     dispatch
