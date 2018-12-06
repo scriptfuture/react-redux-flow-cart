@@ -15,6 +15,7 @@ import { declOfNum } from './../utils'
 import { getCart, removeProduct, сhangeQuantity } from './../actions/cart'
 
 type Props = {
+    openNewOrder: any,
     getCart: any,
     removeProduct: any,
     сhangeQuantity: any,

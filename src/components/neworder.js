@@ -13,15 +13,39 @@ import { getPrices } from './../actions/cart'
 import { declOfNum } from './../utils'
 
 type Props = {
+    getPrices: any,
+    prices: Array<Object>,
+    isLoad: boolean,
+    isError: boolean,
+    errors: Array<Object>
 };
 
 type State = {
+    email: string,
+    phone: string,
+    fio:  string,
+    address: string,
+    comment: string,
+    isSuccess: boolean
 };
 
 class NewOrder extends Component<Props, State> {
  
   constructor() { 
        super();
+       
+       (this: any).state = {
+            email: "",
+            phone: "",
+            fio:  "",
+            address: "",
+            comment: "",
+            isSuccess: false
+       };
+       
+       
+       this.handleChange = this.handleChange.bind(this);
+       this.handleSubmit = this.handleSubmit.bind(this);
        
   }
   
@@ -42,6 +66,20 @@ class NewOrder extends Component<Props, State> {
       
      this.setState(obj);
   }
+  
+  handleSubmit(event: SyntheticInputEvent<*>) {
+      
+        let { email, phone, fio, address, comment }: Object = this.props;
+        
+        // отправляем форму
+        this.props.newOrder(email, phone, fio, address, comment); 
+               
+        this.setState({isSuccess: true});
+ 
+        
+        event.preventDefault();
+  }
+  
   
   getTotalPrice(): number {
       return this.props.prices.reduce((sum: number, current: Object) => sum + (parseInt(current.price) * parseInt(current.quantity)), 0);
@@ -66,6 +104,7 @@ class NewOrder extends Component<Props, State> {
                на общую сумму <b><PriceFormatter priceInCoins={this.getTotalPrice()} /></b> </p>);
   }
   
+
   render() {
  
 	  return (
@@ -87,28 +126,28 @@ class NewOrder extends Component<Props, State> {
               Произошла ошибка!
             </div>
 		  
-			<form onSubmit="(e) => this.handleSubmit(e, this)" action="#" method="post">
+			<form onSubmit={this.handleSubmit}>
 				<div className="form-group">
-					<label for="email">Email:*</label><br />
-					<input type="text" id="email" name="email" className="form-control"/>
+					<label htmlFor="email">Email:*</label><br />
+					<input type="text" id="email" name="email" className="form-control" value={this.state.email} onChange={this.handleChange} />
 				</div>
 				<div className="form-group">
-					<label for="phone">Телефон:*</label><br />
-					<input type="text" id="phone" name="phone" className="form-control"/>
+					<label htmlFor="phone">Телефон:*</label><br />
+					<input type="text" id="phone" name="phone" className="form-control" value={this.state.phone} onChange={this.handleChange} />
 				</div>
 				<div className="form-group">
-					<label for="fio">Ф.И.О:*</label><br />
-					<input type="text" id="fio" name="fio" className="form-control"/>
-				</div>
-                
-				<div className="form-group">
-					<label for="address">Адрес доставки:</label><br />
-				    <textarea rows="3" id="address" name="address" className="form-control"></textarea>
+					<label htmlFor="fio">Ф.И.О:*</label><br />
+					<input type="text" id="fio" name="fio" className="form-control" value={this.state.fio} onChange={this.handleChange} />
 				</div>
                 
 				<div className="form-group">
-					<label for="comment">Комментарий к заказу:</label><br />
-				    <textarea rows="3" id="comment" name="comment" className="form-control"></textarea>
+					<label htmlFor="address">Адрес доставки:</label><br />
+				    <textarea rows="3" id="address" name="address" className="form-control" value={this.state.address} onChange={this.handleChange} />
+				</div>
+                
+				<div className="form-group">
+					<label htmlFor="comment">Комментарий к заказу:</label><br />
+				    <textarea rows="3" id="comment" name="comment" className="form-control" value={this.state.comment}  onChange={this.handleChange} />
 				</div>
 				
 			    <p><button type="submit" className="btn btn-primary">Отправить</button></p>
