@@ -1,127 +1,19 @@
 yarn run v1.9.4
 $ ./node_modules/.bin/flow && react-scripts start
-Error ---------------------------------------------------------------------------------- src/components/neworder.js:31:9
+Error ---------------------------------------------------------------------------------- src/components/neworder.js:75:9
 
-Cannot call `this.props.getPrices` because property `getPrices` is missing in `Props` [1].
+Cannot call `this.props.newOrder` because property `newOrder` is missing in `Props` [1].
 
-   src/components/neworder.js:31:9
-   31|         this.props.getPrices();      
-               ^^^^^^^^^^^^^^^^^^^^^^
+   src/components/neworder.js:75:9
+   75|         this.props.newOrder(email, phone, fio, address, comment); 
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 References:
-   src/components/neworder.js:21:34
-   21| class NewOrder extends Component<Props, State> {
+   src/components/neworder.js:32:34
+   32| class NewOrder extends Component<Props, State> {
                                         ^^^^^ [1]
 
 
-Error --------------------------------------------------------------------------------- src/components/neworder.js:47:14
 
-Cannot get `this.props.prices` because property `prices` is missing in `Props` [1].
-
-   src/components/neworder.js:47:14
-   47|       return this.props.prices.reduce((sum: number, current: Object) => sum + (parseInt(current.price) * parseInt(current.quantity)), 0);
-                    ^^^^^^^^^^^^^^^^^
-
-References:
-   src/components/neworder.js:21:34
-   21| class NewOrder extends Component<Props, State> {
-                                        ^^^^^ [1]
-
-
-Error --------------------------------------------------------------------------------- src/components/neworder.js:51:14
-
-Cannot get `this.props.prices` because property `prices` is missing in `Props` [1].
-
-   src/components/neworder.js:51:14
-   51|       return this.props.prices.length;
-                    ^^^^^^^^^^^^^^^^^
-
-References:
-   src/components/neworder.js:21:34
-   21| class NewOrder extends Component<Props, State> {
-                                        ^^^^^ [1]
-
-
-Error --------------------------------------------------------------------------------- src/components/neworder.js:55:14
-
-Cannot get `this.props.prices` because property `prices` is missing in `Props` [1].
-
-   src/components/neworder.js:55:14
-   55|       return this.props.prices.reduce((sum: number, current: Object) => sum + parseInt(current.quantity), 0);
-                    ^^^^^^^^^^^^^^^^^
-
-References:
-   src/components/neworder.js:21:34
-   21| class NewOrder extends Component<Props, State> {
-                                        ^^^^^ [1]
-
-
-Error --------------------------------------------------------------------------------- src/components/neworder.js:73:32
-
-Cannot get `this.props.isLoad` because property `isLoad` is missing in `Props` [1].
-
-   src/components/neworder.js:73:32
-   73|             <Preloader isShow={this.props.isLoad} />
-                                      ^^^^^^^^^^^^^^^^^
-
-References:
-   src/components/neworder.js:21:34
-   21| class NewOrder extends Component<Props, State> {
-                                        ^^^^^ [1]
-
-
-Error --------------------------------------------------------------------------------- src/components/neworder.js:74:30
-
-Cannot get `this.props.isError` because property `isError` is missing in `Props` [1].
-
-   src/components/neworder.js:74:30
-   74|             <Errors isError={this.props.isError} errors={this.props.errors}/>
-                                    ^^^^^^^^^^^^^^^^^^
-
-References:
-   src/components/neworder.js:21:34
-   21| class NewOrder extends Component<Props, State> {
-                                        ^^^^^ [1]
-
-
-Error --------------------------------------------------------------------------------- src/components/neworder.js:74:58
-
-Cannot get `this.props.errors` because property `errors` is missing in `Props` [1].
-
-   src/components/neworder.js:74:58
-   74|             <Errors isError={this.props.isError} errors={this.props.errors}/>
-                                                                ^^^^^^^^^^^^^^^^^
-
-References:
-   src/components/neworder.js:21:34
-   21| class NewOrder extends Component<Props, State> {
-                                        ^^^^^ [1]
-
-
-Error --------------------------------------------------------------------------------- src/components/neworder.js:132:3
-
-Cannot call `bindActionCreators` because undefined property `getPrices` [1] is incompatible with `ActionCreator` [2].
-
-   src/components/neworder.js:132:3
-          v-------------------
-   132|   bindActionCreators(
-   133|     {
-   134| 
-   135|       getPrices
-   136|     },
-   137|     dispatch
-   138|   )
-          ^
-
-References:
-   flow-typed/npm/react-redux_v5.x.x.js:141:21
-   141|     CP: $Diff<$Diff<ElementConfig<Com>, RSP>, RDP>,
-                            ^^^^^^^^^^^^^^^^^^ [1]
-   flow-typed/npm/redux_v4.x.x.js:51:58
-    51|   declare export type ActionCreators<K, A> = { [key: K]: ActionCreator<A, any> };
-                                                                 ^^^^^^^^^^^^^^^^^^^^^ [2]
-
-
-
-Found 8 errors
+Found 1 error
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

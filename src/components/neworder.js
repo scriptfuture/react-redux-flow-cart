@@ -14,6 +14,7 @@ import { declOfNum } from './../utils'
 
 type Props = {
     getPrices: any,
+    newOrder: any,
     prices: Array<Object>,
     isLoad: boolean,
     isError: boolean,
@@ -44,8 +45,8 @@ class NewOrder extends Component<Props, State> {
        };
        
        
-       this.handleChange = this.handleChange.bind(this);
-       this.handleSubmit = this.handleSubmit.bind(this);
+       (this: any).handleChange = this.handleChange.bind(this);
+       (this: any).handleSubmit = this.handleSubmit.bind(this);
        
   }
   
@@ -69,7 +70,7 @@ class NewOrder extends Component<Props, State> {
   
   handleSubmit(event: SyntheticInputEvent<*>) {
       
-        let { email, phone, fio, address, comment }: Object = this.props;
+        let { email, phone, fio, address, comment }: Object = this.state;
         
         // отправляем форму
         this.props.newOrder(email, phone, fio, address, comment); 
