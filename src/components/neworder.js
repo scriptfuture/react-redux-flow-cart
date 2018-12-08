@@ -9,6 +9,7 @@ import Errors from './blocks/errors'
 import PriceFormatter from './blocks/price-formatter'
 
 import { getPrices } from './../actions/cart'
+import { newOrder } from './../actions/neworder'
 
 import { declOfNum } from './../utils'
 
@@ -72,8 +73,11 @@ class NewOrder extends Component<Props, State> {
       
         let { email, phone, fio, address, comment }: Object = this.state;
         
+        let cartLine: string = this.getCartLine();
+        let purchaseChecksum: number = this.getTotalPrice();
+        
         // отправляем форму
-        this.props.newOrder(email, phone, fio, address, comment); 
+        this.props.newOrder(email, phone, fio, address, comment, cartLine, purchaseChecksum); 
                
         this.setState({isSuccess: true});
  
@@ -81,6 +85,10 @@ class NewOrder extends Component<Props, State> {
         event.preventDefault();
   }
   
+  
+  getCartLine(): number {
+      return this.props.prices.reduce((s: string, current: Object) => s + current.id + ':' + current.quantity + ':' + current.price + ',', '').slice(0, -1);
+  }
   
   getTotalPrice(): number {
       return this.props.prices.reduce((sum: number, current: Object) => sum + (parseInt(current.price) * parseInt(current.quantity)), 0);
@@ -172,7 +180,8 @@ const mapDispatchToProps = (dispatch:any) =>
   bindActionCreators(
     {
 
-      getPrices
+      getPrices,
+      newOrder
     },
     dispatch
   )
