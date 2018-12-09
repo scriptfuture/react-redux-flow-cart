@@ -11,7 +11,7 @@ import PriceFormatter from './blocks/price-formatter'
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
-import { declOfNum } from './../utils'
+import { declOfNum } from './../utils/'
 import { getCart, removeProduct, сhangeQuantity } from './../actions/cart'
 
 type Props = {

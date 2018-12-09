@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { isU, getCoins, getBN } from './../../utils'
+import { isU, getCoins, getBN } from './../../utils/'
 
 const PriceFormatter = ({ 
        priceInCoins, // цена в монетах (для рублей в копейках)

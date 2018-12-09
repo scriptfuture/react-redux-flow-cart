@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "bbcode-to-react": "^0.2.9",
     "connected-react-router": "4.4.1",
     "history": "^4.7.2",
     "react": "16.4.2",
@@ -11,6 +12,7 @@
     "react-redux": "5.0.7",
     "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
+    "react-scripts": "^2.1.1",
     "react-tooltip": "^3.9.0",
     "redux": "4.0.0",
     "redux-thunk": "2.3.0",
@@ -26,9 +28,7 @@
   },
   "devDependencies": {
     "flow-bin": "^0.74.0",
-    "flow-typed": "^2.4.0",
-    "jest": "^20.0.4",
-    "jest-cli": "^20.0.4"
+    "flow-typed": "^2.4.0"
   },
   "browserslist": [
     ">0.2%",

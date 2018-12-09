@@ -3,32 +3,38 @@ import axios from 'axios';
 import { SHOW_ERROR } from './app'
 
 // actions
-export const NEWORDER_REQUESTED = 'cart/NEWORDER_REQUESTED'
-export const NEWORDER = 'cart/NEWORDER'
+export const NEWORDER_REQUESTED = 'neworder/NEWORDER_REQUESTED'
+export const NEWORDER = 'neworder/NEWORDER'
 
-export const newOrder = (email: string, phone: string, fio:  string, address: string, comment: string, cartLine: string, purchaseChecksum: number) => {
+export const newOrder = (form: Object, callback) => {
     
     return (dispatch: any) => {
         
-       dispatch({
-         type: NEWORDER_REQUESTED
-      });
+        dispatch({
+           type: NEWORDER_REQUESTED
+        });
 
-      
-        axios.post("/api/ok.json", { email, phone, fio, address, comment, cart_line: cartLine, purchase_checksum: purchaseChecksum })
+        // на реальном api заменить на axios.post   
+        axios.get("/api/neworder_ok.json", form)
             .then(function(res) {
+                
+                if (typeof res.data === "undefined" || typeof res.data.message === "undefined") throw {code: 0, message: "Поле 'message' не найдено!"};
+                
+                let message: string = res.data.message;
 
                 // чистим корзину
-                localStorage.setItem('cart', null);
+                localStorage.removeItem('cart');
 
                 dispatch({
-                   type: NEWORDER
+                   type: NEWORDER,
+                   message: message
                 });
+                
+                callback();
             })
             .catch(function(e) {
-                
-                console.log(e);
 
+                // показываем ошибку
                 dispatch({
                     type: SHOW_ERROR,
                     errors: [{

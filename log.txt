@@ -1,17 +1,11 @@
 yarn run v1.9.4
 $ ./node_modules/.bin/flow && react-scripts start
-Error ---------------------------------------------------------------------------------- src/components/neworder.js:75:9
+Error -------------------------------------------------------------------------------- src/components/neworder.js:125:35
 
-Cannot call `this.props.newOrder` because property `newOrder` is missing in `Props` [1].
+Cannot resolve name `parser`.
 
-   src/components/neworder.js:75:9
-   75|         this.props.newOrder(email, phone, fio, address, comment); 
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-References:
-   src/components/neworder.js:32:34
-   32| class NewOrder extends Component<Props, State> {
-                                        ^^^^^ [1]
+   125|             {this.props.isSuccess?parser.parse(this.props.message):""}
+                                          ^^^^^^
 
 
 

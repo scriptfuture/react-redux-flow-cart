@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import parser from 'bbcode-to-react';
+
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
@@ -11,7 +13,7 @@ import PriceFormatter from './blocks/price-formatter'
 import { getPrices } from './../actions/cart'
 import { newOrder } from './../actions/neworder'
 
-import { declOfNum } from './../utils'
+import { declOfNum, isU, bbcodeParse } from './../utils/'
 
 type Props = {
     getPrices: any,
@@ -19,7 +21,9 @@ type Props = {
     prices: Array<Object>,
     isLoad: boolean,
     isError: boolean,
-    errors: Array<Object>
+    errors: Array<Object>,
+    isSuccess: boolean,
+    message: string
 };
 
 type State = {
@@ -29,6 +33,7 @@ type State = {
     address: string,
     comment: string,
     isSuccess: boolean
+    
 };
 
 class NewOrder extends Component<Props, State> {
@@ -71,22 +76,39 @@ class NewOrder extends Component<Props, State> {
   
   handleSubmit(event: SyntheticInputEvent<*>) {
       
+      // ! валидаторы форм
+      
         let { email, phone, fio, address, comment }: Object = this.state;
         
         let cartLine: string = this.getCartLine();
         let purchaseChecksum: number = this.getTotalPrice();
         
+        let self: any = this;
+        
         // отправляем форму
-        this.props.newOrder(email, phone, fio, address, comment, cartLine, purchaseChecksum); 
+        this.props.newOrder({ 
+               email: email, 
+               phone: phone, 
+               fio: fio, 
+               address: address, 
+               comment: comment, 
+               cartLine: cartLine, 
+               purchaseChecksum: purchaseChecksum 
+           }, 
+           function() {
                
-        this.setState({isSuccess: true});
+               // меняем состояния компонента локально (через state)
+               self.setState({isSuccess: true});
+           }
+        ); 
  
+        this.setState();
         
         event.preventDefault();
   }
   
   
-  getCartLine(): number {
+  getCartLine(): string {
       return this.props.prices.reduce((s: string, current: Object) => s + current.id + ':' + current.quantity + ':' + current.price + ',', '').slice(0, -1);
   }
   
@@ -113,16 +135,9 @@ class NewOrder extends Component<Props, State> {
                на общую сумму <b><PriceFormatter priceInCoins={this.getTotalPrice()} /></b> </p>);
   }
   
-
-  render() {
- 
-	  return (
-          <div>
-            <Preloader isShow={this.props.isLoad} />
-            <Errors isError={this.props.isError} errors={this.props.errors}/>
-
-		    <h1>Оформление заказа</h1>
-
+  getForm() {
+      
+      return (<div>
             <p>Для того чтобы совершить покупку, корректно заполните форму ниже. </p>
             
             {this.getCartInfo()}
@@ -161,7 +176,33 @@ class NewOrder extends Component<Props, State> {
 				
 			    <p><button type="submit" className="btn btn-primary">Отправить</button></p>
 			</form>
+         </div>);
+  }
+  
+  getMessage() {
       
+      const message: string = !isU(this.props.message)?this.props.message:"";
+      
+      return (<div>
+
+          {bbcodeParse(message)}
+          
+          <Link to={'/'}>Продолжить</Link> покупки.
+      </div>);
+  }
+
+  render() {
+      
+ 
+	  return (
+          <div>
+            <Preloader isShow={this.props.isLoad} />
+            <Errors isError={this.props.isError} errors={this.props.errors}/>
+           
+		    <h1>Оформление заказа</h1>
+
+            <br />
+            {this.state.isSuccess?this.getMessage():this.getForm()}
               
          </div>
 		);
@@ -169,9 +210,13 @@ class NewOrder extends Component<Props, State> {
  
 } 
 
-const mapStateToProps = ({ app, cart  }) => ({
+const mapStateToProps = ({ app, cart, neworder  }) => ({
     prices: cart.prices,
-    isLoad: cart.isLoad,
+    
+    message: neworder.message,
+    isSuccess: neworder.isSuccess,
+    isLoad: neworder.isLoad,
+    
     isError: app.isError,
     errors: app.errors 
 })
