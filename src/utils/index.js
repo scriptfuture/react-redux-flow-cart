@@ -1,7 +1,7 @@
 // Полезные функции
 
 import parser from 'bbcode-to-react';
-import { YoutubeTag, BoldTag, BrTag, PTag } from './bbcode-tags'
+import { YoutubeTag, BrTag, PTag } from './bbcode-tags'
 
 // проверка на undefined
 export const isU = (a: any): boolean => typeof a === "undefined";
@@ -29,7 +29,6 @@ export const declOfNum = (num: number, titles: Array<string>): string => {
 export const bbcodeParse = (str: string): string => {  
 
     parser.registerTag('youtube', YoutubeTag); // add new tag
-    parser.registerTag('b', BoldTag);
     parser.registerTag('br', BrTag); 
     parser.registerTag('p', PTag);
     

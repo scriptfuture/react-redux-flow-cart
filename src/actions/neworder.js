@@ -6,7 +6,7 @@ import { SHOW_ERROR } from './app'
 export const NEWORDER_REQUESTED = 'neworder/NEWORDER_REQUESTED'
 export const NEWORDER = 'neworder/NEWORDER'
 
-export const newOrder = (form: Object, callback) => {
+export const newOrder = (form: Object, callback: any) => {
     
     return (dispatch: any) => {
         

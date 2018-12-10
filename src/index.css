@@ -2,6 +2,27 @@ h1 {
   font-size: 28px;
 }
 
+h2 {
+  font-size: 26px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 22px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 18px;
+}
+
+
 .content {
     padding-top:90px;
 }
@@ -23,8 +44,10 @@ h1 {
 	padding: 0;
     border-radius: 5px;
 	border: 1px solid lightgrey;
-	width:300px;
-	height:370px;
+    
+	min-width:320px;
+	min-height:370px;
+    
 	float:left;
 	margin-right: 15px;
 	margin-bottom: 15px;
@@ -206,4 +229,23 @@ input::-webkit-inner-spin-button {
 
 .qty-changer input[type='number'] {
     -moz-appearance: textfield;
+}
+
+
+.nav-item a,.nav-item span {
+    color: #F7C9B9 !important;
+}
+
+.nav-item a:hover {
+    color: #FCEDE8 !important;
+}
+
+
+.dropdown-menu a {
+    color: black !important;
+}
+
+
+.dropdown-menu a:hover {
+    color: #050505 !important;
 }

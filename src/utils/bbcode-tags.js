@@ -2,7 +2,6 @@ import React from 'react'
 import { Tag } from 'bbcode-to-react';
 
 // https://github.com/JimLiu/bbcode-to-react
-// +добавить ещё тегов
 
 export class YoutubeTag extends Tag {
   toReact() {
@@ -18,15 +17,6 @@ export class YoutubeTag extends Tag {
         frameBorder="0"
         allowFullScreen
       />
-    );
-  }
-}
- 
-export class BoldTag extends Tag {
-  toReact() {
-    // using this.getComponents() to get children components.
-    return (
-      <b>{this.getComponents()}</b>
     );
   }
 }
