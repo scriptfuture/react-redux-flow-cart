@@ -149,7 +149,7 @@ export const addProduct = (id: number, quantity: number, price: number) => {
               cartArr = cartArr.map(function(obj) {
                   
                   if(obj.id === id) {
-                      obj.quantity = obj.quantity + quantity;
+                      obj.quantity = parseInt(obj.quantity) + parseInt(quantity);
                   }
                   
                   return obj;
