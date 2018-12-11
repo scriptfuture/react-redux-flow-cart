@@ -87,7 +87,7 @@ class Product extends Component<Props, State> {
   addProductToCart() {
       this.setState({showTooltip: true})
       
-      this.props.addProduct(parseInt(this.props.match.params.id), this.state.quantity);
+      this.props.addProduct(parseInt(this.props.match.params.id), this.state.quantity, this.props.product.price);
       
       setTimeout(() => this.setState({showTooltip: false}), 5000);
   }

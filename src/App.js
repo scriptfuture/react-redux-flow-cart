@@ -9,6 +9,8 @@ import Product from './components/product'
 import Cart from './components/cart'
 import NewOrder from './components/neworder'
 
+import CartBlock from './components/blocks/cart-block'
+
 type Props = {};
 
 let y:number = 9;
@@ -78,9 +80,7 @@ class App extends Component<Props, State> {
               </li>
             </ul>
             
-            <span className="navbar-text">
-              В корзине&nbsp; <Link to="/cart" title="12 товаров  ( 6 наименований товаров )"><b>5</b> шт. - <b>28300</b> р.</Link>
-            </span>
+            <CartBlock />
           </div>
         </div>
         </nav>

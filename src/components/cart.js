@@ -72,7 +72,7 @@ class Cart extends Component<Props, State> {
                       <input className="qty-input form-group" type="number" value={obj.quantity} onChange={(e) => this.сhangeQuantity(e, obj.id, cart)}/>
                   </td>
                   <td><PriceFormatter priceInCoins={obj.price} /></td>
-                  <td><PriceFormatter priceInCoins={obj.total_price} /></td>
+                  <td><PriceFormatter priceInCoins={parseInt(obj.total_price) * parseInt(obj.quantity)} /></td>
                   <td><button className="btn btn-danger btn-sm" title="Удалить" onClick={() => this.props.removeProduct(obj.id, cart)}>X</button></td>
                 </tr>
       );

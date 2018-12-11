@@ -130,7 +130,7 @@ export const getPrices = () => {
     };
 }
 
-export const addProduct = (id: number, quantity: number) => {
+export const addProduct = (id: number, quantity: number, price: number) => {
     
     return (dispatch: any) => {
         
@@ -138,7 +138,7 @@ export const addProduct = (id: number, quantity: number) => {
       
       
       if(cartStr == null || cartStr === "") {
-          cartArr.push({"id": id, "quantity": quantity});
+          cartArr.push({ id, quantity });
       }  else {
           
           cartArr =  JSON.parse(cartStr);
@@ -156,7 +156,7 @@ export const addProduct = (id: number, quantity: number) => {
               });
               
           } else {
-              cartArr.push({"id": id, "quantity": quantity});
+              cartArr.push({ id, quantity });
           } // end if
           
       } // end if
@@ -165,7 +165,10 @@ export const addProduct = (id: number, quantity: number) => {
       localStorage.setItem('cart', JSON.stringify(cartArr));
       
       dispatch({
-         type: ADDPRODUCT
+         type: ADDPRODUCT,
+         id, 
+         quantity, 
+         price
       });
 
 

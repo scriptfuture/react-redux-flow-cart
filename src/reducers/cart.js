@@ -13,6 +13,7 @@ export default (state: Object = initialState, action: Object) => {
       return {
         ...state,
         cart: [],
+        prices: [],
         isLoad: true
         
       }
@@ -21,6 +22,7 @@ export default (state: Object = initialState, action: Object) => {
       return {
         ...state,
         cart: action.cart,
+        prices: action.cart.map(({ id, price, quantity }) => ({ id, price, quantity })),
         isLoad: false
       } 
       
@@ -41,20 +43,44 @@ export default (state: Object = initialState, action: Object) => {
       
       
     case ADDPRODUCT:
+    
+        let cartArr: Array<Object> = [];
+    
+        // есть ли уже этот товар в хранилище
+        if(state.prices.some((obj) => obj.id === action.id)) {
+              
+            cartArr = state.prices.map(function(obj) {
+                  
+                if(obj.id === action.id) {
+                    obj.quantity = parseInt(obj.quantity) + parseInt(action.quantity);
+                    obj.price = parseInt(action.price);
+                }
+                  
+                return obj;
+            });
+              
+        } else {
+           cartArr.push({ id: action.id, quantity: parseInt(action.quantity), price: parseInt(action.price) });
+        } // end if
+  
+    
       return {
-        ...state
+        ...state,
+        prices: cartArr
       } 
       
     case REMOVEPRODUCT:
       return {
         ...state,
-        cart: action.cart
+        cart: action.cart,
+        prices: action.cart.map(({ id, price, quantity }) => ({ id, price, quantity }))
       } 
       
     case CHANGEQUANTITY:
       return {
         ...state,
-        cart: action.cart
+        cart: action.cart,
+        prices: action.cart.map(({ id, price, quantity }) => ({ id, price, quantity }))
       } 
  
 

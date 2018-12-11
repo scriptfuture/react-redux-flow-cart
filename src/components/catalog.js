@@ -55,13 +55,13 @@ class Catalog extends Component<Props, State> {
                         <div className="price">
                             <PriceFormatter priceInCoins={obj.price} bntСlass="cbn-title"  ctСlass="cbn-title"/>
                         </div>
-                        <div className="add-cart"><button type="button" className="btn btn-primary" onClick={() => this.addProductToCart(obj.id)}>В корзину</button></div>
+                        <div className="add-cart"><button type="button" className="btn btn-primary" onClick={() => this.addProductToCart(obj.id, obj.price)}>В корзину</button></div>
                     </div> 
       );
   }
   
-  addProductToCart(id) {
-      this.props.addProduct(parseInt(id), 1);
+  addProductToCart(id, price) {
+      this.props.addProduct(parseInt(id), 1, price);
   }
 
   
