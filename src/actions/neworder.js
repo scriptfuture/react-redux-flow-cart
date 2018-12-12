@@ -17,8 +17,10 @@ export const newOrder = (form: Object, callback: any) => {
         // на реальном api заменить на axios.post   
         axios.get("/api/neworder_ok.json", form)
             .then(function(res) {
+				
+				let objErr: Object = { code: 0, message: "Поле 'message' не найдено!" };
                 
-                if (typeof res.data === "undefined" || typeof res.data.message === "undefined") throw {code: 0, message: "Поле 'message' не найдено!"};
+                if (typeof res.data === "undefined" || typeof res.data.message === "undefined") throw objErr;
                 
                 let message: string = res.data.message;
 

@@ -1,20 +1,41 @@
-/* Tooltip container */
-.add-to-cart-tooltip {
-    display: block;
-    position: relative;
-}
-
 /* Tooltip text */
 .add-to-cart-tooltip .add-to-cart-tooltip-text {
-    width: 245px;
-    background-color: black;
-    color: #fff;
+    width: 100%;
     text-align: center;
-    padding: 10px 12px;
-    border-radius: 6px;
-    margin-top: -55px;
- 
-    /* Position the tooltip text - see examples below! */
-    position: absolute;
-    z-index: 1;
+}
+
+.add-to-cart-tooltip {
+        position: absolute;
+        display: block;
+        padding: 10px 12px;
+        min-height: 30px;
+        min-width: 100px;
+        width: 240px;
+        text-align: left;
+        background-color: black;
+        -moz-border-radius: 5px;       
+        -webkit-border-radius: 5px;
+        -khtml-border-radius: 5px;
+        -o-border-radius: 5px;   
+        -ms-border-radius: 5px; 
+        -icab-border-radius: 5px;
+        border-radius: 6px;
+        color: #fff;
+        margin: -60px 0;
+        opacity:0.7;
+}
+
+.add-to-cart-tooltip:before, .add-to-cart-tooltip:after{
+        content:'';
+        position:absolute;
+}
+.add-to-cart-tooltip:before{
+        left: 45%;
+        bottom: -10px;
+        width: 0px;
+        height: 0px;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 15px solid black;
+  
 }

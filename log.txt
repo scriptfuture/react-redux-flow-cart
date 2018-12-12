@@ -1,13 +1,79 @@
-yarn run v1.9.4
+yarn run v1.12.3
 $ ./node_modules/.bin/flow && react-scripts start
-Error -------------------------------------------------------------------------------- src/components/neworder.js:125:35
+Error ------------------------------------------------------------------------------------------------- src/App.js:83:13
 
-Cannot resolve name `parser`.
+Cannot create `CartBlock` element because property `cart` is missing in props [1] but exists in `Props` [2] in type
+argument `CP`.
 
-   125|             {this.props.isSuccess?parser.parse(this.props.message):""}
-                                          ^^^^^^
+   src/App.js:83:13
+    83|             <CartBlock />
+                    ^^^^^^^^^^^^^ [1]
+
+References:
+   flow-typed/npm/react-redux_v5.x.x.js:141:21
+   141|     CP: $Diff<$Diff<ElementConfig<Com>, RSP>, RDP>,
+                            ^^^^^^^^^^^^^^^^^^ [2]
+
+
+Error ------------------------------------------------------------------------ src/components/blocks/cart-block.js:28:12
+
+Cannot get `this.props.prices` because property `prices` is missing in `Props` [1].
+
+   src/components/blocks/cart-block.js:28:12
+   28|         if(this.props.prices.length === 0) this.props.getPrices();
+                  ^^^^^^^^^^^^^^^^^
+
+References:
+   src/components/blocks/cart-block.js:21:35
+   21| class CartBlock extends Component<Props, State> { 
+                                         ^^^^^ [1]
+
+
+Error ------------------------------------------------------------------------ src/components/blocks/cart-block.js:32:14
+
+Cannot get `this.props.prices` because property `prices` is missing in `Props` [1].
+
+   src/components/blocks/cart-block.js:32:14
+   32|       return this.props.prices.reduce((sum: number, current: Object) => sum + (parseInt(current.price) * parseInt(current.quantity)), 0);
+                    ^^^^^^^^^^^^^^^^^
+
+References:
+   src/components/blocks/cart-block.js:21:35
+   21| class CartBlock extends Component<Props, State> { 
+                                         ^^^^^ [1]
+
+
+Error ------------------------------------------------------------------------ src/components/blocks/cart-block.js:36:14
+
+Cannot get `this.props.prices` because property `prices` is missing in `Props` [1].
+
+   src/components/blocks/cart-block.js:36:14
+   36|       return this.props.prices.length;
+                    ^^^^^^^^^^^^^^^^^
+
+References:
+   src/components/blocks/cart-block.js:21:35
+   21| class CartBlock extends Component<Props, State> { 
+                                         ^^^^^ [1]
+
+
+Error ------------------------------------------------------------------------ src/components/blocks/cart-block.js:40:14
+
+Cannot get `this.props.prices` because property `prices` is missing in `Props` [1].
+
+   src/components/blocks/cart-block.js:40:14
+   40|       return this.props.prices.reduce((sum: number, current: Object) => sum + parseInt(current.quantity), 0);
+                    ^^^^^^^^^^^^^^^^^
+
+References:
+   src/components/blocks/cart-block.js:21:35
+   21| class CartBlock extends Component<Props, State> { 
+                                         ^^^^^ [1]
 
 
 
-Found 1 error
+Found 5 errors
+
+Only showing the most relevant union/intersection branches.
+To see all branches, re-run Flow with --show-all-branches
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

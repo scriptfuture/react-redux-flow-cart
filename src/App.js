@@ -13,8 +13,6 @@ import CartBlock from './components/blocks/cart-block'
 
 type Props = {};
 
-let y:number = 9;
-
 type State = {
 };
 
@@ -22,10 +20,6 @@ class App extends Component<Props, State> {
     
   state: State  = {
   };
-    
-  constructor() {
-      super();
-  }
     
     
   render() {
@@ -40,34 +34,29 @@ class App extends Component<Props, State> {
           <div className="collapse navbar-collapse" id="navbarCollapse">
           
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-              {/*<Link className="nav-link" to="/">Товары <span className="sr-only">(current)</span></Link> */}
-                
-              <li className="nav-item dropdown">
+              <li className="nav-item dropdown active">
                 <Link className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" to="/">Каталог <span className="caret"></span></Link>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/">Все товары</Link></li>
-                  <li><Link className="dropdown-item" to="/">Новинки</Link></li>
-                  <li role="separator" className="divider"></li>
-                  <li className="dropdown-header">Категории</li>
-                  <li><Link className="dropdown-item" to="/">Категория 1</Link></li>
-                  <li><Link className="dropdown-item" to="/">Категория 2</Link></li>
-                  <li><Link className="dropdown-item" to="/">Категория 3</Link></li>
+					<li><Link className="dropdown-item" to="/">Все товары</Link></li>
+					<li><Link className="dropdown-item" to="/">Новинки</Link></li>
+					<li role="separator" className="divider"></li>
+					<li className="dropdown-header">Категории</li>
+					<li><Link className="dropdown-item" to="/">Категория 1</Link></li>
+				    <li><Link className="dropdown-item" to="/">Категория 2</Link></li>
+					<li><Link className="dropdown-item" to="/">Категория 3</Link></li>
                   
                   
-                <li className="dropdown-submenu">
-                    <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span className="nav-label">Service C</span><span className="caret"></span></a>
-                    <ul className="dropdown-menu">
-                       <li><Link className="dropdown-item" to="/">Подкатегория 1</Link></li>
-                       <li><Link className="dropdown-item" to="/">Подкатегория 2</Link></li>
-                       <li><Link className="dropdown-item" to="/">Подкатегория 3</Link></li>
-                    </ul>
-                </li>
+					<li className="dropdown-submenu">
+						<ul className="dropdown-menu">
+						   <li><Link className="dropdown-item" to="/">Подкатегория 1</Link></li>
+						   <li><Link className="dropdown-item" to="/">Подкатегория 2</Link></li>
+						   <li><Link className="dropdown-item" to="/">Подкатегория 3</Link></li>
+						</ul>
+					</li>
                   
                 </ul>
               </li>
-                
-              </li>
+			  
               <li className="nav-item">
                 <Link className="nav-link" to="/about-us">О проекте</Link>
               </li>

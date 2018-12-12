@@ -63,7 +63,7 @@ class Cart extends Component<Props, State> {
 	  return cart.map((obj, index) =>
                   <tr key={index}>
                   <td>{obj.id}</td>
-                  <td><img src={obj.img_src} width="100"/></td>
+                  <td><img src={obj.img_src} width="100" alt={obj.title} /></td>
                   <td>
                      <Link className="nav-link" to={'/product/'+obj.id}>{obj.title}</Link>
                   </td>

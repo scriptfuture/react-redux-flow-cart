@@ -48,7 +48,7 @@ class Catalog extends Component<Props, State> {
 	  return catalog.map((obj, index) =>
                     <div className="product" key={index}>
                         <div className="num">№{obj.id}</div>
-                        <div className="image"><img src={obj.img_src} height="180"/></div>
+                        <div className="image"><img src={obj.img_src} height="180" alt={obj.title} /></div>
                         <div className="header">
                            <Link className="nav-link" to={'/product/'+obj.id}>{obj.title}</Link>
                         </div>

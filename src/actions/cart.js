@@ -37,8 +37,10 @@ export const getCart = () => {
 
         axios.get("/api/catalog.json?items=" + cartParams.join(','))
             .then(function(res) {
+				
+				let objErr: Object = { code: 0, message: "Поле 'catalog' не найдено!" };
 
-                if (typeof res.data === "undefined" || typeof res.data.catalog === "undefined") throw {code: 0, message: "Поле 'catalog' не найдено!"};
+                if (typeof res.data === "undefined" || typeof res.data.catalog === "undefined") throw objErr;
                 
                 let cart: Array<Object> = res.data.catalog;
                 
@@ -93,8 +95,10 @@ export const getPrices = () => {
 
         axios.get("/api/prices.json?items=" + cartParams.join(','))
             .then(function(res) {
+				
+				let objErr: Object = { code: 0, message: "Поле 'prices' не найдено!" };
 
-                if (typeof res.data === "undefined" || typeof res.data.prices === "undefined") throw {code: 0, message: "Поле 'prices' не найдено!"};
+                if (typeof res.data === "undefined" || typeof res.data.prices === "undefined") throw objErr;
                 
                 let prices: Array<Object> = res.data.prices;
                 
@@ -110,10 +114,14 @@ export const getPrices = () => {
                     return obj;
                 });
 
+                setTimeout(() => { 
+				
                 dispatch({
                     type: GETPRICES,
                     prices: prices
                 });
+				
+				}, 3000);
             })
             .catch(function(e) {
                 

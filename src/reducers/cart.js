@@ -44,12 +44,13 @@ export default (state: Object = initialState, action: Object) => {
       
     case ADDPRODUCT:
     
-        let cartArr: Array<Object> = [];
-    
-        // есть ли уже этот товар в хранилище
-        if(state.prices.some((obj) => obj.id === action.id)) {
+        // добавляем новый товар в корзину в store
+		let cartArr: Array<Object> = [...state.prices];
+		
+        // есть ли уже этот товар в store
+        if(cartArr.some((obj) => obj.id === action.id)) {
               
-            cartArr = state.prices.map(function(obj) {
+            cartArr = cartArr.map(function(obj) {
                   
                 if(obj.id === action.id) {
                     obj.quantity = parseInt(obj.quantity) + parseInt(action.quantity);
@@ -62,8 +63,7 @@ export default (state: Object = initialState, action: Object) => {
         } else {
            cartArr.push({ id: action.id, quantity: parseInt(action.quantity), price: parseInt(action.price) });
         } // end if
-  
-    
+
       return {
         ...state,
         prices: cartArr

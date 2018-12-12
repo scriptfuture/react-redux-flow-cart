@@ -19,7 +19,9 @@ export const getProduct = (id: number) => {
         axios.get("/api/product.json?id="+id)
             .then(function(res) {
 
-                if (typeof res.data === "undefined" || typeof res.data.product === "undefined") throw {code: 0, message: "Поле 'product' не найдено!"};
+				let objErr: Object = { code: 0, message: "Поле 'product' не найдено!" };
+
+                if (typeof res.data === "undefined" || typeof res.data.product === "undefined") throw objErr;
 
                 dispatch({
                     type: GETPRODUCT,

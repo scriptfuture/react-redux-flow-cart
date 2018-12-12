@@ -9,13 +9,14 @@ export class YoutubeTag extends Tag {
     const attributes = {
       src: this.getContent(true),
       width: this.params.width || 420,
-      height: this.params.height || 315,
+      height: this.params.height || 315
     };
     return (
       <iframe
         {...attributes}
         frameBorder="0"
         allowFullScreen
+		title={this.params.title || ""}
       />
     );
   }
