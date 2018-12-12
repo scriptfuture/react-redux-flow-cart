@@ -9,7 +9,7 @@ import { declOfNum } from './../../utils/'
 
 type Props = {
     getPrices: any,
-    cart: Array<Object>,
+    prices: Array<Object>,
     isLoad: boolean,
     isError: boolean,
     errors: Array<Object>
@@ -49,6 +49,8 @@ class CartBlock extends Component<Props, State> {
   }
   
   render():any {
+	  
+	  if(this.props.isLoad) return(<span className="navbar-text">загрузка...</span>);
         
       return (<span className="navbar-text">
                   В корзине&nbsp; <Link to="/cart" title={this.getCartInfoString()}><b>{this.getTotalQuantity()}</b> шт. &nbsp;–&nbsp;  

@@ -3,8 +3,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import parser from 'bbcode-to-react';
-
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 

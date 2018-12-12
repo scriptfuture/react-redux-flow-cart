@@ -18,8 +18,10 @@ export const getCatalog = () => {
 
         axios.get("/api/catalog.json")
             .then(function(res) {
+				
+				let objErr: Object = { code: 0, message: "Поле 'catalog' не найдено!" };
 
-                if (typeof res.data === "undefined" || typeof res.data.catalog === "undefined") throw {code: 0, message: "Поле 'catalog' не найдено!"};
+                if (typeof res.data === "undefined" || typeof res.data.catalog === "undefined") throw objErr;
 
                 dispatch({
                     type: GETCATALOG,
