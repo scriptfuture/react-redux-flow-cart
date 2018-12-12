@@ -47,7 +47,7 @@ export default (state: Object = initialState, action: Object) => {
         // добавляем новый товар в корзину в store
 		let cartArr: Array<Object> = [...state.prices];
 		
-        // есть ли уже этот товар в store
+        // есть ли уже этот товар в store?
         if(cartArr.some((obj) => obj.id === action.id)) {
               
             cartArr = cartArr.map(function(obj) {

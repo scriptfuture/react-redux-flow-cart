@@ -50,7 +50,8 @@ class CartBlock extends Component<Props, State> {
   
   render():any {
 	  
-	  if(this.props.isLoad) return(<span className="navbar-text">загрузка...</span>);
+	  if(this.props.isLoad && !this.props.isError) return(<span className="navbar-text">загрузка корзины...</span>);
+      if(this.props.isError) return(<span className="navbar-text">Ошибка загрузки корзины!</span>);
         
       return (<span className="navbar-text">
                   В корзине&nbsp; <Link to="/cart" title={this.getCartInfoString()}><b>{this.getTotalQuantity()}</b> шт. &nbsp;–&nbsp;  

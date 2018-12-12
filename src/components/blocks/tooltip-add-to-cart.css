@@ -5,37 +5,44 @@
 }
 
 .add-to-cart-tooltip {
-        position: absolute;
-        display: block;
-        padding: 10px 12px;
-        min-height: 30px;
-        min-width: 100px;
-        width: 240px;
-        text-align: left;
-        background-color: black;
-        -moz-border-radius: 5px;       
-        -webkit-border-radius: 5px;
-        -khtml-border-radius: 5px;
-        -o-border-radius: 5px;   
-        -ms-border-radius: 5px; 
-        -icab-border-radius: 5px;
-        border-radius: 6px;
-        color: #fff;
-        margin: -60px 0;
-        opacity:0.7;
+    position: absolute;
+    display: block;
+    padding: 10px 12px;
+    min-height: 30px;
+    min-width: 100px;
+    width: 240px;
+    text-align: left;
+    background-color: black;
+    -moz-border-radius: 5px;       
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -o-border-radius: 5px;   
+    -ms-border-radius: 5px; 
+    -icab-border-radius: 5px;
+    border-radius: 6px;
+    color: #fff;
+    margin: -60px 0;
+    opacity:0.7;
+}
+
+.atct-max {
+    margin: -108px 0;
+}
+
+.atct-quant {
+    margin: -85px 0;
 }
 
 .add-to-cart-tooltip:before, .add-to-cart-tooltip:after{
-        content:'';
-        position:absolute;
+    content:'';
+    position:absolute;
 }
 .add-to-cart-tooltip:before{
-        left: 45%;
-        bottom: -10px;
-        width: 0px;
-        height: 0px;
-        border-left: 15px solid transparent;
-        border-right: 15px solid transparent;
-        border-top: 15px solid black;
-  
+    left: 45%;
+    bottom: -10px;
+    width: 0px;
+    height: 0px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid black;
 }

@@ -16,6 +16,7 @@ type Props = {
     getProduct: any,
     addProduct: any,
     product: Object,
+    prices: Array<Object>,
     isLoad: boolean,
     isError: boolean,
     errors: Array<Object>,
@@ -89,7 +90,15 @@ class Product extends Component<Props, State> {
       
       this.props.addProduct(parseInt(this.props.match.params.id), this.state.quantity, this.props.product.price);
       
-      setTimeout(() => this.setState({showTooltip: false}), 5000);
+      setTimeout(() => this.setState({showTooltip: false}), 7000);
+  }
+  
+  getTooltipQuantity(id: number): number  {        
+        return this.props.prices.reduce((sum: number, current: Object) => (current.id === id)?sum + parseInt(current.quantity):sum, 0);
+  } 
+  
+  isNewProduct(id: number, quantity: number): boolean {
+       return this.getTooltipQuantity(id) === quantity;
   }
   
   render() {
@@ -143,7 +152,11 @@ class Product extends Component<Props, State> {
                     </div>
                     
                     <div className="page-add-cart">
-                        <TooltipAddToCart isShow={this.state.showTooltip}/>
+                        <TooltipAddToCart 
+                            isShow={this.state.showTooltip} 
+                            quantity={this.getTooltipQuantity(this.props.product.id)} 
+                            isNew={this.isNewProduct(this.props.product.id, this.state.quantity)}
+                        />
                         <button type="button" className="btn btn-primary btn-lg" onClick={this.addProductToCart} >В корзину</button>
                     </div>
                 
@@ -159,8 +172,9 @@ class Product extends Component<Props, State> {
  
 } 
 
-const mapStateToProps = ({ product, app  }) => ({
+const mapStateToProps = ({ product, app, cart  }) => ({
     product: product.product,
+    prices: cart.prices,
     isLoad: product.isLoad,
     isError: app.isError,
     errors: app.errors 

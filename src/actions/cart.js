@@ -113,15 +113,11 @@ export const getPrices = () => {
 
                     return obj;
                 });
-
-                setTimeout(() => { 
 				
                 dispatch({
                     type: GETPRICES,
                     prices: prices
                 });
-				
-				}, 3000);
             })
             .catch(function(e) {
                 
