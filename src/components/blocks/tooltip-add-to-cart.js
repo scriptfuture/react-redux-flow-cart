@@ -15,7 +15,7 @@ let getText = (quantity: number, isNew: boolean): string => {
        res = "Товар добавлен в корзину ещё раз! В корзине "+quantity+" "+declOfNum(quantity, ["экземпляр","экземпляра","экземпляров"])+" этого товара.";
     }
     
-    return res + "/" + quantity + "/" + isNew;
+    return res;
 };
 
 let getTooltipClass = (isShow, quantity, isNew): string => {

@@ -93,20 +93,19 @@ class Product extends Component<Props, State> {
       setTimeout(() => this.setState({showTooltip: false}), 5000);
   }
   
-  getTooltipQuantity(id: number): number  {  
+  getTooltipQuantity(): number  {  
 
-        console.log(this.props.prices);
-  
-        return this.props.prices.filter((obj) => obj.id === id).reduce((sum: number, current: Object) => sum + parseInt(current.quantity), 0);
+      let id: number = parseInt(this.props.match.params.id);
+        
+      return this.props.prices.filter((obj) => obj.id === id).reduce((sum: number, current: Object) => sum + parseInt(current.quantity), 0);
   } 
   
-  isNewProduct(id: number, quantity: number): boolean {
+  isNewProduct(): boolean {
       
-      console.log(id);
-      console.log(quantity);
-      console.log(this.getTooltipQuantity(id));
+      let id: number = parseInt(this.props.match.params.id);
+      let quantity: number = this.state.quantity;
       
-       return this.getTooltipQuantity(id) === quantity;
+      return this.getTooltipQuantity() === quantity;
   }
   
   render() {
@@ -162,8 +161,8 @@ class Product extends Component<Props, State> {
                     <div className="page-add-cart">
                         <TooltipAddToCart 
                             isShow={this.state.showTooltip} 
-                            quantity={this.getTooltipQuantity(this.props.product.id)} 
-                            isNew={this.isNewProduct(this.props.product.id, this.state.quantity)}
+                            quantity={this.getTooltipQuantity()} 
+                            isNew={this.isNewProduct()}
                         />
                         <button type="button" className="btn btn-primary btn-lg" onClick={this.addProductToCart} >В корзину</button>
                     </div>
