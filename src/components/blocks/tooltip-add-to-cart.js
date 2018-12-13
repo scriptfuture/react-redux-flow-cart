@@ -5,7 +5,7 @@ import './tooltip-add-to-cart.css'
 import { declOfNum } from './../../utils/'
 
 
-let getText: string = (quantity, isNew) => {
+let getText = (quantity: number, isNew: boolean): string => {
     
     let res: string = "Товар добавлен в корзину!";
     
@@ -15,10 +15,10 @@ let getText: string = (quantity, isNew) => {
        res = "Товар добавлен в корзину ещё раз! В корзине "+quantity+" "+declOfNum(quantity, ["экземпляр","экземпляра","экземпляров"])+" этого товара.";
     }
     
-    return res;
+    return res + "/" + quantity + "/" + isNew;
 };
 
-let getTooltipClass: string = (isShow, quantity, isNew) => {
+let getTooltipClass = (isShow, quantity, isNew): string => {
     
     if(!isShow) return "hide";
     

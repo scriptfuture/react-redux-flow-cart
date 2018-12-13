@@ -90,14 +90,22 @@ class Product extends Component<Props, State> {
       
       this.props.addProduct(parseInt(this.props.match.params.id), this.state.quantity, this.props.product.price);
       
-      setTimeout(() => this.setState({showTooltip: false}), 7000);
+      setTimeout(() => this.setState({showTooltip: false}), 5000);
   }
   
-  getTooltipQuantity(id: number): number  {        
-        return this.props.prices.reduce((sum: number, current: Object) => (current.id === id)?sum + parseInt(current.quantity):sum, 0);
+  getTooltipQuantity(id: number): number  {  
+
+        console.log(this.props.prices);
+  
+        return this.props.prices.filter((obj) => obj.id === id).reduce((sum: number, current: Object) => sum + parseInt(current.quantity), 0);
   } 
   
   isNewProduct(id: number, quantity: number): boolean {
+      
+      console.log(id);
+      console.log(quantity);
+      console.log(this.getTooltipQuantity(id));
+      
        return this.getTooltipQuantity(id) === quantity;
   }
   

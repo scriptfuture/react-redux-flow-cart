@@ -1,79 +1,87 @@
-yarn run v1.12.3
+yarn run v1.9.4
 $ ./node_modules/.bin/flow && react-scripts start
-Error ------------------------------------------------------------------------------------------------- src/App.js:83:13
+Error ---------------------------------------------------------------- src/components/blocks/tooltip-add-to-cart.js:8:23
 
-Cannot create `CartBlock` element because property `cart` is missing in props [1] but exists in `Props` [2] in type
-argument `CP`.
+Cannot assign function to `getText` because function [1] is incompatible with string [2].
 
-   src/App.js:83:13
-    83|             <CartBlock />
-                    ^^^^^^^^^^^^^ [1]
-
-References:
-   flow-typed/npm/react-redux_v5.x.x.js:141:21
-   141|     CP: $Diff<$Diff<ElementConfig<Com>, RSP>, RDP>,
-                            ^^^^^^^^^^^^^^^^^^ [2]
-
-
-Error ------------------------------------------------------------------------ src/components/blocks/cart-block.js:28:12
-
-Cannot get `this.props.prices` because property `prices` is missing in `Props` [1].
-
-   src/components/blocks/cart-block.js:28:12
-   28|         if(this.props.prices.length === 0) this.props.getPrices();
-                  ^^^^^^^^^^^^^^^^^
+   src/components/blocks/tooltip-add-to-cart.js:8:23
+                             v----------------------
+    8| let getText: string = (quantity, isNew) => {
+    9|     
+   10|     let res: string = "Товар добавлен в корзину!";
+   11|     
+   12|     if(isNew) {
+   13|        if(quantity > 1) res = "В корзину добавлено "+quantity+" "+declOfNum(quantity, ["экземпляр","экземпляра","экземпляров"])+" этого товара."; 
+   14|     } else {
+   15|        res = "Товар добавлен в корзину ещё раз! В корзине "+quantity+" "+declOfNum(quantity, ["экземпляр","экземпляра","экземпляров"])+" этого товара.";
+   16|     }
+   17|     
+   18|     return res;
+   19| };
+       ^ [1]
 
 References:
-   src/components/blocks/cart-block.js:21:35
-   21| class CartBlock extends Component<Props, State> { 
-                                         ^^^^^ [1]
+   src/components/blocks/tooltip-add-to-cart.js:8:14
+    8| let getText: string = (quantity, isNew) => {
+                    ^^^^^^ [2]
 
 
-Error ------------------------------------------------------------------------ src/components/blocks/cart-block.js:32:14
+Error --------------------------------------------------------------- src/components/blocks/tooltip-add-to-cart.js:21:31
 
-Cannot get `this.props.prices` because property `prices` is missing in `Props` [1].
+Cannot assign function to `getTooltipClass` because function [1] is incompatible with string [2].
 
-   src/components/blocks/cart-block.js:32:14
-   32|       return this.props.prices.reduce((sum: number, current: Object) => sum + (parseInt(current.price) * parseInt(current.quantity)), 0);
-                    ^^^^^^^^^^^^^^^^^
-
-References:
-   src/components/blocks/cart-block.js:21:35
-   21| class CartBlock extends Component<Props, State> { 
-                                         ^^^^^ [1]
-
-
-Error ------------------------------------------------------------------------ src/components/blocks/cart-block.js:36:14
-
-Cannot get `this.props.prices` because property `prices` is missing in `Props` [1].
-
-   src/components/blocks/cart-block.js:36:14
-   36|       return this.props.prices.length;
-                    ^^^^^^^^^^^^^^^^^
-
-References:
-   src/components/blocks/cart-block.js:21:35
-   21| class CartBlock extends Component<Props, State> { 
-                                         ^^^^^ [1]
-
-
-Error ------------------------------------------------------------------------ src/components/blocks/cart-block.js:40:14
-
-Cannot get `this.props.prices` because property `prices` is missing in `Props` [1].
-
-   src/components/blocks/cart-block.js:40:14
-   40|       return this.props.prices.reduce((sum: number, current: Object) => sum + parseInt(current.quantity), 0);
-                    ^^^^^^^^^^^^^^^^^
+   src/components/blocks/tooltip-add-to-cart.js:21:31
+                                     v------------------------------
+   21| let getTooltipClass: string = (isShow, quantity, isNew) => {
+   22|     
+   23|     if(!isShow) return "hide";
+   24|     
+   25|     let res: string = "add-to-cart-tooltip";
+   26|     
+   27|     if(isNew) {
+   28|        if(quantity > 1) res = "add-to-cart-tooltip atct-quant"; 
+   29|     } else {
+   30|        res = "add-to-cart-tooltip atct-max";
+   31|     }
+   32|     
+   33|     return res;
+   34| };
+       ^ [1]
 
 References:
-   src/components/blocks/cart-block.js:21:35
-   21| class CartBlock extends Component<Props, State> { 
-                                         ^^^^^ [1]
+   src/components/blocks/tooltip-add-to-cart.js:21:22
+   21| let getTooltipClass: string = (isShow, quantity, isNew) => {
+                            ^^^^^^ [2]
+
+
+Error --------------------------------------------------------------- src/components/blocks/tooltip-add-to-cart.js:38:21
+
+Cannot call `getTooltipClass` because string [1] is not a function.
+
+   src/components/blocks/tooltip-add-to-cart.js:38:21
+   38|     <div className={getTooltipClass(isShow, quantity, isNew)}>
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+References:
+   src/components/blocks/tooltip-add-to-cart.js:21:22
+   21| let getTooltipClass: string = (isShow, quantity, isNew) => {
+                            ^^^^^^ [1]
+
+
+Error --------------------------------------------------------------- src/components/blocks/tooltip-add-to-cart.js:40:14
+
+Cannot call `getText` because string [1] is not a function.
+
+   src/components/blocks/tooltip-add-to-cart.js:40:14
+   40|             {getText(quantity, isNew)}
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+
+References:
+   src/components/blocks/tooltip-add-to-cart.js:8:14
+    8| let getText: string = (quantity, isNew) => {
+                    ^^^^^^ [1]
 
 
 
-Found 5 errors
-
-Only showing the most relevant union/intersection branches.
-To see all branches, re-run Flow with --show-all-branches
+Found 4 errors
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
