@@ -18,7 +18,7 @@ let getText = (quantity: number, isNew: boolean): string => {
     return res;
 };
 
-let getTooltipClass = (isShow, quantity, isNew): string => {
+let getTooltipClass = (isShow: boolean, quantity: number, isNew: boolean): string => {
     
     if(!isShow) return "hide";
     
