@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 
-
 import About from './components/about'
 import Catalog from './components/catalog'
 import Product from './components/product'

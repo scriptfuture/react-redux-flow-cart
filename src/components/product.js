@@ -8,6 +8,7 @@ import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
 import PriceFormatter from './blocks/price-formatter'
+import Helmet from "react-helmet"
 
 import { getProduct } from './../actions/product'
 import { addProduct } from './../actions/cart'
@@ -111,6 +112,8 @@ class Product extends Component<Props, State> {
 	  
 	  return (
           <div>
+            <Helmet title={"Каталог / "+ this.props.product.title} />
+          
             <Preloader isShow={this.props.isLoad} />
             
            

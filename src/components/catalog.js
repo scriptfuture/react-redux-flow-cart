@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
+import Helmet from "react-helmet"
+
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
@@ -54,6 +56,8 @@ class Catalog extends Component<Props, State> {
 	  
 	  return (
 		   <div>
+            <Helmet title={"Каталог"} />
+           
             <Preloader isShow={this.props.isLoad} />
             
            

@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import Helmet from "react-helmet"
+
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
@@ -136,6 +138,8 @@ class NewOrder extends Component<Props, State> {
   getForm() {
       
       return (<div>
+            <Helmet title={"Оформление заказа"} />
+      
             <p>Для того чтобы совершить покупку, корректно заполните форму ниже. </p>
             
             {this.getCartInfo()}

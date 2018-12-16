@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { push } from 'connected-react-router'
 
+import Helmet from "react-helmet"
 
 import PriceFormatter from './blocks/price-formatter'
 
@@ -107,6 +108,8 @@ class Cart extends Component<Props, State> {
   
 	  return (
 		   <div>
+            <Helmet title={"Корзина"} />
+           
             <Preloader isShow={this.props.isLoad} />
             <Errors isError={this.props.isError} errors={this.props.errors}/>
 

@@ -58,7 +58,7 @@ class CatalogItem extends Component<Props, State> {
   
   render():any {
       
-      let { id, img_src, title, price, quantity }: Object = this.props;
+      let { id, img_src, title, price }: Object = this.props;
       let { showTooltip, currentQuantity }: Object = this.state;
 
       return (<div className="product">

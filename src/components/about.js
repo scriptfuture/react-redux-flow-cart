@@ -1,4 +1,5 @@
 import React from 'react'
+import Helmet from "react-helmet"
 
 import { bbcodeParse } from './../utils/'
 
@@ -9,6 +10,8 @@ let test_bb = "[i]тест i[/i]  [b]тест b[/b] [u]тест u[/u] [h1]тес
     
 const About = () => (
   <div>
+    <Helmet title={"О проекте"} />
+  
     <h1>О проекте</h1>
     <p>Корзина товаров на React + Redux + Flow.</p>
     <div>
