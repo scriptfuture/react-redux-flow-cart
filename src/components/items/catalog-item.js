@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { Link } from 'react-router-dom'
+import { push } from 'connected-react-router'
 
 import PriceFormatter from './../blocks/price-formatter'
 import TooltipAddToCart from './../blocks/tooltip-add-to-cart'
@@ -15,11 +16,12 @@ type Props = {
     img_src: string, 
     title: string, 
     price: number,
-    addProduct: any    
+    addProduct: any,
+    openProduct: any    
 };
 
 type State = {
-    showTooltip:boolean, 
+    showTooltip:boolean,
     currentQuantity: number
 };
 
@@ -28,8 +30,7 @@ class CatalogItem extends Component<Props, State> {
 
   state: State  = {
       showTooltip: false,
-      currentQuantity: 1, 
-      isNew: true
+      currentQuantity: 1
   };
   
   constructor() { 
@@ -58,12 +59,12 @@ class CatalogItem extends Component<Props, State> {
   
   render():any {
       
-      let { id, img_src, title, price }: Object = this.props;
-      let { showTooltip, currentQuantity }: Object = this.state;
+      let { id, img_src, title, price, openProduct }: Object = this.props;
+      let { showTooltip }: Object = this.state;
 
       return (<div className="product">
                         <div className="num">№{id}</div>
-                        <div className="image"><img src={img_src} height="180" alt={title} /></div>
+                        <div className="image"><img src={img_src} height="180" alt={title} onClick={()=> openProduct(id)}/></div>
                         <div className="header">
                            <Link className="nav-link" to={'/product/'+id}>{title}</Link>
                         </div>
@@ -91,7 +92,8 @@ const mapStateToProps = ({ cart  }) => ({
 const mapDispatchToProps = (dispatch:any) =>
   bindActionCreators(
     {
-      addProduct
+      addProduct,
+      openProduct: (id: number) => push('/product/'+id)
     },
     dispatch
   )

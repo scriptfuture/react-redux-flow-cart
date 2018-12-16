@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
+import { Link } from 'react-router-dom'
+
 import Helmet from "react-helmet"
 
 import Preloader from './blocks/preloader'
@@ -73,6 +75,30 @@ class Catalog extends Component<Props, State> {
                <div className="clear"></div>
             </div>
 
+                <ul className="pagination">
+                  <li className="page-item disabled">
+                    <Link className="page-link" to={'/catalog/1'}>«</Link>
+                  </li>
+                  <li className="page-item active">
+                    <Link className="page-link" to={'/catalog/1'}>1</Link>
+                  </li>
+                  <li className="page-item">
+                    <Link className="page-link" to={'/catalog/1'}>2</Link>
+                  </li>
+                  <li className="page-item">
+                    <Link className="page-link" to={'/catalog/1'}>3</Link>
+                  </li>
+                  <li className="page-item">
+                    <Link className="page-link" to={'/catalog/1'}>4</Link>
+                  </li>
+                  <li className="page-item">
+                    <Link className="page-link" to={'/catalog/1'}>5</Link>
+                  </li>
+                  <li className="page-item">
+                    <Link className="page-link" to={'/catalog/1'}>»</Link>
+                  </li>
+                </ul>
+                
 
           </div>
 		);
