@@ -25,6 +25,16 @@
     opacity:0.7;
 }
 
+.atct-cat {
+    margin: -90px 36px;
+    opacity:0.8;
+}
+
+.atct-max-cat {
+    margin: -144px 36px;
+    opacity:0.8;
+}
+
 .atct-max {
     margin: -108px 0;
 }

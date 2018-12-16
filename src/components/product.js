@@ -102,7 +102,6 @@ class Product extends Component<Props, State> {
   
   isNewProduct(): boolean {
       
-      let id: number = parseInt(this.props.match.params.id);
       let quantity: number = this.state.quantity;
       
       return this.getTooltipQuantity() === quantity;
@@ -163,6 +162,7 @@ class Product extends Component<Props, State> {
                             isShow={this.state.showTooltip} 
                             quantity={this.getTooltipQuantity()} 
                             isNew={this.isNewProduct()}
+                            isCatalog={false}
                         />
                         <button type="button" className="btn btn-primary btn-lg" onClick={this.addProductToCart} >В корзину</button>
                     </div>

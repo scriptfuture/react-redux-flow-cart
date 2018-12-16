@@ -2,19 +2,16 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { Link } from 'react-router-dom'
-
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
-import PriceFormatter from './blocks/price-formatter'
+import CatalogItem from './items/catalog-item'
+
 
 import { getCatalog } from './../actions/catalog'
-import { addProduct } from './../actions/cart'
 
 type Props = {
     getCatalog: any,
-    addProduct: any,
     catalog: Array<Object>,
     isLoad: boolean,
     isError: boolean,
@@ -22,14 +19,14 @@ type Props = {
     
 };
 
-type State = {};
+type State = {
+    tooltipCatalog: Object
+};
 
 class Catalog extends Component<Props, State> { 
- 
-  constructor() { 
-       super();
-       
-       (this: any).addProductToCart = this.addProductToCart.bind(this);
+
+  state = {
+      tooltipCatalog: {} 
   }
   
   componentDidMount() {
@@ -43,27 +40,15 @@ class Catalog extends Component<Props, State> {
 	  
 	  let catalog = [];
 	  if(typeof this.props.catalog !== "undefined" && Array.isArray(this.props.catalog)) catalog = this.props.catalog;
-
+      
 	  
-	  return catalog.map((obj, index) =>
-                    <div className="product" key={index}>
-                        <div className="num">№{obj.id}</div>
-                        <div className="image"><img src={obj.img_src} height="180" alt={obj.title} /></div>
-                        <div className="header">
-                           <Link className="nav-link" to={'/product/'+obj.id}>{obj.title}</Link>
-                        </div>
-                        <div className="price">
-                            <PriceFormatter priceInCoins={obj.price} bntСlass="cbn-title"  ctСlass="cbn-title"/>
-                        </div>
-                        <div className="add-cart"><button type="button" className="btn btn-primary" onClick={() => this.addProductToCart(obj.id, obj.price)}>В корзину</button></div>
-                    </div> 
-      );
+	  return catalog.map((obj, index) => <CatalogItem 
+                                             key={index} 
+                                             id={obj.id} 
+                                             img_src={obj.img_src} 
+                                             title={obj.title} 
+                                             price={obj.price} />);
   }
-  
-  addProductToCart(id, price) {
-      this.props.addProduct(parseInt(id), 1, price);
-  }
-
   
   render() {
 	  
@@ -102,8 +87,7 @@ const mapDispatchToProps = (dispatch:any) =>
   bindActionCreators(
     {
 
-      getCatalog,
-      addProduct
+      getCatalog
 
     },
     dispatch

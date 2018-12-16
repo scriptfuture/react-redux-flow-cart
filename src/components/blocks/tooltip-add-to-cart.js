@@ -18,24 +18,32 @@ let getText = (quantity: number, isNew: boolean): string => {
     return res;
 };
 
-let getTooltipClass = (isShow: boolean, quantity: number, isNew: boolean): string => {
+let getTooltipClass = (isShow: boolean, quantity: number, isNew: boolean, isCatalog: boolean): string => {
     
     if(!isShow) return "hide";
     
-    let res: string = "add-to-cart-tooltip";
+    let sub1 = "";
+    let sub2 = " atct-max";
+    
+    if(isCatalog) {
+        sub1 = " atct-cat";
+        sub2 = " atct-max-cat";
+    }
+    
+    let res: string = "add-to-cart-tooltip" + sub1;
     
     if(isNew) {
        if(quantity > 1) res = "add-to-cart-tooltip atct-quant"; 
     } else {
-       res = "add-to-cart-tooltip atct-max";
+       res = "add-to-cart-tooltip" + sub2;
     }
     
     return res;
 };
 
 
-const TooltipAddToCart = ({ isShow, quantity, isNew }: Object) => {return (
-    <div className={getTooltipClass(isShow, quantity, isNew)}>
+const TooltipAddToCart = ({ isShow, quantity, isNew, isCatalog}: Object) => {return (
+    <div className={getTooltipClass(isShow, quantity, isNew, isCatalog)}>
         <div className="add-to-cart-tooltip-text">
             {getText(quantity, isNew)}
         </div>
