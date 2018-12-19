@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { Link } from 'react-router-dom'
-
 import Helmet from "react-helmet"
 
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
 import CatalogItem from './items/catalog-item'
+import Pagination from './blocks/pagination'
 
 
 import { getCatalog } from './../actions/catalog'
@@ -17,6 +16,7 @@ import { getCatalog } from './../actions/catalog'
 type Props = {
     getCatalog: any,
     catalog: Array<Object>,
+    pagination: Object,
     isLoad: boolean,
     isError: boolean,
     errors: Array<Object>
@@ -35,10 +35,29 @@ class Catalog extends Component<Props, State> {
   
   componentDidMount() {
       
+        let currentPage: number = parseInt(this.props.match.params.page) || 1;
+      
         // получаем актуальные курсы при старте страницы
-        this.props.getCatalog(); 
+        this.props.getCatalog(currentPage); 
         
-  } 
+  }
+  
+  componentWillUpdate(nextProps, nextState) {
+      
+      //  let currentPage: number = parseInt(this.props.match.params.page) || 1;
+      
+        // получаем актуальные курсы при старте страницы
+      //  this.props.getCatalog(currentPage); 
+  }
+  
+  componentWillU() {
+      
+        let currentPage: number = parseInt(this.props.match.params.page) || 1;
+      
+        // получаем актуальные курсы при старте страницы
+        this.props.getCatalog(currentPage); 
+        
+  }
   
   getCatalog() {
 	  
@@ -47,7 +66,7 @@ class Catalog extends Component<Props, State> {
       
 	  
 	  return catalog.map((obj, index) => <CatalogItem 
-                                             key={index} 
+                                             key={obj.id} 
                                              id={obj.id} 
                                              img_src={obj.img_src} 
                                              title={obj.title} 
@@ -55,15 +74,19 @@ class Catalog extends Component<Props, State> {
   }
   
   render() {
+      
+     let currentPage: number = parseInt(this.props.match.params.page) || 1;
+     
+     let { pagination, isLoad, isError, errors } = this.props;
 	  
 	  return (
 		   <div>
             <Helmet title={"Каталог"} />
            
-            <Preloader isShow={this.props.isLoad} />
+            <Preloader isShow={isLoad} />
             
            
-            <Errors isError={this.props.isError} errors={this.props.errors}/>
+            <Errors isError={isError} errors={errors}/>
 
            
             <h1>Каталог товаров</h1>
@@ -75,29 +98,7 @@ class Catalog extends Component<Props, State> {
                <div className="clear"></div>
             </div>
 
-                <ul className="pagination">
-                  <li className="page-item disabled">
-                    <Link className="page-link" to={'/catalog/1'}>«</Link>
-                  </li>
-                  <li className="page-item active">
-                    <Link className="page-link" to={'/catalog/1'}>1</Link>
-                  </li>
-                  <li className="page-item">
-                    <Link className="page-link" to={'/catalog/1'}>2</Link>
-                  </li>
-                  <li className="page-item">
-                    <Link className="page-link" to={'/catalog/1'}>3</Link>
-                  </li>
-                  <li className="page-item">
-                    <Link className="page-link" to={'/catalog/1'}>4</Link>
-                  </li>
-                  <li className="page-item">
-                    <Link className="page-link" to={'/catalog/1'}>5</Link>
-                  </li>
-                  <li className="page-item">
-                    <Link className="page-link" to={'/catalog/1'}>»</Link>
-                  </li>
-                </ul>
+            <Pagination limit={pagination.limit} currentPage={currentPage} totalPages={pagination.totalPages} isReplay={pagination.isReplay} />   
                 
 
           </div>
@@ -108,6 +109,7 @@ class Catalog extends Component<Props, State> {
 
 const mapStateToProps = ({ catalog, app  }) => ({
     catalog: catalog.catalog,
+    pagination: catalog.pagination,
     isLoad: catalog.isLoad,
     isError: app.isError,
     errors: app.errors 

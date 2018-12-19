@@ -1,0 +1,99 @@
+{
+    "pagination": {
+        "limit": 21, 
+        "totalPages": 100,
+        "isReplay": true
+    },
+    "catalog": [{
+            "id": 21,
+            "img_src": "/img/product.jpg",
+            "price": 2730035,
+            "article_number": "b245",
+            "stock_availability": 5,
+            "title": "Название товара 1"
+        },
+
+        {
+            "id": 22,
+            "img_src": "/img/product.jpg",
+            "price": 8600,
+            "article_number": "b6767",
+            "stock_availability": 7,
+            "title": "Название товара 2"
+        },
+
+        {
+            "id": 23,
+            "img_src": "/img/product.jpg",
+            "price": 13400,
+            "article_number": "b253534",
+            "stock_availability": 54,
+            "title": "Название товара 3"
+        },
+
+        {
+            "id": 24,
+            "img_src": "/img/product.jpg",
+            "price": 12350,
+            "article_number": "b25645",
+            "stock_availability": 5,
+            "title": "Название товара 4"
+        },
+
+        {
+            "id": 25,
+            "img_src": "/img/product.jpg",
+            "price": 12850,
+            "article_number": "b25445",
+            "stock_availability": 44,
+            "title": "Название товара 5"
+        },
+
+        {
+            "id": 26,
+            "img_src": "/img/product.jpg",
+            "price": 12350,
+            "article_number": "b25645",
+            "stock_availability": 49,
+            "title": "Название товара 6"
+        },
+
+        {
+            "id": 27,
+            "img_src": "/img/product.jpg",
+            "price": 12350,
+            "article_number": "b25645",
+            "stock_availability": 23,
+            "title": "Название товара 7"
+        },
+
+        {
+            "id": 28,
+            "img_src": "/img/product.jpg",
+            "price": 12350,
+            "article_number": "b245",
+            "stock_availability": 43535333,
+            "title": "Название товара 8"
+        },
+
+        {
+            "id": 29,
+            "img_src": "/img/product.jpg",
+            "price": 12310,
+            "article_number": "b276545",
+            "stock_availability": 2,
+            "title": "Название товара 9"
+        },
+
+        {
+            "id": 30,
+            "img_src": "/img/product.jpg",
+            "price": 12385,
+            "article_number": "b56245",
+            "stock_availability": 49,
+            "title": "Название товара 10"
+        }
+
+
+    ]
+}

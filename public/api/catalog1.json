@@ -1,4 +1,9 @@
 {
+    "pagination": {
+        "limit": 21, 
+        "totalPages": 100,
+        "isReplay": true
+    },
     "catalog": [{
             "id": 1,
             "img_src": "/img/product.jpg",

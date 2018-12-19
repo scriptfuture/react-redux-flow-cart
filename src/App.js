@@ -78,6 +78,7 @@ class App extends Component<Props, State> {
                 <div className="col content">
 
                     <Route exact path="/" component={Catalog} /> 
+                    <Route exact path="/catalog/:page" component={Catalog} /> 
                     <Route exact path="/about-us" component={About} /> 
                     
                     <Route exact path="/product/:id" component={Product} />
