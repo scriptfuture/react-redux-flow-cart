@@ -24,9 +24,11 @@ let getList = (limit: number, currentPage: number, totalPages: number): Array<nu
 
 let handler = (e: any): any => {
     e.stopPropagation();
+    e.stopImmediatePropagation()
     
     let link: string = e.target.href;
     
+    console.log(link);
   //  push(link);
 };
 
