@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
+import { push } from 'connected-react-router'
 
-let getList = (limit: number, currentPage: number, totalPages: number, isReplay: boolean): Array<number> => {
+let getList = (limit: number, currentPage: number, totalPages: number): Array<number> => {
     
     limit--;
     
@@ -22,32 +22,40 @@ let getList = (limit: number, currentPage: number, totalPages: number, isReplay:
 };
 
 
+let handler = (e: any): any => {
+    e.stopPropagation();
+    
+    let link: string = e.target.href;
+    
+  //  push(link);
+};
 
-const Pagination = ({ limit, currentPage, totalPages, isReplay }: Object) => {return(
+
+const Pagination = ({ limit, currentPage, totalPages, isReplay, nextPage }: Object) => {return(
     <ul className="pagination">
         
         {currentPage - limit/2 > 1? 
             <li className="page-item">
-                <Link className="page-link" to={'/catalog/' + Math.floor(currentPage - limit/2)}>«</Link>
+                <a className="page-link" href={'/catalog/' + Math.floor(currentPage - limit/2)} onClick={handler}>«</a>
             </li>: (isReplay?  
             <li className="page-item">
-                <Link className="page-link" to={'/catalog/' + totalPages}>«</Link>
+                <a className="page-link" href={'/catalog/' + totalPages} onClick={handler}>«</a>
             </li>: "")}
         
-        {getList(limit, currentPage, totalPages, isReplay).map((currentValue: number, index: number) => (
+        {getList(limit, currentPage, totalPages).map((currentValue: number, index: number) => (
         
             <li className={currentValue === currentPage?"page-item active":"page-item"} key={index} title={'Страница '+currentValue}>
-                <Link className="page-link" to={'/catalog/'+currentValue}>{currentValue}</Link>
+                <a className="page-link" href={'/catalog/'+currentValue} onClick={handler}>{currentValue}</a>
             </li>
         ))}
         
 
         {currentPage + limit/2 < totalPages? 
             <li className="page-item">
-                <Link className="page-link" to={'/catalog/' + (Math.floor(currentPage + limit/2) + 1)}>»</Link>
+                <a className="page-link" href={'/catalog/' + (Math.floor(currentPage + limit/2) + 1)} onClick={handler}>»</a>
             </li>: (isReplay?
             <li className="page-item">
-                <Link className="page-link" to={'/catalog/1'}>»</Link>
+                <a className="page-link" href={'/catalog/1'} onClick={handler}>»</a>
             </li>: "")}
         
     </ul>

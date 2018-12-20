@@ -73,6 +73,10 @@ class Catalog extends Component<Props, State> {
                                              price={obj.price} />);
   }
   
+  nextPage() {
+      
+  }
+  
   render() {
       
      let currentPage: number = parseInt(this.props.match.params.page) || 1;
@@ -98,7 +102,13 @@ class Catalog extends Component<Props, State> {
                <div className="clear"></div>
             </div>
 
-            <Pagination limit={pagination.limit} currentPage={currentPage} totalPages={pagination.totalPages} isReplay={pagination.isReplay} />   
+            <Pagination 
+                limit={pagination.limit} 
+                currentPage={currentPage} 
+                totalPages={pagination.totalPages} 
+                isReplay={pagination.isReplay}
+                nextPage={this.nextPage}                
+            />   
                 
 
           </div>
