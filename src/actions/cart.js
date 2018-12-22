@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-import { SHOW_ERROR } from './app'
+import { SHOW_ERROR, HIDE_ERROR } from './app'
 
 // actions
 export const ADDPRODUCT = 'cart/ADDPRODUCT'
@@ -55,6 +55,10 @@ export const getCart = () => {
 
                     return obj;
                 });
+                
+                dispatch({
+                    type: HIDE_ERROR
+                });
 
                 dispatch({
                     type: GETCART,
@@ -63,7 +67,10 @@ export const getCart = () => {
             })
             .catch(function(e) {
                 
-                console.log(e);
+                dispatch({
+                    type: GETCART,
+                    cart: []
+                });
 
                 dispatch({
                     type: SHOW_ERROR,
@@ -112,6 +119,10 @@ export const getPrices = () => {
                     obj["total_price"] = obj.price * obj.quantity;
 
                     return obj;
+                });
+                
+                dispatch({
+                    type: HIDE_ERROR
                 });
 				
                 dispatch({

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-import { SHOW_ERROR } from './app'
+import { SHOW_ERROR, HIDE_ERROR } from './app'
 
 // actions
 export const GETPRODUCT_REQUESTED = 'product/GETPRODUCT_REQUESTED'
@@ -22,6 +22,10 @@ export const getProduct = (id: number) => {
 				let objErr: Object = { code: 0, message: "Поле 'product' не найдено!" };
 
                 if (typeof res.data === "undefined" || typeof res.data.product === "undefined") throw objErr;
+                
+                dispatch({
+                    type: HIDE_ERROR
+                });
 
                 dispatch({
                     type: GETPRODUCT,
@@ -30,7 +34,10 @@ export const getProduct = (id: number) => {
             })
             .catch(function(e) {
                 
-                console.log(e);
+                dispatch({
+                    type: GETPRODUCT,
+                    product: {}
+                });
 
                 dispatch({
                     type: SHOW_ERROR,

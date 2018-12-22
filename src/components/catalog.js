@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 
 import Helmet from "react-helmet"
 
@@ -19,42 +20,35 @@ type Props = {
     pagination: Object,
     isLoad: boolean,
     isError: boolean,
-    errors: Array<Object>
-    
+    errors: Array<Object>,
+    match: Object,
+    newpage: any,
+    currentPage: number
 };
 
 type State = {
     tooltipCatalog: Object
+    
 };
 
 class Catalog extends Component<Props, State> { 
 
   state = {
-      tooltipCatalog: {} 
+      tooltipCatalog: {}
+  }
+  
+  constructor() { 
+       super();
+       
+       (this: any).nextPage = this.nextPage.bind(this);
   }
   
   componentDidMount() {
       
-        let currentPage: number = parseInt(this.props.match.params.page) || 1;
+        let currentPage: number = parseInt(this.props.match.params.page);
+        if(isNaN(currentPage)) currentPage = 1;
       
-        // получаем актуальные курсы при старте страницы
-        this.props.getCatalog(currentPage); 
-        
-  }
-  
-  componentWillUpdate(nextProps, nextState) {
-      
-      //  let currentPage: number = parseInt(this.props.match.params.page) || 1;
-      
-        // получаем актуальные курсы при старте страницы
-      //  this.props.getCatalog(currentPage); 
-  }
-  
-  componentWillU() {
-      
-        let currentPage: number = parseInt(this.props.match.params.page) || 1;
-      
-        // получаем актуальные курсы при старте страницы
+        // получаем каталог
         this.props.getCatalog(currentPage); 
         
   }
@@ -73,13 +67,15 @@ class Catalog extends Component<Props, State> {
                                              price={obj.price} />);
   }
   
-  nextPage() {
+  nextPage(page: number) {
+      // именяем url
+      this.props.newpage(page);
       
+      // получаем каталог
+      this.props.getCatalog(page); 
   }
   
   render() {
-      
-     let currentPage: number = parseInt(this.props.match.params.page) || 1;
      
      let { pagination, isLoad, isError, errors } = this.props;
 	  
@@ -104,7 +100,7 @@ class Catalog extends Component<Props, State> {
 
             <Pagination 
                 limit={pagination.limit} 
-                currentPage={currentPage} 
+                currentPage={this.props.currentPage} 
                 totalPages={pagination.totalPages} 
                 isReplay={pagination.isReplay}
                 nextPage={this.nextPage}                
@@ -117,19 +113,22 @@ class Catalog extends Component<Props, State> {
  
 } 
 
+
 const mapStateToProps = ({ catalog, app  }) => ({
     catalog: catalog.catalog,
     pagination: catalog.pagination,
     isLoad: catalog.isLoad,
     isError: app.isError,
-    errors: app.errors 
+    errors: app.errors,
+    currentPage: catalog.currentPage    
 })
 
 const mapDispatchToProps = (dispatch:any) =>
   bindActionCreators(
     {
 
-      getCatalog
+      getCatalog,
+      newpage: (page: number) => push('/catalog/' + page)
 
     },
     dispatch

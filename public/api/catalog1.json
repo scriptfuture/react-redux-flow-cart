@@ -1,6 +1,6 @@
 {
     "pagination": {
-        "limit": 21, 
+        "limit": 11, 
         "totalPages": 100,
         "isReplay": true
     },

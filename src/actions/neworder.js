@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { SHOW_ERROR } from './app'
+import { SHOW_ERROR, HIDE_ERROR } from './app'
 
 // actions
 export const NEWORDER_REQUESTED = 'neworder/NEWORDER_REQUESTED'
@@ -28,6 +28,10 @@ export const newOrder = (form: Object, callback: any) => {
                 localStorage.removeItem('cart');
 
                 dispatch({
+                    type: HIDE_ERROR
+                });
+                
+                dispatch({
                    type: NEWORDER,
                    message: message
                 });
@@ -35,6 +39,11 @@ export const newOrder = (form: Object, callback: any) => {
                 callback();
             })
             .catch(function(e) {
+                
+                dispatch({
+                   type: NEWORDER,
+                   message: ""
+                });
 
                 // показываем ошибку
                 dispatch({
