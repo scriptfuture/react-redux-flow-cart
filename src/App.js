@@ -21,6 +21,10 @@ class App extends Component<Props, State> {
   };
     
     
+  getCategories() {
+      
+  }
+    
   render() {
     return (
       <div>

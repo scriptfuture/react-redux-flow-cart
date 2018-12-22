@@ -32,6 +32,7 @@ export const getCatalog = (currentPage: number) => {
                 dispatch({
                     type: GETCATALOG,
                     catalog: res.data.catalog,
+                    categories: res.data.categories, 
                     pagination: res.data.pagination,
                     currentPage: currentPage
                 });
@@ -41,6 +42,7 @@ export const getCatalog = (currentPage: number) => {
                 dispatch({
                     type: GETCATALOG,
                     catalog: [],
+                    categories: [],
                     pagination: {},
                     currentPage: 1
                 });
