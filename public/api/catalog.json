@@ -4,12 +4,47 @@
         "totalPages": 100,
         "isReplay": true
     },
-    "category": {
-        "id": 1,
-        "parent": 0,
-        "name": "Категория 1"
-
-    },
+    "categories": [{
+            "id": 1,
+            "parent": 0,
+            "name": "Категория 1"
+        },
+        {
+            "id": 2,
+            "parent": 0,
+            "name": "Категория 2"
+        },
+        {
+            "id": 3,
+            "parent": 0,
+            "name": "Категория 3"
+        },
+        {
+            "id": 4,
+            "parent": 0,
+            "name": "Категория 4"
+        },
+        {
+            "id": 5,
+            "parent": 0,
+            "name": "Категория 5"
+        },
+        {
+            "id": 6,
+            "parent": 5,
+            "name": "Категория 6"
+        },
+        {
+            "id": 7,
+            "parent": 5,
+            "name": "Категория 7"
+        },
+        {
+            "id": 8,
+            "parent": 6,
+            "name": "Категория 8"
+        }
+    ],
     "catalog": [{
             "id": 1,
             "img_src": "/img/product.jpg",

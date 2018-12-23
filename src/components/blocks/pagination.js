@@ -19,7 +19,7 @@ let getList = (limit: number, currentPage: number, totalPages: number): Array<nu
 };
 
 
-const Pagination = ({ limit, currentPage, totalPages, isReplay, nextPage }: Object) => {return(
+const Pagination = ({ limit, currentPage, totalPages, isReplay, nextPage }: Object) => (
     <ul className="pagination">
         
         {currentPage - limit/2 > 1? 
@@ -47,6 +47,6 @@ const Pagination = ({ limit, currentPage, totalPages, isReplay, nextPage }: Obje
             </li>: "")}
         
     </ul>
-)}
+)
 
 export default Pagination;

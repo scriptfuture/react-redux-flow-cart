@@ -1,0 +1,96 @@
+{
+    "menu": [{
+            "id": 1,
+            "parent": 0,
+            "name": "Каталог",
+            "url": "/catalog"
+        },
+        {
+            "id": 2,
+            "parent": 0,
+            "name": "О проекте",
+            "url": "/about-us"
+        },
+        {
+            "id": 3,
+            "parent": 0,
+            "name": "Корзина",
+            "url": "/cart"
+        },
+        {
+            "id": 4,
+            "parent": 0,
+            "name": "Оформить заказ",
+            "url": "/neworder"
+        },
+        {
+            "id": 7,
+            "parent": 1,
+            "name": "Все товары",
+            "url": "/catalog"
+
+        },
+        {
+            "id": 8,
+            "parent": 1,
+            "name": "Новинки",
+            "url": "/catalog/new-items"
+
+        },
+        {
+            "id": 9,
+            "parent": 1,
+            "name": "Категории",
+            "url": "{subtitle}"
+
+        },
+        {
+            "id": 10,
+            "parent": 1,
+            "name": "Категория 1",
+            "url": "/catalog/1/10"
+        },
+        {
+            "id": 20,
+            "parent": 1,
+            "name": "Категория 2",
+            "url": "/catalog/1/20"
+        },
+        {
+            "id": 30,
+            "parent": 1,
+            "name": "Категория 3",
+            "url": "/catalog/1/30"
+        },
+        {
+            "id": 40,
+            "parent": 1,
+            "name": "Категория 4",
+            "url": "/catalog/1/40"
+        },
+        {
+            "id": 50,
+            "parent": 1,
+            "name": "Категория 5",
+            "url": "/catalog/1/50"
+        },
+        {
+            "id": 60,
+            "parent": 1,
+            "name": "Категория 6",
+            "url": "/catalog/1/60"
+        },
+        {
+            "id": 70,
+            "parent": 1,
+            "name": "Категория 7",
+            "url": "/catalog/1/70"
+        },
+        {
+            "id": 80,
+            "parent": 1,
+            "name": "Категория 8",
+            "url": "/catalog/1/80"
+        }
+    ]
+}

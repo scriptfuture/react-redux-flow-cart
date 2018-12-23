@@ -42,12 +42,12 @@ let getTooltipClass = (isShow: boolean, quantity: number, isNew: boolean, isCata
 };
 
 
-const TooltipAddToCart = ({ isShow, quantity, isNew, isCatalog}: Object) => {return (
+const TooltipAddToCart = ({ isShow, quantity, isNew, isCatalog}: Object) =>  (
     <div className={getTooltipClass(isShow, quantity, isNew, isCatalog)}>
         <div className="add-to-cart-tooltip-text">
             {getText(quantity, isNew)}
         </div>
     </div>
-)}
+)
 
 export default TooltipAddToCart;

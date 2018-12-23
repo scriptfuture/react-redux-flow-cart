@@ -3,7 +3,7 @@ import React from 'react'
 import './preloader.css'
 
 
-const Preloader = ({ isShow }: Object) => {return (
+const Preloader = ({ isShow }: Object) => (
     <div className={isShow?"preloader-1":"preloader-1 preloader-hide"}>
         <div>Загрузка</div>
         <span className="line line-1"></span>
@@ -16,6 +16,6 @@ const Preloader = ({ isShow }: Object) => {return (
         <span className="line line-8"></span>
         <span className="line line-9"></span>
     </div>
-)}
+)
 
 export default Preloader;
