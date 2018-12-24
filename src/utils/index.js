@@ -38,3 +38,29 @@ export const bbcodeParse = (str: string): string => {
 
     return parser.toReact(str);  
 };
+
+// функция формирования дерева
+// на вход получает массив вида [{id: 1, parent: 0, ...}, {id: 2, parent: 1, ...}, {id: 3, parent: 1, ...}, {id: 4, parent: 2, ...}]
+// на выходе формерует дерево вида [{id: 1, parent: 0, children: [{id: 2, parent: 1, children: [{id: 4, parent: 2, children: null, ...}], ...}, {id: 3, parent: 1, children: null, ...}]]
+export const getTree = (children: Array<Object>, res: Array<Object>): Array<Object> => {  
+    
+    children.forEach(function({ id, parent }, i, arr) {
+      //alert( i + ": " + item + " (массив:" + arr + ")" );
+      
+      //let children: Array<Object> = startArr.reduce((acc, el, arr) => acc + 1, 0);
+      
+      let children: Array<Object> = arr.filter((el) => el.parent === parent);
+      
+      if(children.length === 0) {
+          res.push({id, parent, children: null});
+      } else {
+          res.push({id, parent, children});
+         // return getTree(children, res); 
+      }
+      
+      //res.push({})
+    });
+   
+
+    return res;  
+};

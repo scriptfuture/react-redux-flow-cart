@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import { Link } from 'react-router-dom'
 
+import { getTree } from './../../utils/'
 
 import { getTopMenu } from './../../actions/top-menu'
 
@@ -30,10 +31,24 @@ class TopMenu extends Component<Props, State> {
         
   }
   
+  getTree() {
+      let arr: Array<Object> = getTree([{id: 1, parent: 0}, {id: 2, parent: 1}, {id: 3, parent: 1}, {id: 4, parent: 2}], []);
+      console.log(arr);
+  }
+  
   render():any {
       
-      //let { id, img_src, title, price, openProduct }: Object = this.props;
+      let { menu }: Object = this.props;
+      let topLevelMenu: Array<Object> = menu.filter((obj) => obj.parent === 0);
+      
+      console.log(this.getTree());
+      
       //let { showTooltip }: Object = this.state;
+      
+     // console.log(menu);
+    //  console.log(topLevelMenu);
+      
+      
 
       return (<nav className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
         <div className="container">
@@ -43,6 +58,17 @@ class TopMenu extends Component<Props, State> {
           </button>
           <div className="collapse navbar-collapse" id="navbarCollapse">
           
+          <ul className="navbar-nav mr-auto">
+          
+           {topLevelMenu.map((obj) => (
+             <li className="nav-item" key={obj.id}>
+                <Link className="nav-link" to={obj.url}>{obj.name}</Link>
+             </li>
+           ))}
+             
+          </ul>
+          
+          {/*
             <ul className="navbar-nav mr-auto">
               <li className="nav-item dropdown active">
                 <Link className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" to="/">Каталог <span className="caret"></span></Link>
@@ -78,6 +104,7 @@ class TopMenu extends Component<Props, State> {
                  <Link className="nav-link" to="/neworder">Оформить заказ</Link>
               </li>
             </ul>
+          */}
             
             <CartBlock />
           </div>
@@ -87,8 +114,8 @@ class TopMenu extends Component<Props, State> {
  
 } 
 
-const mapStateToProps = ({ cart  }) => ({
-    prices: cart.prices
+const mapStateToProps = ({ topmenu  }) => ({
+    menu: topmenu.menu
 })
 
 const mapDispatchToProps = (dispatch:any) =>
