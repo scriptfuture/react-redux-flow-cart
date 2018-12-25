@@ -3,7 +3,7 @@
             "id": 1,
             "parent": 0,
             "name": "Каталог",
-            "url": "/catalog"
+            "url": "/"
         },
         {
             "id": 2,
@@ -27,7 +27,7 @@
             "id": 7,
             "parent": 1,
             "name": "Все товары",
-            "url": "/catalog"
+            "url": "/"
 
         },
         {
@@ -35,6 +35,13 @@
             "parent": 1,
             "name": "Новинки",
             "url": "/catalog/new-items"
+
+        },
+        {
+            "id": 99,
+            "parent": 1,
+            "name": "",
+            "url": "{separator}"
 
         },
         {

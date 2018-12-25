@@ -31,24 +31,46 @@ class TopMenu extends Component<Props, State> {
         
   }
   
-  getTree() {
-      let arr: Array<Object> = getTree([{id: 1, parent: 0}, {id: 2, parent: 1}, {id: 3, parent: 1}, {id: 4, parent: 2}], []);
-      console.log(arr);
+  getDropdownMenuItem(obj: Object, c: any) {
+      if(obj.url === "{subtitle}") return(<li key={obj.id} className="dropdown-header">{obj.name}</li>);
+      if(obj.url === "{separator}") return(<li role="separator" className="divider"></li>);
+      
+      return c;
+  }
+  
+  getDropdownMenu(children: Array<Object>) {
+      return(<ul className="dropdown-menu">
+                  {children.map((obj) => obj.children.length > 1?this.getDropdownMenuItem(obj,
+                        <li key={obj.id}>
+                            <Link className="dropdown-item" to={obj.url}>{obj.name} подменю</Link>
+                        </li>
+                  ):this.getDropdownMenuItem(obj,
+                        <li  key={obj.id}>
+                            <Link className="dropdown-item" to={obj.url}>{obj.name}</Link>
+                        </li>
+                  ))}
+
+             </ul>);
+  }
+  
+  getMenuTree() {
+      let { menu }: Object = this.props;
+      
+      let topMenu: Array<Object> = getTree(menu);
+      
+      return topMenu.map((obj) => obj.children.length > 1?(
+             <li className="nav-item dropdown active" key={obj.id}>
+                <Link className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" to={obj.url}>{obj.name} <span className="caret"></span></Link>
+                 {this.getDropdownMenu(obj.children)}
+             </li>
+      ):(
+             <li className="nav-item" key={obj.id}>
+                <Link className="nav-link" to={obj.url}>{obj.name}</Link>
+             </li>
+      ));
   }
   
   render():any {
-      
-      let { menu }: Object = this.props;
-      let topLevelMenu: Array<Object> = menu.filter((obj) => obj.parent === 0);
-      
-      console.log(this.getTree());
-      
-      //let { showTooltip }: Object = this.state;
-      
-     // console.log(menu);
-    //  console.log(topLevelMenu);
-      
-      
 
       return (<nav className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
         <div className="container">
@@ -59,13 +81,7 @@ class TopMenu extends Component<Props, State> {
           <div className="collapse navbar-collapse" id="navbarCollapse">
           
           <ul className="navbar-nav mr-auto">
-          
-           {topLevelMenu.map((obj) => (
-             <li className="nav-item" key={obj.id}>
-                <Link className="nav-link" to={obj.url}>{obj.name}</Link>
-             </li>
-           ))}
-             
+              {this.getMenuTree()}
           </ul>
           
           {/*

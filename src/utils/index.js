@@ -40,27 +40,37 @@ export const bbcodeParse = (str: string): string => {
 };
 
 // функция формирования дерева
-// на вход получает массив вида [{id: 1, parent: 0, ...}, {id: 2, parent: 1, ...}, {id: 3, parent: 1, ...}, {id: 4, parent: 2, ...}]
-// на выходе формерует дерево вида [{id: 1, parent: 0, children: [{id: 2, parent: 1, children: [{id: 4, parent: 2, children: null, ...}], ...}, {id: 3, parent: 1, children: null, ...}]]
-export const getTree = (children: Array<Object>, res: Array<Object>): Array<Object> => {  
+// на вход получает массив вида 
+// [{id: 1, parent: 0, ...}, {id: 2, parent: 1, ...}, {id: 3, parent: 1, ...}, {id: 4, parent: 2, ...}]
+// на выходе формерует дерево вида 
+// [{id: 1, parent: 0, children: [{id: 2, parent: 1, children: [{id: 4, parent: 2, children: null, ...}], ...}, {id: 3, parent: 1, children: null, ...}]]
+export const getTree = (arr: Array<Object>): Array<Object> => {
     
-    children.forEach(function({ id, parent }, i, arr) {
-      //alert( i + ": " + item + " (массив:" + arr + ")" );
-      
-      //let children: Array<Object> = startArr.reduce((acc, el, arr) => acc + 1, 0);
-      
-      let children: Array<Object> = arr.filter((el) => el.parent === parent);
-      
-      if(children.length === 0) {
-          res.push({id, parent, children: null});
-      } else {
-          res.push({id, parent, children});
-         // return getTree(children, res); 
-      }
-      
-      //res.push({})
-    });
-   
+  let tree: Array<Object> = [];
+  let mappedArr: Object = {};
+  let arrElem: Object = {};
+  let mappedElem: Object = {}; 
 
-    return res;  
-};
+  // First map the nodes of the array to an object -> create a hash table.
+  for(let i: number = 0, len = arr.length; i < len; i++) {
+    arrElem = arr[i];
+    mappedArr[arrElem.id] = arrElem;
+    mappedArr[arrElem.id]['children'] = [];
+  }
+
+
+  for (var id in mappedArr) {
+    if (mappedArr.hasOwnProperty(id)) {
+      mappedElem = mappedArr[id];
+      // If the element is not at the root level, add it to its parent array of children.
+      if (mappedElem.parent) {
+        mappedArr[mappedElem['parent']]['children'].push(mappedElem);
+      }
+      // If the element is at the root level, add it to first level elements array.
+      else {
+        tree.push(mappedElem);
+      }
+    }
+  }
+  return tree;
+} 
