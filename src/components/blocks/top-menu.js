@@ -40,12 +40,12 @@ class TopMenu extends Component<Props, State> {
   }
   
   // остальные уровни меню (бесконечный уровень вложенности)
-  getDropdownMenuLevel(children: Array<Object>) {
+  getDropdownMenuNextLevel(children: Array<Object>) {
       return(<ul className="dropdown-menu">
                   {children.map((obj) => obj.children.length > 1?this.getDropdownMenuItem(obj,
                         <li className="dropdown-submenu" key={obj.id}>
                             <Link to={obj.url} className="dropdown-item">{obj.name}</Link>
-                            {this.getDropdownMenuLevel(obj.children)} 
+                            {this.getDropdownMenuNextLevel(obj.children)} 
                         </li>
                   ):this.getDropdownMenuItem(obj,
                         <li  key={obj.id}>
@@ -60,7 +60,7 @@ class TopMenu extends Component<Props, State> {
                   {children.map((obj) => obj.children.length > 1?this.getDropdownMenuItem(obj,
                         <li className="dropdown-submenu" key={obj.id}>
                             <Link to={obj.url} className="dropdown-item">{obj.name}</Link>
-                            {this.getDropdownMenuLevel(obj.children)}         
+                            {this.getDropdownMenuNextLevel(obj.children)}         
                         </li>
                   ):this.getDropdownMenuItem(obj,
                         <li  key={obj.id}>
