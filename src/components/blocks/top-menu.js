@@ -12,7 +12,8 @@ import { getTopMenu } from './../../actions/top-menu'
 import CartBlock from './cart-block'
 
 type Props = { 
-   getTopMenu: any
+   getTopMenu: any,
+   menu: Array<Object>
 };
 
 type State = {
@@ -38,18 +39,34 @@ class TopMenu extends Component<Props, State> {
       return c;
   }
   
-  getDropdownMenu(children: Array<Object>) {
+  // остальные уровни меню (бесконечный уровень вложенности)
+  getDropdownMenuLevel(children: Array<Object>) {
       return(<ul className="dropdown-menu">
                   {children.map((obj) => obj.children.length > 1?this.getDropdownMenuItem(obj,
-                        <li key={obj.id}>
-                            <Link className="dropdown-item" to={obj.url}>{obj.name} подменю</Link>
+                        <li className="dropdown-submenu" key={obj.id}>
+                            <Link to={obj.url} className="dropdown-item">{obj.name}</Link>
+                            {this.getDropdownMenuLevel(obj.children)} 
                         </li>
                   ):this.getDropdownMenuItem(obj,
                         <li  key={obj.id}>
                             <Link className="dropdown-item" to={obj.url}>{obj.name}</Link>
                         </li>
                   ))}
-
+             </ul>);
+  }
+  
+  getDropdownMenu(children: Array<Object>) {
+      return(<ul className="dropdown-menu">
+                  {children.map((obj) => obj.children.length > 1?this.getDropdownMenuItem(obj,
+                        <li className="dropdown-submenu" key={obj.id}>
+                            <Link to={obj.url} className="dropdown-item">{obj.name}</Link>
+                            {this.getDropdownMenuLevel(obj.children)}         
+                        </li>
+                  ):this.getDropdownMenuItem(obj,
+                        <li  key={obj.id}>
+                            <Link className="dropdown-item" to={obj.url}>{obj.name}</Link>
+                        </li>
+                  ))}
              </ul>);
   }
   
@@ -57,6 +74,8 @@ class TopMenu extends Component<Props, State> {
       let { menu }: Object = this.props;
       
       let topMenu: Array<Object> = getTree(menu);
+      
+      console.log(topMenu);
       
       return topMenu.map((obj) => obj.children.length > 1?(
              <li className="nav-item dropdown active" key={obj.id}>
@@ -80,49 +99,10 @@ class TopMenu extends Component<Props, State> {
           </button>
           <div className="collapse navbar-collapse" id="navbarCollapse">
           
-          <ul className="navbar-nav mr-auto">
-              {this.getMenuTree()}
-          </ul>
-          
-          {/*
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item dropdown active">
-                <Link className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" to="/">Каталог <span className="caret"></span></Link>
-                <ul className="dropdown-menu">
-					<li><Link className="dropdown-item" to="/">Все товары</Link></li>
-					<li><Link className="dropdown-item" to="/">Новинки</Link></li>
-					<li role="separator" className="divider"></li>
-					<li className="dropdown-header">Категории</li>
-					<li><Link className="dropdown-item" to="/">Категория 1</Link></li>
-				    <li><Link className="dropdown-item" to="/">Категория 2</Link></li>
-					<li><Link className="dropdown-item" to="/">Категория 3</Link></li>
-                  
-                  
-					<li className="dropdown-submenu">
-						<ul className="dropdown-menu">
-						   <li><Link className="dropdown-item" to="/">Подкатегория 1</Link></li>
-						   <li><Link className="dropdown-item" to="/">Подкатегория 2</Link></li>
-						   <li><Link className="dropdown-item" to="/">Подкатегория 3</Link></li>
-						</ul>
-					</li>
-                  
-                </ul>
-              </li>
-			  
-              <li className="nav-item">
-                <Link className="nav-link" to="/about-us">О проекте</Link>
-              </li>
-              
-              <li className="nav-item">
-                 <Link className="nav-link" to="/cart">Корзина</Link>
-              </li>
-              <li className="nav-item">
-                 <Link className="nav-link" to="/neworder">Оформить заказ</Link>
-              </li>
-            </ul>
-          */}
-            
-            <CartBlock />
+              <ul className="navbar-nav mr-auto">
+                  {this.getMenuTree()}
+              </ul>
+              <CartBlock />
           </div>
         </div>
         </nav>);
