@@ -7,7 +7,7 @@ let getList = (limit: number, currentPage: number, totalPages: number): Array<nu
     let start: number = currentPage - limit/2 > 0? currentPage - limit/2: 1;
     let stop: number = currentPage + limit/2 > totalPages? totalPages: currentPage + limit/2;
     
-    if(currentPage - limit/2 <= 0) stop = currentPage + (limit - currentPage) + 1;
+    if(currentPage - limit/2 <= 0) stop = limit + 1;
     if(currentPage + limit/2 >= totalPages) start = totalPages - limit;
     
     if(totalPages <= limit) {
