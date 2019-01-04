@@ -55,7 +55,7 @@ class Cart extends Component<Props, State> {
      this.props.сhangeQuantity(id, val, cart);
   }
   
-  getCart() {
+  getCartList() {
 	  
 	  let cart = [];
 	  if(typeof this.props.cart !== "undefined" && Array.isArray(this.props.cart)) cart = this.props.cart;
@@ -102,7 +102,7 @@ class Cart extends Component<Props, State> {
               </div>);
   }
   
-  render() {
+  getCart() {
       
       let total_price: number = this.getTotalPrice();
   
@@ -131,7 +131,7 @@ class Cart extends Component<Props, State> {
                 </tr>
               </thead>
               <tbody>
-               {this.getCart()}
+               {this.getCartList()}
                 
                 <tr>
                   <td colSpan="3" className="sum-info">{this.getCartInfo()}</td>
@@ -150,6 +150,30 @@ class Cart extends Component<Props, State> {
 
           </div>
 		);
+  }
+  
+  getEmptyCart() {
+      
+	  return (
+		   <div>
+            <Helmet title={"Корзина"} />
+
+		    <h1>Корзина</h1>
+            <br />
+
+            <h6>Корзина пуста!</h6>
+
+
+          </div>
+		);
+  }
+  
+  render() {
+      
+      let cart = [];
+	  if(typeof this.props.cart !== "undefined" && Array.isArray(this.props.cart)) cart = this.props.cart;
+
+	  return cart.length === 0?this.getEmptyCart():this.getCart();
   }
  
 } 
