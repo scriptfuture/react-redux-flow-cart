@@ -48,8 +48,7 @@ class CartBlock extends Component<Props, State> {
                declOfNum(totalProductNames, ["наименование товара","наименования товаров","наименований товаров"]) + " )");
   }
   
-  render():any {
-	  
+  getCartBlock() {
 	  if(this.props.isLoad && !this.props.isError) return(<span className="navbar-text">загрузка корзины...</span>);
       if(this.props.isError) return(<span className="navbar-text">Ошибка загрузки корзины!</span>);
         
@@ -58,6 +57,15 @@ class CartBlock extends Component<Props, State> {
                   
                    <b><PriceFormatter priceInCoins={this.getTotalPrice()} /></b></Link>
               </span>);
+  }
+  
+  getEmptyCartBlock() {
+      return (<span className="navbar-text">Корзина пуста</span>);
+  }
+  
+  render() {
+      
+      return this.props.prices.length === 0?this.getEmptyCartBlock():this.getCartBlock();
   }
  
 } 
