@@ -8,6 +8,12 @@ let getList = (limit: number, currentPage: number, totalPages: number): Array<nu
     let stop: number = currentPage + limit/2 > totalPages? totalPages: currentPage + limit/2;
     
     if(currentPage - limit/2 <= 0) stop = currentPage + (limit - currentPage) + 1;
+    if(currentPage + limit/2 >= totalPages) start = totalPages - limit;
+    
+    if(totalPages <= limit) {
+        start = 1;
+        stop = totalPages;
+    }
     
     let i: number = start, resArr: Array<number> = [];
     while (i <= stop) {
@@ -25,7 +31,7 @@ const Pagination = ({ limit, currentPage, totalPages, isReplay, nextPage }: Obje
         {currentPage - limit/2 > 1? 
             <li className="page-item">
                 <span className="page-link" onClick={() => nextPage(Math.floor(currentPage - limit/2))}>«</span>
-            </li>: (isReplay?  
+            </li>: (isReplay && totalPages > limit?  
             <li className="page-item">
                 <span className="page-link" onClick={() => nextPage(totalPages)}>«</span>
             </li>: "")}
@@ -41,7 +47,7 @@ const Pagination = ({ limit, currentPage, totalPages, isReplay, nextPage }: Obje
         {currentPage + limit/2 < totalPages? 
             <li className="page-item">
                 <span className="page-link" onClick={() => nextPage(Math.floor(currentPage + limit/2) + 1)}>»</span>
-            </li>: (isReplay?
+            </li>: (isReplay && totalPages > limit?
             <li className="page-item">
                 <span className="page-link" onClick={() => nextPage(1)}>»</span>
             </li>: "")}

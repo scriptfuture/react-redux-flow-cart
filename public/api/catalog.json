@@ -1,7 +1,7 @@
 {
     "pagination": {
         "limit": 11, 
-        "totalPages": 100,
+        "totalPages": 30,
         "isReplay": true
     },
     "categories": [{
