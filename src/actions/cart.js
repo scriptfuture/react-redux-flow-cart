@@ -17,6 +17,8 @@ export const REMOVEPRODUCT = 'cart/REMOVEPRODUCT'
 
 export const CHANGEQUANTITY = 'cart/CHANGEQUANTITY'
 
+export const CHANGEEXPAND = 'cart/CHANGEEXPAND'
+
 // action creators
 export const getCart = () => {
     
@@ -233,5 +235,58 @@ export const сhangeQuantity = (id: number, quantity: number, ct: Array<Object>)
             cart: cart
         });
 
+    };
+}
+
+export const expand = (isExpand: boolean) => {
+    
+    return (dispatch: any) => {
+
+      let isExpandStr: string = localStorage.getItem('is_expand');
+      
+      
+      if(isExpandStr == null || isExpandStr === "") {
+          
+           localStorage.setItem('is_expand', isExpand?"True":"False");
+           
+            dispatch({
+                type: CHANGEEXPAND,
+                isExpand: !isExpand
+            });
+            
+      }  else {
+          
+           localStorage.setItem('is_expand', isExpandStr === "True"?"False":"True");  
+           
+            dispatch({
+                type: CHANGEEXPAND,
+                isExpand: isExpandStr === "True"?false:true
+            });
+      } // end if
+      
+      
+    };
+}
+
+export const getExpand = (isExpand: boolean) => {
+    
+    return (dispatch: any) => {
+
+      let isExpandStr: string = localStorage.getItem('is_expand');
+      
+      
+      if(isExpandStr == null || isExpandStr === "") {
+          
+           localStorage.setItem('is_expand', isExpand?"True":"False");
+            
+      }  else {
+           
+            dispatch({
+                type: CHANGEEXPAND,
+                isExpand: isExpandStr === "True"?true:false
+            });
+      } // end if
+      
+      
     };
 }

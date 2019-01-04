@@ -13,7 +13,7 @@ import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
 
 import { declOfNum } from './../utils/'
-import { getCart, removeProduct, сhangeQuantity } from './../actions/cart'
+import { getCart, removeProduct, сhangeQuantity, expand, getExpand } from './../actions/cart'
 
 type Props = {
     openNewOrder: any,
@@ -43,6 +43,9 @@ class Cart extends Component<Props, State> {
         // получаем список товаров с сервера
         this.props.getCart(); 
         
+        // текущие состояние экспандера таблицы
+        this.props.getExpand(this.props.isExpand);
+        
   } 
   
   сhangeQuantity(event: SyntheticInputEvent<*>, id: number, cart: Array<Object>): void {
@@ -66,9 +69,13 @@ class Cart extends Component<Props, State> {
                   <td>{obj.id}</td>
                   <td><img src={obj.img_src} width="100" alt={obj.title} /></td>
                   <td>
-                     <Link className="nav-link" to={'/product/'+obj.id}>{obj.title}</Link>
+                     <Link to={'/product/'+obj.id}>{obj.title}</Link>
                   </td>
-                  <td>{obj.article_number}</td>  
+                  
+                  {this.props.isExpand?<td>{obj.article_number}</td>:""}  
+                  {this.props.isExpand?<td>{obj.weight} кг.</td>:""} 
+                  
+                  <td>&nbsp;</td>  
                   <td>
                       <input className="qty-input form-group" type="number" value={obj.quantity} onChange={(e) => this.сhangeQuantity(e, obj.id, cart)}/>
                   </td>
@@ -91,20 +98,26 @@ class Cart extends Component<Props, State> {
       return this.props.cart.reduce((sum: number, current: Object) => sum + parseInt(current.quantity), 0);
   }
   
+  getTotalWeight(): number {
+      return this.props.cart.reduce((sum: number, current: Object) => sum + parseFloat(current.weight), 0);
+  }
+  
   getCartInfo() {
       let totalQuantity: number = this.getTotalQuantity();
       let totalProductNames: number = this.getTotalProductNames();
       
-      return (<div>
+      return (<div className="cart-info">
                  В корзине {totalQuantity} {declOfNum(totalQuantity,["товар","товара","товаров"])}&nbsp; 
                  
                  ( {totalProductNames} {declOfNum(totalProductNames,["наименование товара","наименования товаров","наименований товаров"])} )
+                 
               </div>);
   }
   
   getCart() {
       
       let total_price: number = this.getTotalPrice();
+      let isExpand: boolean = this.props.isExpand;
   
 	  return (
 		   <div>
@@ -117,28 +130,41 @@ class Cart extends Component<Props, State> {
 		    <h1>Корзина</h1>
             <br />
 
-            <table className="table table-hover">
+            {this.getCartInfo()}
+            <table className="table table-hover cart-table">
               <thead>
                 <tr>
                   <th scope="col" className="numcol">№</th>
                   <th scope="col">Изображение</th>
                   <th scope="col">Наименование</th>
-                  <th scope="col">Артикул</th>
+                  {isExpand?<th scope="col">Артикул</th>:""}
+                  {isExpand?<th scope="col" className="weightcol">Вес</th>:""}
+                  <th scope="col"><span className="harr-cart" onClick={() => this.props.expand(isExpand)}>&harr;</span></th>
                   <th scope="col">Количество</th>
                   <th scope="col" className="sum1col">Цена за 1 шт.</th>
                   <th scope="col" className="sumcol">Общая сумма</th>
-                   <th scope="col" className="delcol">&nbsp;</th>
+                  <th scope="col" className="delcol">&nbsp;</th>
                 </tr>
               </thead>
               <tbody>
                {this.getCartList()}
                 
-                <tr>
-                  <td colSpan="3" className="sum-info">{this.getCartInfo()}</td>
-                  <td colSpan="3" className="sum-text">Стоимость всех товаров:</td>
-                  <td colSpan="2" className="sum-num"><PriceFormatter priceInCoins={total_price} /></td>
-                </tr>
-  
+                
+                {isExpand?(
+                    <tr>
+                      <td colSpan="4" className="sum-text-weight">Суммарный вес:</td>
+                      <td className="sum-num-weight sum-border-weight">{this.getTotalWeight()} кг.</td>
+                      <td colSpan="3" className="sum-text">Стоимость всех товаров:</td>
+                      <td colSpan="2" className="sum-num"><PriceFormatter priceInCoins={total_price} /></td>
+                    </tr>
+                ):(
+                    <tr>
+                      <td colSpan="4" className="sum-text-weight sum-border-weight">Суммарный вес:&nbsp; <span className="sum-num-weight">27.34 кг.</span></td>
+                      <td colSpan="2" className="sum-text">Стоимость всех товаров:</td>
+                      <td colSpan="2" className="sum-num"><PriceFormatter priceInCoins={total_price} /></td>
+                    </tr>
+                )}
+                
               </tbody>
             </table>
       
@@ -181,6 +207,7 @@ class Cart extends Component<Props, State> {
 const mapStateToProps = ({ cart, app  }) => ({
     cart: cart.cart,
     isLoad: cart.isLoad,
+    isExpand: cart.isExpand,
     isError: app.isError,
     errors: app.errors 
 })
@@ -192,7 +219,9 @@ const mapDispatchToProps = (dispatch:any) =>
       getCart,
       removeProduct,
       сhangeQuantity,
-      openNewOrder:  () => push('/neworder')
+      openNewOrder:  () => push('/neworder'),
+      expand,
+      getExpand
 
     },
     dispatch

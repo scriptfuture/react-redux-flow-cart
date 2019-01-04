@@ -1,9 +1,10 @@
-import { ADDPRODUCT, REMOVEPRODUCT, GETCART_REQUESTED, GETCART, GETPRICES_REQUESTED, GETPRICES, CHANGEQUANTITY } from './../actions/cart'
+import { ADDPRODUCT, REMOVEPRODUCT, GETCART_REQUESTED, GETCART, GETPRICES_REQUESTED, GETPRICES, CHANGEQUANTITY, CHANGEEXPAND } from './../actions/cart'
 
 
 const initialState: Object = {
   cart: [],
-  prices: []
+  prices: [],
+  isExpand: false
 }
 
 export default (state: Object = initialState, action: Object) => {
@@ -82,7 +83,12 @@ export default (state: Object = initialState, action: Object) => {
         cart: action.cart,
         prices: action.cart.map(({ id, price, quantity }) => ({ id, price, quantity }))
       } 
- 
+      
+    case CHANGEEXPAND:
+      return {
+        ...state,
+        isExpand: action.isExpand
+      } 
 
     default:
       return state

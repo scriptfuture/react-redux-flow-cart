@@ -183,16 +183,27 @@ button.qty-change{
     width:40px;
 }
 
+.content .weightcol {
+    width:100px;
+}
+/*
+.content .cart-table td {
+    border: 1px solid red;
+}
+*/
+
 .content .sum-text {
   text-align:right;  
   font-size: 1.1em;
   padding-top:14px;
+  border-bottom: 1px solid #dee2e6;
 }
 
 .content .sum-num {
   text-align:left;  
   font-size: 1.2em;
   font-weight: bold;
+  border-bottom: 1px solid #dee2e6;
 }
 
 .content .sum-info {
@@ -200,6 +211,25 @@ button.qty-change{
   font-size: 1em;
   color: grey;
 }
+
+.content .sum-text-weight {
+  text-align:right;  
+  font-size: 1em;
+  padding-top:14px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.content .sum-num-weight { 
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.content .sum-border-weight { 
+  border-right: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+}
+
+
 
 .content .tbl-button-order {
   text-align:right;
@@ -291,4 +321,18 @@ input::-webkit-inner-spin-button {
     -webkit-border-radius:6px 0 6px 6px;
     -moz-border-radius:6px 0 6px 6px;
     border-radius:6px 0 6px 6px;
+}
+
+.harr-cart {
+    cursor: pointer;
+}
+
+.harr-cart:hover {
+    color: orange;
+}
+
+.cart-info {
+    font-size: 1em;
+    padding-bottom: 10px;
+    color: #707070;
 }

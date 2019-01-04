@@ -51,16 +51,18 @@
             "price": 2730035,
             "article_number": "b245",
             "stock_availability": 5,
-            "title": "Название товара 1"
+            "title": "Название товара 1 Название товара 1 Название товара 1 Название товара 1",
+            "weight": 20.2
         },
 
         {
             "id": 2,
             "img_src": "/img/product.jpg",
             "price": 8600,
-            "article_number": "b6767",
+            "article_number": "b6767453543",
             "stock_availability": 7,
-            "title": "Название товара 2"
+            "title": "Название товара 2",
+            "weight": 90.21
         },
 
         {
@@ -69,7 +71,8 @@
             "price": 13400,
             "article_number": "b253534",
             "stock_availability": 54,
-            "title": "Название товара 3"
+            "title": "Название товара 3",
+            "weight": 1.9
         },
 
         {
@@ -78,7 +81,8 @@
             "price": 12350,
             "article_number": "b25645",
             "stock_availability": 5,
-            "title": "Название товара 4"
+            "title": "Название товара 4",
+            "weight": 3.7
         },
 
         {
@@ -87,7 +91,8 @@
             "price": 12850,
             "article_number": "b25445",
             "stock_availability": 44,
-            "title": "Название товара 5"
+            "title": "Название товара 5",
+            "weight": 1.5
         },
 
         {
@@ -96,7 +101,8 @@
             "price": 12350,
             "article_number": "b25645",
             "stock_availability": 49,
-            "title": "Название товара 6"
+            "title": "Название товара 6",
+            "weight": 2.1
         },
 
         {
@@ -105,7 +111,8 @@
             "price": 12350,
             "article_number": "b25645",
             "stock_availability": 23,
-            "title": "Название товара 7"
+            "title": "Название товара 7",
+            "weight": 3.1
         },
 
         {
@@ -114,7 +121,8 @@
             "price": 12350,
             "article_number": "b245",
             "stock_availability": 43535333,
-            "title": "Название товара 8"
+            "title": "Название товара 8",
+            "weight": 1.2
         },
 
         {
@@ -123,7 +131,8 @@
             "price": 12310,
             "article_number": "b276545",
             "stock_availability": 2,
-            "title": "Название товара 9"
+            "title": "Название товара 9",
+            "weight": 1.4
         },
 
         {
@@ -132,7 +141,8 @@
             "price": 12385,
             "article_number": "b56245",
             "stock_availability": 49,
-            "title": "Название товара 10"
+            "title": "Название товара 10",
+            "weight": 1.5
         }
 
 

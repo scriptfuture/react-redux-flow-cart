@@ -53,7 +53,7 @@ class CartBlock extends Component<Props, State> {
       if(this.props.isError) return(<span className="navbar-text">Ошибка загрузки корзины!</span>);
         
       return (<span className="navbar-text">
-                  В корзине&nbsp; <Link to="/cart" title={this.getCartInfoString()}><b>{this.getTotalQuantity()}</b> шт. &nbsp;–&nbsp;  
+                  В корзине:&nbsp; <Link to="/cart" title={this.getCartInfoString()}><b>{this.getTotalQuantity()}</b> шт. &nbsp;–&nbsp;  
                   
                    <b><PriceFormatter priceInCoins={this.getTotalPrice()} /></b></Link>
               </span>);
