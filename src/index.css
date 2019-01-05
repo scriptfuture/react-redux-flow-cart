@@ -356,8 +356,14 @@ input::-webkit-inner-spin-button {
     padding:10px;
 }
 
+.cart-mv .cart-mv-item .img-container {
+    width:100%;
+    text-align: center;
+}
+
 .cart-mv .cart-mv-item img {
     width:100%;
+    max-width:300px;
 }
 
 .cart-mv .cart-mv-item .cart-mv-del {

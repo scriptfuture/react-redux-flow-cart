@@ -208,7 +208,7 @@ class Cart extends Component<Props, State> {
 	  
 	  return cart.map((obj, index) =>
                 <div className="cart-mv-item" key={index}>
-                     <div><img src={obj.img_src} alt={obj.title}/></div>
+                     <div className="img-container"><img src={obj.img_src} alt={obj.title}/></div>
                      <table className="table">
                       <tbody>
                         <tr>
