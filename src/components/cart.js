@@ -208,7 +208,7 @@ class Cart extends Component<Props, State> {
 	  
 	  return cart.map((obj, index) =>
                 <div className="cart-mv-item" key={index}>
-                     <div><img src={obj.img_src}/></div>
+                     <div><img src={obj.img_src} alt={obj.title}/></div>
                      <table className="table">
                       <tbody>
                         <tr>
@@ -260,7 +260,6 @@ class Cart extends Component<Props, State> {
   getCartMV() {
       
       let total_price: number = this.getTotalPrice();
-      let isExpand: boolean = this.props.isExpand;
   
 	  return (
 		   <div className="cart-mv">
