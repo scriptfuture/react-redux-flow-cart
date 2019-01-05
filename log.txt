@@ -1,55 +1,45 @@
 yarn run v1.9.4
 $ ./node_modules/.bin/flow && react-scripts start
-Error ----------------------------------------------------------------------- src/components/items/catalog-item.js:48:44
+Error ------------------------------------------------------------------------------------- src/components/cart.js:49:30
 
-Cannot get `this.state.currentQuantity` because property `currentQuantity` is missing in `State` [1].
+Cannot get `this.props.isExpand` because property `isExpand` is missing in `Props` [1].
 
-   src/components/items/catalog-item.js:48:44
-   48|       return this.getTooltipQuantity() === this.state.currentQuantity;
-                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-References:
-   src/components/items/catalog-item.js:29:10
-   29|   state: State  = {
-                ^^^^^ [1]
-
-
-Error ----------------------------------------------------------------------- src/components/items/catalog-item.js:61:40
-
-Property `openProduct` is missing in `Props` [1].
-
-   src/components/items/catalog-item.js:61:40
-   61|       let { id, img_src, title, price, openProduct }: Object = this.props;
-                                              ^^^^^^^^^^^
+   src/components/cart.js:49:30
+   49|         this.props.getExpand(this.props.isExpand);
+                                    ^^^^^^^^^^^^^^^^^^^
 
 References:
-   src/components/items/catalog-item.js:27:37
-   27| class CatalogItem extends Component<Props, State> { 
-                                           ^^^^^ [1]
+   src/components/cart.js:34:30
+   34| class Cart extends Component<Props, State> { 
+                                    ^^^^^ [1]
 
 
-Error ------------------------------------------------------------------------ src/components/items/catalog-item.js:92:3
+Error ------------------------------------------------------------------------------------- src/components/cart.js:77:20
 
-Cannot call `bindActionCreators` because undefined property `openProduct` [1] is incompatible with function [2].
+Property `isExpand` is missing in `Props` [1].
 
-   src/components/items/catalog-item.js:92:3
-          v-------------------
-    92|   bindActionCreators(
-    93|     {
-    94|       addProduct,
-    95|       openProduct: (id) => push('/product/'+id)
-    96|     },
-    97|     dispatch
-    98|   )
-          ^
+   src/components/cart.js:77:20
+   77|                   {this.props.isExpand?<td>{obj.article_number}</td>:""}  
+                          ^^^^^^^^^^^^^^^^^^^
 
 References:
-   flow-typed/npm/react-redux_v5.x.x.js:141:21
-   141|     CP: $Diff<$Diff<ElementConfig<Com>, RSP>, RDP>,
-                            ^^^^^^^^^^^^^^^^^^ [1]
-   src/components/items/catalog-item.js:95:20
-    95|       openProduct: (id) => push('/product/'+id)
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ [2]
+   src/components/cart.js:34:30
+   34| class Cart extends Component<Props, State> { 
+                                    ^^^^^ [1]
+
+
+Error ------------------------------------------------------------------------------------ src/components/cart.js:122:31
+
+Cannot get `this.props.isExpand` because property `isExpand` is missing in `Props` [1].
+
+   src/components/cart.js:122:31
+   122|       let isExpand: boolean = this.props.isExpand;
+                                      ^^^^^^^^^^^^^^^^^^^
+
+References:
+   src/components/cart.js:34:30
+    34| class Cart extends Component<Props, State> { 
+                                     ^^^^^ [1]
 
 
 

@@ -20,9 +20,12 @@ type Props = {
     getCart: any,
     removeProduct: any,
     сhangeQuantity: any,
+    getExpand: any,
+    expand: any,
     cart: Array<Object>,
     isLoad: boolean,
     isError: boolean,
+    isExpand: boolean,
     errors: Array<Object>
     
 };
@@ -120,7 +123,7 @@ class Cart extends Component<Props, State> {
       let isExpand: boolean = this.props.isExpand;
   
 	  return (
-		   <div>
+		   <div className="cart-desktop">
             <Helmet title={"Корзина"} />
            
             <Preloader isShow={this.props.isLoad} />
@@ -131,7 +134,7 @@ class Cart extends Component<Props, State> {
             <br />
 
             {this.getCartInfo()}
-            <table className="table table-hover cart-table">
+            <table className="table table-hover">
               <thead>
                 <tr>
                   <th scope="col" className="numcol">№</th>
@@ -139,7 +142,9 @@ class Cart extends Component<Props, State> {
                   <th scope="col">Наименование</th>
                   {isExpand?<th scope="col">Артикул</th>:""}
                   {isExpand?<th scope="col" className="weightcol">Вес</th>:""}
-                  <th scope="col"><span className="harr-cart" onClick={() => this.props.expand(isExpand)}>&harr;</span></th>
+                  <th scope="col">
+                     <span className="harr-cart" onClick={() => this.props.expand(isExpand)} title={isExpand?"свернуть":"развернуть"}>&harr;</span>
+                  </th>
                   <th scope="col">Количество</th>
                   <th scope="col" className="sum1col">Цена за 1 шт.</th>
                   <th scope="col" className="sumcol">Общая сумма</th>
@@ -167,7 +172,8 @@ class Cart extends Component<Props, State> {
                 
               </tbody>
             </table>
-      
+            
+
            <div className="tbl-button-order">
                {total_price > 0?(<button type="button" className="btn btn-primary" onClick={this.props.openNewOrder}>Оформить заказ</button>):
                                 (<button type="button" className="btn btn-primary" disabled>Оформить заказ</button>)}
@@ -194,12 +200,110 @@ class Cart extends Component<Props, State> {
 		);
   }
   
+  getCartListMV() {
+	  
+	  let cart = [];
+	  if(typeof this.props.cart !== "undefined" && Array.isArray(this.props.cart)) cart = this.props.cart;
+
+	  
+	  return cart.map((obj, index) =>
+                <div className="cart-mv-item" key={index}>
+                     <div><img src={obj.img_src}/></div>
+                     <table className="table">
+                      <tbody>
+                        <tr>
+                          <th scope="row">ID:</th>
+                          <td>{obj.id}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Название:</th>
+                          <td><Link to={'/product/'+obj.id}>{obj.title}</Link></td>
+                        </tr>
+                        
+                        {this.props.isExpand?
+                        <tr>
+                          <th scope="row">Артикул:</th>
+                          <td>{obj.article_number}</td>
+                        </tr>:""}  
+                        
+                       {this.props.isExpand?
+                        <tr>
+                          <th scope="row">Вес:</th>
+                          <td>{obj.weight} кг.</td>
+                        </tr>:""} 
+                        
+
+                        <tr>
+                          <th scope="row">Количество:</th>
+                          <td>
+                             <input className="qty-input form-group" type="number" value={obj.quantity} onChange={(e) => this.сhangeQuantity(e, obj.id, cart)}/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Цена за 1 шт.:</th>
+                          <td><PriceFormatter priceInCoins={obj.price} /></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Общая сумма:</th>
+                          <td><PriceFormatter priceInCoins={parseInt(obj.total_price) * parseInt(obj.quantity)} /></td>
+                        </tr>
+                        <tr className="cart-mv-del">
+                          <td colSpan="2"><button className="btn btn-danger" title="Удалить"  onClick={() => this.props.removeProduct(obj.id, cart)}>Удалить</button></td>
+                        </tr>
+                      </tbody>
+                    </table> 
+                </div>
+      );
+  }
+  
+  // корзина для мобильной версии
+  getCartMV() {
+      
+      let total_price: number = this.getTotalPrice();
+      let isExpand: boolean = this.props.isExpand;
+  
+	  return (
+		   <div className="cart-mv">
+            <Helmet title={"Корзина"} />
+           
+            <Preloader isShow={this.props.isLoad} />
+            <Errors isError={this.props.isError} errors={this.props.errors}/>
+
+           
+		    <h1>Корзина</h1>
+            <br />
+            
+            
+            {this.getCartInfo()}
+            <div>
+                {this.getCartListMV()}
+            </div>
+            
+           <div className="sum-weight-mv">Суммарный вес: {this.getTotalWeight()} кг.</div>
+
+           <div className="sum-text-mv">Стоимость всех товаров: <span><PriceFormatter priceInCoins={total_price} /></span></div>
+      
+           <div className="tbl-button-order">
+               {total_price > 0?(<button type="button" className="btn btn-primary" onClick={this.props.openNewOrder}>Оформить заказ</button>):
+                                (<button type="button" className="btn btn-primary" disabled>Оформить заказ</button>)}
+           </div>
+
+
+          </div>
+		);
+  }
+  
   render() {
       
       let cart = [];
 	  if(typeof this.props.cart !== "undefined" && Array.isArray(this.props.cart)) cart = this.props.cart;
-
-	  return cart.length === 0?this.getEmptyCart():this.getCart();
+   
+      return cart.length === 0?this.getEmptyCart():(
+         <div>
+             {this.getCartMV()}
+             {this.getCart()}
+         </div>
+      );
   }
  
 } 

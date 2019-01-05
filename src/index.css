@@ -186,11 +186,6 @@ button.qty-change{
 .content .weightcol {
     width:100px;
 }
-/*
-.content .cart-table td {
-    border: 1px solid red;
-}
-*/
 
 .content .sum-text {
   text-align:right;  
@@ -335,4 +330,72 @@ input::-webkit-inner-spin-button {
     font-size: 1em;
     padding-bottom: 10px;
     color: #707070;
+}
+
+/* mobile version */
+.content .sum-text-mv {
+  text-align:right;  
+  font-size: 1.1em;
+  padding-top: 15px; 
+  padding-bottom: 15px;
+  border-top:1px solid lightgrey;
+}
+
+.content .sum-text-mv span {
+  font-weight: bold;
+}
+
+.content .sum-weight-mv {
+  padding-bottom:15px;
+}
+
+.cart-mv .cart-mv-item {
+    margin-bottom: 15px;
+    border:1px solid lightgrey;
+    border-radius: 5px;
+    padding:10px;
+}
+
+.cart-mv .cart-mv-item img {
+    width:100%;
+}
+
+.cart-mv .cart-mv-item .cart-mv-del {
+    text-align: center;
+}
+
+.cart-mv th {
+    min-width: 150px;
+}
+
+.cart-mv {
+    display: none;
+}
+
+.cart-desktop {
+    display: block;
+}
+
+@media screen and (min-width: 325px) and (max-width: 990px)  {
+    .cart-desktop {
+       display: none;
+   }
+   
+   .cart-mv {
+       display: block;
+   }    
+}
+
+@media screen and (max-width: 325px)  {
+    .cart-desktop {
+       display: none;
+   }
+   
+   .cart-mv {
+       display: block;
+   } 
+   
+   .cart-mv th {
+       min-width: 120px;
+   }   
 }

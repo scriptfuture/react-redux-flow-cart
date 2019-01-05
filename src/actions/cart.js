@@ -29,8 +29,10 @@ export const getCart = () => {
         
         let cartStr: ?string = localStorage.getItem('cart'), cartArr: Array<Object> = [], cartParams: Array<number> = [];
       
-        if(cartStr != null && cartStr !== "") {
-              cartArr =  JSON.parse(cartStr);
+        if(cartStr !== null && cartStr !== "") {
+            
+              let json: string = ((cartStr: any): string);
+              cartArr =  JSON.parse(json);
               
               // какие товары каталога запросить с сервера
               cartParams = cartArr.map((obj) => obj.id);
@@ -242,7 +244,7 @@ export const expand = (isExpand: boolean) => {
     
     return (dispatch: any) => {
 
-      let isExpandStr: string = localStorage.getItem('is_expand');
+      let isExpandStr: ?string = localStorage.getItem('is_expand');
       
       
       if(isExpandStr == null || isExpandStr === "") {
@@ -272,7 +274,7 @@ export const getExpand = (isExpand: boolean) => {
     
     return (dispatch: any) => {
 
-      let isExpandStr: string = localStorage.getItem('is_expand');
+      let isExpandStr: ?string = localStorage.getItem('is_expand');
       
       
       if(isExpandStr == null || isExpandStr === "") {
