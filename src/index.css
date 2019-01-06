@@ -428,3 +428,8 @@ input::-webkit-inner-spin-button {
 .dropdown-menu a:active {
     background-color: #ffcead !important;
 } 
+
+.cart-block a:hover {
+    text-decoration: none;
+    color: #efefef !important;
+}
