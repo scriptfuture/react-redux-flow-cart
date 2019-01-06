@@ -84,7 +84,11 @@ class Cart extends Component<Props, State> {
                   </td>
                   <td><PriceFormatter priceInCoins={obj.price} /></td>
                   <td><PriceFormatter priceInCoins={parseInt(obj.total_price) * parseInt(obj.quantity)} /></td>
-                  <td><button className="btn btn-danger btn-sm" title="Удалить" onClick={() => this.props.removeProduct(obj.id, cart)}>X</button></td>
+                  <td>
+                      <button className="btn btn-danger btn-sm" title="Удалить" onClick={() => this.props.removeProduct(obj.id, cart)}>
+                          <i className="fa fa-trash" aria-hidden="true"></i>
+                      </button>
+                  </td>
                 </tr>
       );
   }
@@ -253,7 +257,11 @@ class Cart extends Component<Props, State> {
                           <td><PriceFormatter priceInCoins={parseInt(obj.total_price) * parseInt(obj.quantity)} /></td>
                         </tr>
                         <tr className="cart-mv-del">
-                          <td colSpan="2"><button className="btn btn-danger" title="Удалить"  onClick={() => this.props.removeProduct(obj.id, cart)}>Удалить</button></td>
+                          <td colSpan="2">
+                             <button className="btn btn-danger" title="Удалить"  onClick={() => this.props.removeProduct(obj.id, cart)}>
+                                 <i className="fa fa-trash" aria-hidden="true"></i>&nbsp; удалить
+                             </button>
+                          </td>
                         </tr>
                       </tbody>
                     </table> 

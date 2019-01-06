@@ -81,7 +81,9 @@ class CatalogItem extends Component<Props, State> {
                                 isNew={this.isNewProduct()}
                                 isCatalog={true}
                             />
-                            <button type="button" className="btn btn-primary" onClick={() => this.addProductToCart(id, price)}>В корзину</button>
+                            <button type="button" className="btn btn-primary" onClick={() => this.addProductToCart(id, price)}>
+                                <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>&nbsp; В корзину
+                            </button>
                         </div>
                     </div>);
   }

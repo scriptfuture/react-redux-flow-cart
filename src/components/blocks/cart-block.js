@@ -44,7 +44,7 @@ class CartBlock extends Component<Props, State> {
       let totalQuantity: number = this.getTotalQuantity();
       let totalProductNames: number = this.getTotalProductNames();
       
-      return (totalQuantity+" "+declOfNum(totalQuantity, ["товар","товара","товаров"]) + " ( " + totalProductNames +" "+
+      return "В корзине: " + (totalQuantity+" "+declOfNum(totalQuantity, ["товар","товара","товаров"]) + " ( " + totalProductNames +" "+
                declOfNum(totalProductNames, ["наименование товара","наименования товаров","наименований товаров"]) + " )");
   }
   
@@ -52,8 +52,9 @@ class CartBlock extends Component<Props, State> {
 	  if(this.props.isLoad && !this.props.isError) return(<span className="navbar-text">загрузка корзины...</span>);
       if(this.props.isError) return(<span className="navbar-text">Ошибка загрузки корзины!</span>);
         
-      return (<span className="navbar-text">
-                  В корзине:&nbsp; <Link to="/cart" title={this.getCartInfoString()}><b>{this.getTotalQuantity()}</b> шт. &nbsp;–&nbsp;  
+      return (<span className="navbar-text" title={this.getCartInfoString()}>
+                   <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+ &nbsp; <Link to="/cart"><b>{this.getTotalQuantity()}</b> шт. &nbsp;–&nbsp;  
                   
                    <b><PriceFormatter priceInCoins={this.getTotalPrice()} /></b></Link>
               </span>);
