@@ -10,6 +10,9 @@ import TooltipAddToCart from './../blocks/tooltip-add-to-cart'
 
 import { addProduct } from './../../actions/cart'
 
+import { limitStr } from './../../utils/'
+
+
 type Props = {
     prices: Array<Object>,
     id: number, 
@@ -66,7 +69,7 @@ class CatalogItem extends Component<Props, State> {
                         <div className="num">№{id}</div>
                         <div className="image"><img src={img_src} height="180" alt={title} onClick={()=> openProduct(id)}/></div>
                         <div className="header">
-                           <Link className="nav-link" to={'/product/'+id}>{title}</Link>
+                           <Link className="nav-link" to={'/product/'+id} title={title}>{limitStr(title, 55, '...')}</Link>
                         </div>
                         <div className="price">
                             <PriceFormatter priceInCoins={price} bntСlass="cbn-title"  ctСlass="cbn-title"/>

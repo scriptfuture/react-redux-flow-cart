@@ -232,6 +232,11 @@ class Cart extends Component<Props, State> {
                           <td>{obj.weight} кг.</td>
                         </tr>:""} 
                         
+                        <tr>
+                          <td className="harr-cart-mv" colSpan="2"onClick={() => this.props.expand(this.props.isExpand)} title={this.props.isExpand?"свернуть":"развернуть"}>
+                              &uarr;&darr;
+                          </td>
+                        </tr>
 
                         <tr>
                           <th scope="row">Количество:</th>

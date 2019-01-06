@@ -73,4 +73,12 @@ export const getTree = (arr: Array<Object>): Array<Object> => {
     }
   }
   return tree;
-} 
+}
+
+// обрезание строки
+export const limitStr = (str: string, n: number, symb: string): string => {
+    if (!n && !symb) return str;
+    symb = symb || '...';
+    if(str.length <= n) symb = "";
+    return str.substr(0, n - symb.length) + symb;
+}
