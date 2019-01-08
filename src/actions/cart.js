@@ -213,8 +213,11 @@ export const removeProduct = (removeId: number, ct: Array<Object>) => {
     };
 }
 
-export const сhangeQuantity = (id: number, quantity: number, ct: Array<Object>) => {
+export const сhangeQuantity = (id: number, qty: number, ct: Array<Object>) => {
     
+    // количество, только положительные целые числа или 0
+    let quantity: number  = qty > 0?qty:0;
+
     return (dispatch: any) => {
         
         let cart: Array<Object> = ct.map((obj) => { 
@@ -226,7 +229,7 @@ export const сhangeQuantity = (id: number, quantity: number, ct: Array<Object>)
 
             return obj;
         });
-        
+  
         // сохраняем обнавлённую корзину в localStorage
         let cartArr: Array<Object> = cart.map((obj) => ({ id: obj.id, quantity: obj.quantity }));
         localStorage.setItem('cart', JSON.stringify(cartArr));

@@ -54,10 +54,7 @@ class Cart extends Component<Props, State> {
   сhangeQuantity(event: SyntheticInputEvent<*>, id: number, cart: Array<Object>): void {
       
      let val: number  = (event.target.value: any);
-
-     // количество, только положительные целые числа 
-     val = val > 0?val:1;
-
+     
      this.props.сhangeQuantity(id, val, cart);
   }
   
@@ -80,7 +77,11 @@ class Cart extends Component<Props, State> {
                   
                   <td>&nbsp;</td>  
                   <td>
-                      <input className="qty-input form-group" type="number" value={obj.quantity} onChange={(e) => this.сhangeQuantity(e, obj.id, cart)}/>
+                      <input 
+                         className="qty-input form-group" 
+                         type="number" 
+                         value={obj.quantity} 
+                         onChange={(e) => this.сhangeQuantity(e, obj.id, cart)}/>
                   </td>
                   <td><PriceFormatter priceInCoins={obj.price} /></td>
                   <td><PriceFormatter priceInCoins={parseInt(obj.total_price) * parseInt(obj.quantity)} /></td>
