@@ -31,9 +31,6 @@ const App = () => (
                      
                     </div>
                 </div>
-
-                <br />
-
             </main>
             <Footer />
         </div>
