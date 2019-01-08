@@ -431,5 +431,31 @@ input::-webkit-inner-spin-button {
 
 .cart-block a:hover {
     text-decoration: none;
-    color: #efefef !important;
+    color: #ffcead !important;
+}
+
+
+.app-wrapper {
+   height: 100vh; /* высота секции равна высоте области просмотра */
+}
+
+.mf-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;  
+}
+
+main {
+   flex: 1 0 auto;
+   max-width: 1140px;
+   width: 100%;
+   margin: 15px auto;
+}
+
+footer {
+   flex: 0 0 auto;
+   max-width: 1140px;
+   width: 100%;
+   margin: 0 auto;
+   padding-bottom:15px;
 }
