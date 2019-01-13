@@ -1,11 +1,33 @@
 {
     "product": {
         "id": 1,
+        "img_min": "/img/product_min.jpg",
+        "img_mid": "/img/product_mid.jpg",
         "img_src": "/img/product.jpg",
         "price": 2730035,
         "article_number": "b245",
         "stock_availability": 5,
+        "weight": 21.2,
         "title": "Название товара 1",
-        "description": "Описание товара 1"
+        "description": "Описание товара 1",
+        "images": [{
+            "id": 1,
+            "img_src": "/img/product.jpg",
+            "img_min": "/img/product_min.jpg",
+            "title": "Изображение товара 1"
+        },
+        {
+            "id": 2,
+            "img_src": "/img/product.jpg",
+            "img_min": "/img/product_min.jpg",
+            "title": "Изображение товара 2"
+        },
+
+        {
+            "id": 3,
+            "img_src": "/img/product.jpg",
+            "img_min": "/img/product_min.jpg",
+            "title": "Изображение товара 3"
+        }]
     }
 }

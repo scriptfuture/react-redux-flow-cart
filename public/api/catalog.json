@@ -48,6 +48,8 @@
     "catalog": [{
             "id": 1,
             "img_src": "/img/product.jpg",
+            "img_mid": "/img/product_mid.jpg",
+            "img_min": "/img/product_min.jpg",
             "price": 2730035,
             "article_number": "b245",
             "stock_availability": 5,
@@ -58,6 +60,8 @@
         {
             "id": 2,
             "img_src": "/img/product.jpg",
+            "img_mid": "/img/product_mid.jpg",
+            "img_min": "/img/product_min.jpg",
             "price": 8600,
             "article_number": "b6767453543",
             "stock_availability": 7,
@@ -68,6 +72,8 @@
         {
             "id": 3,
             "img_src": "/img/product.jpg",
+            "img_mid": "/img/product_mid.jpg",
+            "img_min": "/img/product_min.jpg",
             "price": 13400,
             "article_number": "b253534",
             "stock_availability": 54,
@@ -78,6 +84,8 @@
         {
             "id": 4,
             "img_src": "/img/product.jpg",
+            "img_mid": "/img/product_mid.jpg",
+            "img_min": "/img/product_min.jpg",
             "price": 12350,
             "article_number": "b25645",
             "stock_availability": 5,
@@ -88,6 +96,8 @@
         {
             "id": 5,
             "img_src": "/img/product.jpg",
+            "img_mid": "/img/product_mid.jpg",
+            "img_min": "/img/product_min.jpg",
             "price": 12850,
             "article_number": "b25445",
             "stock_availability": 44,
@@ -98,6 +108,8 @@
         {
             "id": 6,
             "img_src": "/img/product.jpg",
+            "img_mid": "/img/product_mid.jpg",
+            "img_min": "/img/product_min.jpg",
             "price": 12350,
             "article_number": "b25645",
             "stock_availability": 49,
@@ -108,6 +120,8 @@
         {
             "id": 7,
             "img_src": "/img/product.jpg",
+            "img_mid": "/img/product_mid.jpg",
+            "img_min": "/img/product_min.jpg",
             "price": 12350,
             "article_number": "b25645",
             "stock_availability": 23,
@@ -118,6 +132,8 @@
         {
             "id": 8,
             "img_src": "/img/product.jpg",
+            "img_mid": "/img/product_mid.jpg",
+            "img_min": "/img/product_min.jpg",
             "price": 12350,
             "article_number": "b245",
             "stock_availability": 43535333,
@@ -128,6 +144,8 @@
         {
             "id": 9,
             "img_src": "/img/product.jpg",
+            "img_mid": "/img/product_mid.jpg",
+            "img_min": "/img/product_min.jpg",
             "price": 12310,
             "article_number": "b276545",
             "stock_availability": 2,
@@ -138,6 +156,8 @@
         {
             "id": 10,
             "img_src": "/img/product.jpg",
+            "img_mid": "/img/product_mid.jpg",
+            "img_min": "/img/product_min.jpg",
             "price": 12385,
             "article_number": "b56245",
             "stock_availability": 49,

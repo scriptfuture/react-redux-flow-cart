@@ -74,9 +74,7 @@ class TopMenu extends Component<Props, State> {
       let { menu }: Object = this.props;
       
       let topMenu: Array<Object> = getTree(menu);
-      
-      console.log(topMenu);
-      
+
       return topMenu.map((obj) => obj.children.length > 1?(
              <li className="nav-item dropdown active" key={obj.id}>
                 <Link className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" to={obj.url}>{obj.name} <span className="caret"></span></Link>

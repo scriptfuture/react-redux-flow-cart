@@ -13,6 +13,8 @@ import Helmet from "react-helmet"
 import { getProduct } from './../actions/product'
 import { addProduct } from './../actions/cart'
 
+import { declOfNum } from './../utils/'
+
 type Props = {
     getProduct: any,
     addProduct: any,
@@ -109,6 +111,10 @@ class Product extends Component<Props, State> {
   }
   
   render() {
+      
+      
+      let miniatures: Array<String> = this.props.product.images === undefined?[]:this.props.product.images;
+      let countImg: number = miniatures.length + 1;
 	  
 	  return (
           <div>
@@ -122,7 +128,16 @@ class Product extends Component<Props, State> {
           <div className="container">
               <div className="row page-product">
                 <div className="col-sm-4">
-                   <div className="page-image"><img src={this.props.product.img_src}  alt={this.props.product.title} /></div>
+                  <div className="page-image">
+                        <img src={this.props.product.img_mid}  alt={this.props.product.title} />
+                        <div className="page-sub-images">
+                            {miniatures.map((obj) => <img key={obj.id} src={obj.img_min} alt={obj.title} title={obj.title} />)}
+                        </div>
+                        <div className="page-sub-images-text">
+                            {countImg + ' ' + declOfNum(countImg, ["изображение","изображения","изображений"])}
+                        </div>
+                    </div>
+                   
                 </div>
                 <div className="col-sm-5">
                 
@@ -132,12 +147,16 @@ class Product extends Component<Props, State> {
                     <table className="table page-options">
                       <tbody>
                         <tr>
+                          <td>В наличии</td>
+                          <td>{this.props.product.stock_availability} шт.</td>
+                        </tr>
+                        <tr>
                           <td>Артикул</td>
                           <td>{this.props.product.article_number}</td>
                         </tr>
                         <tr>
-                          <td>В наличии</td>
-                          <td>{this.props.product.stock_availability} шт.</td>
+                          <td>Вес</td>
+                          <td>{this.props.product.weight}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -146,30 +165,32 @@ class Product extends Component<Props, State> {
                     <div className="page-text">{this.props.product.description}</div>
                 </div>
                 
-                <div className="col-sm-3 col-product">
+                <div className="col-sm-3">
                 
-
-                    <div className="page-price"  title="Цена">
-                         <PriceFormatter priceInCoins={this.props.product.price} isTitlePrice={true} tpСlass="item" bntСlass="cbn-title" ctСlass="cbn-title"/>
+                   <div className="col-product">
+                        <div className="page-price"  title="Цена">
+                             <PriceFormatter priceInCoins={this.props.product.price} isTitlePrice={true} tpСlass="item" bntСlass="cbn-title" ctСlass="cbn-title"/>
+                        </div>
+                        
+                        
+                        <div className="qty-changer" title="Количество">
+                            <button className="qty-change" onClick={this.minus}>-</button>
+                            <input className="qty-input form-group" type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange}/>
+                            <button className="qty-change" onClick={this.plus}>+</button>
+                        </div>
+                        
+                        <div className="page-add-cart">
+                            <TooltipAddToCart 
+                                isShow={this.state.showTooltip} 
+                                quantity={this.getTooltipQuantity()} 
+                                isNew={this.isNewProduct()}
+                                isCatalog={false}
+                            />
+                            <button type="button" className="btn btn-primary btn-lg" onClick={this.addProductToCart}>
+                                <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>&nbsp; В корзину
+                            </button>
+                        </div>
                     </div>
-                    
-                    
-                    <div className="qty-changer" title="Количество">
-                        <button className="qty-change" onClick={this.minus}>-</button>
-                        <input className="qty-input form-group" type="number" name="quantity" value={this.state.quantity} onChange={this.handleChange}/>
-                        <button className="qty-change" onClick={this.plus}>+</button>
-                    </div>
-                    
-                    <div className="page-add-cart">
-                        <TooltipAddToCart 
-                            isShow={this.state.showTooltip} 
-                            quantity={this.getTooltipQuantity()} 
-                            isNew={this.isNewProduct()}
-                            isCatalog={false}
-                        />
-                        <button type="button" className="btn btn-primary btn-lg" onClick={this.addProductToCart} >В корзину</button>
-                    </div>
-                
                     
                 </div>
               </div>

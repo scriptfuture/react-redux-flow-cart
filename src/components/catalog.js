@@ -62,7 +62,7 @@ class Catalog extends Component<Props, State> {
 	  return catalog.map((obj, index) => <CatalogItem 
                                              key={obj.id} 
                                              id={obj.id} 
-                                             img_src={obj.img_src} 
+                                             img_src={obj.img_min} 
                                              title={obj.title} 
                                              price={obj.price} />);
   }
