@@ -1,9 +1,9 @@
 {
     "product": {
-        "id": 1,
-        "img_min": "/img/product_min.jpg",
-        "img_mid": "/img/product_mid.jpg",
-        "img_src": "/img/product.jpg",
+        "id": 2,
+        "img_min": "/img/2.jpg",
+        "img_mid": "/img/2.jpg",
+        "img_src": "/img/thumbs/2.jpg",
         "price": 2730035,
         "article_number": "b245",
         "stock_availability": 5,
@@ -12,22 +12,66 @@
         "description": "Описание товара 1",
         "images": [{
             "id": 1,
-            "img_src": "/img/product.jpg",
-            "img_min": "/img/product_min.jpg",
-            "title": "Изображение товара 1"
+            "img_src": "/img/1.jpg",
+            "img_min": "/img/thumbs/1.jpg",
+            "title": "Изображение товара 1",
+            "isSelected": false
         },
         {
             "id": 2,
-            "img_src": "/img/product.jpg",
-            "img_min": "/img/product_min.jpg",
-            "title": "Изображение товара 2"
+            "img_src": "/img/2.jpg",
+            "img_min": "/img/thumbs/2.jpg",
+            "title": "Изображение товара 2",
+            "isSelected": true
         },
-
         {
             "id": 3,
-            "img_src": "/img/product.jpg",
-            "img_min": "/img/product_min.jpg",
-            "title": "Изображение товара 3"
+            "img_src": "/img/3.jpg",
+            "img_min": "/img/thumbs/3.jpg",
+            "title": "Изображение товара 3",
+            "isSelected": false
+        },
+        {
+            "id": 4,
+            "img_src": "/img/4.jpg",
+            "img_min": "/img/thumbs/4.jpg",
+            "title": "Изображение товара 4",
+            "isSelected": false
+        },
+        {
+            "id": 5,
+            "img_src": "/img/5.jpg",
+            "img_min": "/img/thumbs/5.jpg",
+            "title": "Изображение товара 5",
+            "isSelected": false
+        },
+        {
+            "id": 6,
+            "img_src": "/img/6.jpg",
+            "img_min": "/img/thumbs/6.jpg",
+            "title": "Изображение товара 6",
+            "isSelected": false
+        },
+        {
+            "id": 7,
+            "img_src": "/img/7.jpg",
+            "img_min": "/img/thumbs/7.jpg",
+            "title": "Изображение товара 7",
+            "isSelected": false
+        },
+        {
+            "id": 8,
+            "img_src": "/img/8.jpg",
+            "img_min": "/img/thumbs/8.jpg",
+            "title": "Изображение товара 8",
+            "isSelected": false
+        },
+        {
+            "id": 9,
+            "img_src": "/img/9.jpg",
+            "img_min": "/img/thumbs/9.jpg",
+            "title": "Изображение товара 9",
+            "isSelected": false
         }]
     }
 }

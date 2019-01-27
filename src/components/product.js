@@ -55,7 +55,7 @@ class Product extends Component<Props, State> {
       
      // получаем актуальные курсы при старте страницы
      this.props.getProduct(this.props.match.params.id); 
-        
+
   } 
   
   handleChange(event: SyntheticInputEvent<*>): void {
@@ -110,10 +110,31 @@ class Product extends Component<Props, State> {
       return this.getTooltipQuantity() === quantity;
   }
   
+  openGallery(id) {
+      
+    let images: Array<Object> = this.props.product.images === undefined?[]:this.props.product.images.map(
+        ({id, img_min, img_src, title}) => ({ id, image: img_src, thumb: img_min, title: title })
+    );
+    
+    let index = 0;
+    for(let i in images) {
+        if(images[i].id === id) {
+            index = i;
+            break;
+        }
+    }
+    
+    console.log(images);
+
+    window.pulsargallery.open(index, true, true, images);
+  }
+  
   render() {
       
+      console.log("render");
       
-      let miniatures: Array<String> = this.props.product.images === undefined?[]:this.props.product.images;
+      
+      let miniatures: Array<Object> = this.props.product.images === undefined?[]:this.props.product.images.filter((obj) => !obj.isSelected);
       let countImg: number = miniatures.length + 1;
 	  
 	  return (
@@ -129,9 +150,20 @@ class Product extends Component<Props, State> {
               <div className="row page-product">
                 <div className="col-sm-4">
                   <div className="page-image">
-                        <img src={this.props.product.img_mid}  alt={this.props.product.title} />
+                        <img 
+                           src={this.props.product.img_mid}  
+                           alt={this.props.product.title} 
+                           onClick={(e) => this.openGallery(this.props.product.id)}
+                        />
                         <div className="page-sub-images">
-                            {miniatures.map((obj) => <img key={obj.id} src={obj.img_min} alt={obj.title} title={obj.title} />)}
+                            {miniatures.map((obj, index) => 
+                                <img 
+                                   key={index} 
+                                   src={obj.img_min} 
+                                   alt={obj.title} 
+                                   title={obj.title} 
+                                   onClick={(e) => this.openGallery(obj.id)}/>
+                            )}
                         </div>
                         <div className="page-sub-images-text">
                             {countImg + ' ' + declOfNum(countImg, ["изображение","изображения","изображений"])}
