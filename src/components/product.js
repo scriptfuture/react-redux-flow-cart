@@ -117,8 +117,8 @@ class Product extends Component<Props, State> {
     );
     
     let index = 0;
-    for(let i in images) {
-        if(images[i].id === id) {
+    for (let i = 0; i < images.length; i++) {
+        if(typeof images[i] !== 'undefined' && images[i].id === id) {
             index = i;
             break;
         }
