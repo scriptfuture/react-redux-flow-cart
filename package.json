@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "bbcode-to-react": "^0.2.9",
     "connected-react-router": "4.4.1",
+    "formik": "^1.5.0",
     "history": "^4.7.2",
     "react": "16.4.2",
     "react-dom": "16.4.2",

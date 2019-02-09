@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import Helmet from "react-helmet"
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
@@ -143,6 +144,57 @@ class NewOrder extends Component<Props, State> {
             <p>Для того чтобы совершить покупку, корректно заполните форму ниже. </p>
             
             {this.getCartInfo()}
+            
+ <Formik
+      initialValues={{ email: '', password: '' }}
+      validate={values => {
+        let errors = {};
+        if (!values.email) {
+          errors.email = 'Required';
+        } else if (
+          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+        ) {
+          errors.email = 'Invalid email address';
+        }
+        return errors;
+      }}
+      onSubmit={this.handleSubmit}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+				<div className="form-group">
+					<label htmlFor="email">Email:*</label><br />
+                    <Field type="email" id="email" name="email" className="form-control"/>
+                    <ErrorMessage name="email" component="div" />
+				</div>
+				<div className="form-group">
+					<label htmlFor="phone">Телефон:*</label><br />
+                    <Field type="text" id="phone" name="phone"  className="form-control"/>
+				</div>
+				<div className="form-group">
+					<label htmlFor="fio">Ф.И.О:*</label><br />
+                    <Field type="text" id="fio" name="fio"  className="form-control" />
+				</div>
+                
+				<div className="form-group">
+					<label htmlFor="address">Адрес доставки:</label><br />
+				    <textarea rows="3" id="address" name="address" className="form-control" value={this.state.address} onChange={this.handleChange} />
+				</div>
+                
+				<div className="form-group">
+					<label htmlFor="comment">Комментарий к заказу:</label><br />
+				    <textarea rows="3" id="comment" name="comment" className="form-control" value={this.state.comment}  onChange={this.handleChange} />
+				</div>
+				
+			    <p><button type="submit" disabled={isSubmitting}  className="btn btn-primary">Отправить</button></p>
+                
+        </Form>
+      )}
+    </Formik>
+            
+            
+            {/*
+            <p>=========================</p>
              
       
             <div className="alert alert-success hide" role="alert">
@@ -151,6 +203,7 @@ class NewOrder extends Component<Props, State> {
             <div className="alert alert-danger hide" role="alert">
               Произошла ошибка!
             </div>
+            
 		  
 			<form onSubmit={this.handleSubmit}>
 				<div className="form-group">
@@ -178,6 +231,8 @@ class NewOrder extends Component<Props, State> {
 				
 			    <p><button type="submit" className="btn btn-primary">Отправить</button></p>
 			</form>
+            */}
+            
          </div>);
   }
   
