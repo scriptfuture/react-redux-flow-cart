@@ -13,6 +13,8 @@ export const newOrder = (form: Object, callback: any) => {
         dispatch({
            type: NEWORDER_REQUESTED
         });
+        
+        console.log(form);
 
         // на реальном api заменить на axios.post   
         axios.get("/api/neworder_ok.json", form)

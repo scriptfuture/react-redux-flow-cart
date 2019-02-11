@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 import Helmet from "react-helmet"
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 import Preloader from './blocks/preloader'
 import Errors from './blocks/errors'
@@ -28,14 +29,33 @@ type Props = {
 };
 
 type State = {
-    email: string,
-    phone: string,
-    fio:  string,
-    address: string,
-    comment: string,
     isSuccess: boolean
-    
 };
+
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
+// схема валидации
+const SignUpSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Ошибка в email-адресе!')
+    .required('Поле не должно быть пустым!'),
+  phone: Yup.string()
+    .matches(phoneRegExp, 'Ошибка в поле "Телефон"!')
+    .required('Поле не должно быть пустым!'),
+  fio: Yup.string()
+    .min(2, 'Минимум 2 символа!')
+    .max(100, 'Максимум 100 символов!')
+    .required('Поле не должно быть пустым!'),
+});
+
+const Fieldset = ({ name, label, component, ...rest }) => (
+    <div className="form-group">
+	    <label htmlFor={name}>{label}</label><br />
+        <Field type={name} component={component} id={name} name={name} className="form-control" {...rest} />
+        <ErrorMessage name={name} component="div" className="field-error" />
+	</div>
+);
+
 
 class NewOrder extends Component<Props, State> {
  
@@ -43,16 +63,9 @@ class NewOrder extends Component<Props, State> {
        super();
        
        (this: any).state = {
-            email: "",
-            phone: "",
-            fio:  "",
-            address: "",
-            comment: "",
             isSuccess: false
        };
        
-       
-       (this: any).handleChange = this.handleChange.bind(this);
        (this: any).handleSubmit = this.handleSubmit.bind(this);
        
   }
@@ -63,23 +76,9 @@ class NewOrder extends Component<Props, State> {
         this.props.getPrices();      
 
   } 
-  
-  handleChange(event: SyntheticInputEvent<*>): void {
-      
-     let val: number  = (event.target.value: any);
-     let name: string = event.target.name;
 
-     let obj: Object = {};
-     obj[name] = val;
-      
-     this.setState(obj);
-  }
   
-  handleSubmit(event: SyntheticInputEvent<*>) {
-      
-      // ! валидаторы форм
-      
-        let { email, phone, fio, address, comment }: Object = this.state;
+  handleSubmit(values: Object) {
         
         let cartLine: string = this.getCartLine();
         let purchaseChecksum: number = this.getTotalPrice();
@@ -87,25 +86,13 @@ class NewOrder extends Component<Props, State> {
         let self: any = this;
         
         // отправляем форму
-        this.props.newOrder({ 
-               email: email, 
-               phone: phone, 
-               fio: fio, 
-               address: address, 
-               comment: comment, 
-               cartLine: cartLine, 
-               purchaseChecksum: purchaseChecksum 
-           }, 
+        this.props.newOrder({ ...values, cartLine, purchaseChecksum }, 
            function() {
                
                // меняем состояния компонента локально (через state)
                self.setState({isSuccess: true});
            }
-        ); 
- 
-        this.setState();
-        
-        event.preventDefault();
+        );
   }
   
   
@@ -145,94 +132,78 @@ class NewOrder extends Component<Props, State> {
             
             {this.getCartInfo()}
             
- <Formik
-      initialValues={{ email: '', password: '' }}
-      validate={values => {
-        let errors = {};
-        if (!values.email) {
-          errors.email = 'Required';
-        } else if (
-          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-          errors.email = 'Invalid email address';
-        }
-        return errors;
-      }}
-      onSubmit={this.handleSubmit}
-    >
-      {({ isSubmitting }) => (
-        <Form>
-				<div className="form-group">
-					<label htmlFor="email">Email:*</label><br />
-                    <Field type="email" id="email" name="email" className="form-control"/>
-                    <ErrorMessage name="email" component="div" />
-				</div>
-				<div className="form-group">
-					<label htmlFor="phone">Телефон:*</label><br />
-                    <Field type="text" id="phone" name="phone"  className="form-control"/>
-				</div>
-				<div className="form-group">
-					<label htmlFor="fio">Ф.И.О:*</label><br />
-                    <Field type="text" id="fio" name="fio"  className="form-control" />
-				</div>
-                
-				<div className="form-group">
-					<label htmlFor="address">Адрес доставки:</label><br />
-				    <textarea rows="3" id="address" name="address" className="form-control" value={this.state.address} onChange={this.handleChange} />
-				</div>
-                
-				<div className="form-group">
-					<label htmlFor="comment">Комментарий к заказу:</label><br />
-				    <textarea rows="3" id="comment" name="comment" className="form-control" value={this.state.comment}  onChange={this.handleChange} />
-				</div>
-				
-			    <p><button type="submit" disabled={isSubmitting}  className="btn btn-primary">Отправить</button></p>
-                
-        </Form>
-      )}
-    </Formik>
-            
-            
-            {/*
-            <p>=========================</p>
-             
+              <Formik
+                  initialValues={{
+                     email: "",
+                     phone: "",
+                     fio:  "",
+                     address: "",
+                     comment: "",
+                  }}
+                  validationSchema={SignUpSchema}
+                  onSubmit={this.handleSubmit}
+                >
+                  {({ isSubmitting, status, handleReset }) => (
+                    <Form>
+                       <Fieldset
+                           name="email"
+                           label="Email:*"
+                           type="email"
+                       />
+                            
+                       <Fieldset
+                           name="phone"
+                           label="Телефон:*"
+                           type="text"
+                       />
+
+                       <Fieldset
+                           name="fio"
+                           label="Ф.И.О:*"
+                           type="text"
+                       />
+                            
+                       <Fieldset
+                           name="address"
+                           label="Адрес доставки:"
+                           component="textarea"
+                       />
+                            
+                       <Fieldset
+                           name="comment"
+                           label="Комментарий к заказу:"
+                           component="textarea"
+                       />
+                            
       
-            <div className="alert alert-success hide" role="alert">
-              Запись сохранена.
-            </div>
-            <div className="alert alert-danger hide" role="alert">
-              Произошла ошибка!
-            </div>
-            
-		  
-			<form onSubmit={this.handleSubmit}>
-				<div className="form-group">
-					<label htmlFor="email">Email:*</label><br />
-					<input type="text" id="email" name="email" className="form-control" value={this.state.email} onChange={this.handleChange} />
-				</div>
-				<div className="form-group">
-					<label htmlFor="phone">Телефон:*</label><br />
-					<input type="text" id="phone" name="phone" className="form-control" value={this.state.phone} onChange={this.handleChange} />
-				</div>
-				<div className="form-group">
-					<label htmlFor="fio">Ф.И.О:*</label><br />
-					<input type="text" id="fio" name="fio" className="form-control" value={this.state.fio} onChange={this.handleChange} />
-				</div>
-                
-				<div className="form-group">
-					<label htmlFor="address">Адрес доставки:</label><br />
-				    <textarea rows="3" id="address" name="address" className="form-control" value={this.state.address} onChange={this.handleChange} />
-				</div>
-                
-				<div className="form-group">
-					<label htmlFor="comment">Комментарий к заказу:</label><br />
-				    <textarea rows="3" id="comment" name="comment" className="form-control" value={this.state.comment}  onChange={this.handleChange} />
-				</div>
-				
-			    <p><button type="submit" className="btn btn-primary">Отправить</button></p>
-			</form>
-            */}
-            
+                       {status && status.msg && <div>{status.msg}</div>}
+                       
+                       <p>
+                          <button 
+                              type="submit" 
+                              disabled={isSubmitting}  
+                              className={isSubmitting?"btn btn-primary":"btn btn-light"}
+                          >
+                              Отправить
+                          </button>
+                          
+                              &nbsp;&nbsp; 
+                             
+                          <button
+                              type="reset"
+                              className={"btn btn-secondary"}
+                              disabled={isSubmitting}
+                              onClick={handleReset}
+                          >
+                            Очистить
+                          </button>
+                          
+                       </p>
+                            
+                    </Form>
+                  )}
+              </Formik>
+
          </div>);
   }
   

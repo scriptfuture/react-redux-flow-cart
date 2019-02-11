@@ -519,3 +519,9 @@ footer {
     margin-top: 5px;
     margin-bottom: 10px;
 }
+
+.field-error {
+    color: red;
+    font-size:14px;
+    padding: 5px;
+}
