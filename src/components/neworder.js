@@ -143,24 +143,27 @@ class NewOrder extends Component<Props, State> {
                   validationSchema={SignUpSchema}
                   onSubmit={this.handleSubmit}
                 >
-                  {({ isSubmitting, status, handleReset }) => (
+                  {({ isValid,  handleReset }) => (
                     <Form>
                        <Fieldset
                            name="email"
                            label="Email:*"
                            type="email"
+                           component="input"
                        />
                             
                        <Fieldset
                            name="phone"
                            label="Телефон:*"
                            type="text"
+                           component="input"
                        />
 
                        <Fieldset
                            name="fio"
                            label="Ф.И.О:*"
                            type="text"
+                           component="input"
                        />
                             
                        <Fieldset
@@ -174,29 +177,27 @@ class NewOrder extends Component<Props, State> {
                            label="Комментарий к заказу:"
                            component="textarea"
                        />
-                            
-      
-                       {status && status.msg && <div>{status.msg}</div>}
-                       
+           
                        <p>
                           <button 
                               type="submit" 
-                              disabled={isSubmitting}  
-                              className={isSubmitting?"btn btn-primary":"btn btn-light"}
+                              disabled={!isValid}
+                              className="btn btn-primary"
                           >
                               Отправить
                           </button>
                           
                               &nbsp;&nbsp; 
-                             
+                          
+                          {                         
                           <button
                               type="reset"
-                              className={"btn btn-secondary"}
-                              disabled={isSubmitting}
+                              className="btn btn-link"
                               onClick={handleReset}
                           >
                             Очистить
                           </button>
+                          }
                           
                        </p>
                             
