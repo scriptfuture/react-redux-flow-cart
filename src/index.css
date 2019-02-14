@@ -525,3 +525,9 @@ footer {
     font-size:14px;
     padding: 5px;
 }
+
+/* bootsrap styles */
+button[disabled].btn-primary {
+    background-color: #F09374 !important;
+    border-color: #F09374 !important;
+}

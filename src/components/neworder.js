@@ -32,7 +32,22 @@ type State = {
     isSuccess: boolean
 };
 
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+//const phoneRegExp = /+?(\d?)[\s-()]?(\d{3})[\s-()]?(\d{3})[\s-()]?(\d{2})[\s-()]?(\d{2})/g;
+var phone = '+7 (921) 099-34-7757678';
+
+//var phone = '+7 (921) 099-34-7757678';
+
+//var cleanStr = phone.replace(/[\(\) \-\+]+/g, '')
+
+d//ocument.write((val => val)(cleanStr));
+
+d//ocument.write((val => /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g.test(val))(cleanStr));
+
+var cleanStr = phone.replace(/[\(\) \-\+]+/g, '')
+
+document.write((val => val)(cleanStr));
+
+document.write((val => /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g.test(val))(cleanStr));
 
 // схема валидации
 const SignUpSchema = Yup.object().shape({
@@ -40,7 +55,8 @@ const SignUpSchema = Yup.object().shape({
     .email('Ошибка в email-адресе!')
     .required('Поле не должно быть пустым!'),
   phone: Yup.string()
-    .matches(phoneRegExp, 'Ошибка в поле "Телефон"!')
+    //.matches(phoneRegExp, 'Ошибка в поле "Телефон"!')
+     .test('phone-test', 'Ошибка в поле "Телефон"!', val => )
     .required('Поле не должно быть пустым!'),
   fio: Yup.string()
     .min(2, 'Минимум 2 символа!')
